@@ -1,6 +1,6 @@
 <!-- 
     Archivo: index.html 
-    Descripción: Interfaz principal para la gestión de Devolución IVA Exportador (F3600)
+    Descripción: Interfaz principal para la gestión de Devoluciones (F3560,F3281,F3280 PGGR - FEP)
     Fecha: Mayo 2025
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atención F3600</title>
+    <title>Atención Formularios de Devolución</title>
     <!-- Enlaces a recursos externos -->
     <!-- Iconos de Font Awesome para el botón de modo oscuro -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -42,7 +42,7 @@
     <main>
         <!-- Títulos y descripción general -->
         <h1 class="main-title">Atención Contribuyente</h1>
-        <h2 class="sub-title">Formulario 3600 Solicitud Devolución IVA Exportador</h2>
+        <h2 class="sub-title">Solicitud Devolución Formularios F3560,F3280,F3281</h2>
 
         <!-- Descripción del proceso de fiscalización -->
         <p class="description">
@@ -163,7 +163,7 @@
             <div class="title-container">
                 <!-- Encabezado con título -->
                 <div class="title-header">
-                    <h2 class="main-title">Desición Solicitud de Devolución 48 Horas (D.S. 348 de 1975)</h2>
+                    <h2 class="main-title">Desición Solicitud de Devolución (Artículo 81 de la LIVS)</h2>
                 </div>
                 <!-- Contenedor de las secciones de decisión -->
                 <div id="decisionContent" class="decision-sections-container">
@@ -238,7 +238,7 @@
                         </div>
                         <!-- Sección de selección de tipo de decisión -->
                         <section class="decision-section">
-                            <h3>Desición Cruce 48 horas </h3>
+                            <h3>Desición Cruce</h3>
                             <!--Datos de la solicitud (fecha, folio,monto)-->
                             <div class="info-formulario">
                                 <div class="info-item">
@@ -250,7 +250,7 @@
                                     <span id="folioFormulario" class="info-value"></span>
                                 </div>
                                 <div class="info-item">
-                                    <label class="info-label">Fecha Máx. Decisión 48hrs:</label>
+                                    <label class="info-label">Fecha Máx. Decisión:</label>
                                     <span id="fechaMaxDesc48" class="info-value fecha-maxima"></span>
                                 </div>
                             </div>
@@ -353,8 +353,7 @@
                                 onclick="validarYProcesarDecision('ingresar')">Ingresar Decisión</button>
                             <!-- Botón para generar el documento de resolución -->
                             <button id="btnGenerarResolucion" class="action-button"
-                                onclick="validarYProcesarDecision('resolucion')">Generar Resolución Desición 48
-                                horas</button>
+                                onclick="validarYProcesarDecision('resolucion')">Generar Resolución Desición</button>
                             <!-- Botón para enviar notificación al contribuyente -->
                             <button id="btnNotificar" class="action-button"
                                 onclick="validarYProcesarDecision('notificar')">Notificar Desición al
@@ -379,7 +378,7 @@
         <!-- Nueva pestaña FEP -->
         <div id="tabFep" class="tab-content">
             <div class="title-container">
-                <h2 class="main-title">Fiscalización Especial Previa (FEP)</h2>
+                <h2 class="main-title">Fiscalización Especial Previa (Articulo 83 de la LIVS)</h2>
             </div>
             <!-- Contenido FEP (movido desde la sección anterior) -->
             <div id="seccionFep" class="fep-section">

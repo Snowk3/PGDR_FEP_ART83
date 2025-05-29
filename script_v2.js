@@ -501,11 +501,11 @@ function cerrarHojaTrabajo() {
  ******************************************************************************/
 /**
  * Calcula la fecha máxima de decisión sumando 2 días a la fecha de solicitud
- * @returns {Date} Fecha máxima para decisión 48 horas
+ * @returns {Date} Fecha máxima para decisión 48 horas (reemplaza 5 dias ojo)
  */
 function calcularFechaMaxDesc48() {
     const fechaMax = new Date(FECHA_SOLICITUD);
-    fechaMax.setDate(fechaMax.getDate() + 2);
+    fechaMax.setDate(fechaMax.getDate() + 5); // Sumar 5 días a la fecha de solicitud
     return fechaMax;
 }
 /**
