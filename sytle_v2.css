@@ -1,0 +1,1851 @@
+/* filepath: c:\Users\Andre\Desktop\Github\Atencion_Sifm_F3600\sytle_v2.css */
+/*==============================================================================
+   0. VARIABLES CSS Y MODO OSCURO
+==============================================================================*/
+
+:root {
+  /* Colores en modo claro (default) */
+  --color-background: #ffffff;
+  --color-text: #333333;
+  --color-primary: #003366;
+  --color-primary-light: #004c99;
+  --color-secondary: #f8f9fa;
+  --color-border: #dee2e6;
+  --color-input-bg: #ffffff;
+  --color-input-border: #ced4da;
+  --color-input-text: #212224;
+  --color-input-disabled: #e9ecef;
+  --color-header-bg: #003366;
+  --color-button-bg: #ffffff;
+  --color-button-text: #003366;
+  --color-button-hover: #e0e0e0;
+  --color-tab-active: #ffffff;
+  --color-tab-inactive: transparent;
+  --color-tab-text: #333;
+  --color-tab-active-text: #003366;
+  --color-tab-border: #ccc;
+  --color-section-bg: #f8f9fa;
+  --color-section-border: #dee2e6;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-table-header: #003366;
+  --color-table-header-text: #ffffff;
+  --color-table-row-even: #f8f9fa;
+  --color-table-row-hover: #f2f2f2;
+  --color-help-button: #17a2b8;
+  --color-help-button-hover: #138496;
+  --color-worksheet-button: #003366;
+  --color-worksheet-button-hover: #002447;
+  --color-action-button: #003366;
+  --color-action-button-hover: #004c99;
+  --color-action-button-disabled: #cccccc;
+  --color-editor-toolbar: #f0f0f0;
+  --color-editor-border: #ddd;
+  --color-modal-overlay: rgba(0, 0, 0, 0.5);
+  --color-success: #28a745;
+  --color-info: #17a2b8;
+  --color-warning: #ffc107;
+  --color-error: #dc3545;
+}
+
+/* Modo oscuro */
+[data-theme="dark"] {
+  --color-background: #1a1a1a;
+  --color-text: #e0e0e0;
+  --color-primary: #4a90e2;
+  --color-primary-light: #6aa7f3;
+  --color-secondary: #2d2d2d;
+  --color-border: #444444;
+  --color-input-bg: #333333;
+  --color-input-border: #555555;
+  --color-input-text: #e0e0e0;
+  --color-input-disabled: #444444;
+  --color-header-bg: #222222;
+  --color-button-bg: #444444;
+  --color-button-text: #e0e0e0;
+  --color-button-hover: #555555;
+  --color-tab-active: #333333;
+  --color-tab-inactive: #222222;
+  --color-tab-text: #dddddd;
+  --color-tab-active-text: #ffffff;
+  --color-tab-border: #444444;
+  --color-section-bg: #2d2d2d;
+  --color-section-border: #444444;
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-table-header: #333333;
+  --color-table-header-text: #ffffff;
+  --color-table-row-even: #2a2a2a;
+  --color-table-row-hover: #383838;
+  --color-help-button: #17a2b8;
+  --color-help-button-hover: #138496;
+  --color-worksheet-button: #4a90e2;
+  --color-worksheet-button-hover: #357abd;
+  --color-action-button: #4a90e2;
+  --color-action-button-hover: #357abd;
+  --color-action-button-disabled: #555555;
+  --color-editor-toolbar: #333333;
+  --color-editor-border: #444444;
+  --color-modal-overlay: rgba(0, 0, 0, 0.7);
+  --color-success: #2d9946;
+  --color-info: #1793a5;
+  --color-warning: #e0a800;
+  --color-error: #c82333;
+}
+
+/* Transición suave al cambiar temas */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Control para alternar entre modos (claro/oscuro) */
+.theme-toggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1001;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px var(--color-shadow);
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-primary-light);
+}
+
+.theme-toggle i {
+  font-size: 18px;
+}
+
+/* Estilos para los íconos del tema */
+.theme-toggle .light-icon {
+  display: none;
+}
+
+.theme-toggle .dark-icon {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle .light-icon {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle .dark-icon {
+  display: none;
+}
+
+/*==============================================================================
+   1. RESET Y ESTILOS BASE
+==============================================================================*/
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos base */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+/*==============================================================================
+   2. LAYOUT Y NAVEGACIÓN
+==============================================================================*/
+
+/* Header y barra de navegación */
+header {
+  background-color: var(--color-header-bg);
+  padding: 0.25rem;
+  box-shadow: 0 2px 5px var(--color-shadow);
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 0.425rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0.425rem;
+}
+
+.nav-button {
+  background-color: var(--color-button-bg);
+  border: none;
+  padding: 0.51rem 1.02rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 0.765rem;
+  color: var(--color-button-text);
+}
+
+.nav-button:hover {
+  background-color: var(--color-button-hover);
+}
+
+/*TITULOS PRINCIPALES*/
+h1,
+.main-title {
+  font-size: 1.5rem;
+  margin-bottom: 0 rem;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+h2,
+.sub-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.85rem;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+p,
+.description {
+  font-size: 1 rem;
+  margin-bottom: 0.85rem;
+  /*font-weight: bold;*/
+  color: var(--color-text);
+}
+
+/* Contenedor principal */
+main {
+  padding: 7.5px;
+}
+
+/*==============================================================================
+   3. SISTEMA DE PESTAÑAS
+==============================================================================*/
+
+/* Contenedor de pestañas */
+.tabs-container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 10 px;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-tab-border);
+}
+
+.tab-button {
+  background-color: var(--color-tab-inactive);
+  border: none;
+  padding: 0.85rem 1.275rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  color: var(--color-tab-text);
+  border-right: 1px solid var(--color-tab-border);
+}
+
+.tab-button:hover {
+  background-color: var(--color-button-hover);
+}
+
+.tab-button.active {
+  background-color: var(--color-tab-active);
+  border-bottom: 3px solid var(--color-primary);
+  font-weight: bold;
+  color: var(--color-tab-active-text);
+}
+
+.tab-content {
+  display: none;
+  padding: 1.7rem;
+  background-color: var(--color-background);
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/*==============================================================================
+   4. SECCIÓN DE DECISIÓN
+==============================================================================*/
+/* Contenedor para las secciones paralelas */
+.parallel-sections {
+  display: flex;
+  gap: 1.7rem;
+  margin-bottom: 1.7rem;
+  width: 100%;
+}
+
+/* Estilo para cada sección lateral */
+.decision-section {
+  flex: 1;
+  padding: 1.275rem;
+  background-color: var(--color-section-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--color-shadow);
+  min-width: 255px;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .parallel-sections {
+    flex-direction: column;
+  }
+
+  .decision-section {
+    width: 100%;
+  }
+}
+
+/* Contenedor y título */
+.title-container {
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1.275rem;
+  margin-bottom: 1.7rem;
+  background-color: var(--color-background);
+}
+
+.title-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.275rem;
+}
+
+.decision-sections-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.275rem;
+  margin: 0.85rem 0;
+  transition: max-height 0.3s ease-out;
+  overflow: hidden;
+}
+
+.decision-sections-container.collapsed {
+  max-height: 0 !important;
+}
+
+.decision-section {
+  flex: 1;
+  padding: 1.275rem;
+  background-color: var(--color-section-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--color-shadow);
+}
+
+.decision-section h3 {
+  color: var(--color-primary);
+  margin-bottom: 1.275rem;
+  font-size: 1.02rem;
+  text-align: center;
+}
+
+/* Primera Notificación */
+/* Estilos comunes para todas las secciones de decisión */
+.decision-section {
+  background-color: var(--color-section-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px var(--color-shadow);
+}
+
+/* Estilos específicos para primera-notificacion */
+.primera-notificacion {
+  display: flex;
+  flex-direction: column;
+  gap: 12.75px;
+}
+
+/* Estilos para los elementos dentro de primera-notificacion */
+.primera-notificacion h3 {
+  color: var(--color-text);
+  font-size: 1.02em;
+  margin-bottom: 12.75px;
+  padding-bottom: 8.5px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.primera-notificacion h4 {
+  color: var(--color-text);
+  font-size: 0.935em;
+  margin: 12.75px 0 8.5px 0;
+}
+
+.primera-notificacion .action-button {
+  margin: 6px 0;
+      white-space: nowrap;
+}
+
+.primera-notificacion .Apertura-EE {
+  margin: 8.5px 0;
+  padding: 8.5px;
+  background-color: var(--color-input-bg);
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+}
+
+.primera-notificacion label {
+  font-weight: 500;
+  margin-right: 8.5px;
+  color: var(--color-text);
+}
+
+/*ticket solicitud de antecedentes realizado*/
+.ticket-verde {
+  color: var(--color-success);
+  font-size: 1.2em;
+  vertical-align: middle;
+}
+
+/* Estilos para la información del formulario */
+.info-formulario {
+    display: flex;
+    gap: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-label {
+    color: #003366;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+.info-value {
+    color: #1a7c1e;
+    font-weight: bold;
+    background-color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 3px;
+    border: 1px solid #b6e2c1;
+    min-width: 100px;
+    display: inline-block;
+    text-align: center;
+}
+.fecha-maxima {
+    color: #dc3545 !important;
+    font-weight: bold;
+    background-color: #fff5f5 !important;
+    border-color: #dc3545 !important;
+}
+
+/*==============================================================================
+   5. CAMPOS Y FORMULARIOS
+==============================================================================*/
+
+/* Grupos de radio buttons */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.radio-option input[type="radio"] {
+  margin: 0;
+}
+
+/* Campos de monto */
+.amount-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 0.85rem;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.input-group label {
+  min-width: 153px;
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+.amount-input {
+  padding: 0.425rem;
+  font-size: 0.85rem;
+  width: 170px;
+  background-color: var(--color-input-bg);
+  color: var(--color-input-text);
+  border: 1px solid var(--color-input-border);
+}
+
+.amount-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+}
+
+.amount-input[readonly] {
+  background-color: var(--color-input-disabled);
+}
+
+/* Conversión UTM */
+.utm-info {
+  background-color: var(--color-section-bg);
+  padding: 0.6375rem;
+  border-radius: 4px;
+  margin-bottom: 0.85rem;
+  border: 1px solid var(--color-border);
+}
+
+.utm-info p {
+  margin: 0;
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.input-with-utm {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex: 1;
+}
+
+.utm-conversion {
+  display: flex;
+  align-items: center;
+  gap: 0.425rem;
+  color: var(--color-text);
+}
+
+.utm-input {
+  width: 85px;
+  padding: 0.425rem;
+  font-size: 0.765rem;
+  border: 1px solid var(--color-input-border);
+  border-radius: 4px;
+  background-color: var(--color-input-disabled);
+  text-align: right;
+  color: var(--color-input-text);
+}
+
+/*==============================================================================
+   6. TABLAS Y LISTADOS
+==============================================================================*/
+
+/* Contenedor de tabla y estilos base */
+.table-container {
+  overflow-x: auto;
+  margin: 0.85rem 0;
+  width: 100%;
+  box-shadow: 0 2px 4px var(--color-shadow);
+}
+
+.observations-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--color-background);
+  font-size: 0.765rem;
+}
+
+.observations-table th,
+.observations-table td {
+  padding: 0.7375rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.observations-table th {
+  background-color: var(--color-table-header);
+  color: var(--color-table-header-text);
+  font-weight: 600;
+}
+
+.observations-table tbody tr:nth-child(even) {
+  background-color: var(--color-table-row-even);
+}
+
+.observations-table tbody tr:hover {
+  background-color: var(--color-table-row-hover);
+}
+
+/* Botones de ayuda y hojas de trabajo */
+.help-button,
+.worksheet-button {
+  padding: 0.34rem 1.68rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.765rem;
+  width: 25.5px;
+  height: 25.5px;
+  transition: background-color 0.3s;
+}
+
+.help-button {
+  background-color: var(--color-help-button);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.worksheet-button {
+  background-color: var(--color-worksheet-button);
+  color: white;
+}
+
+.help-button:hover {
+  background-color: var(--color-help-button-hover);
+}
+
+.worksheet-button:hover {
+  background-color: var(--color-worksheet-button-hover);
+}
+
+/*==============================================================================
+   7. BOTONES Y CONTROLES
+==============================================================================*/
+
+/* Botones de acción principales */
+.action-buttons-container {
+  margin-top: 1.275rem;
+  padding: 1.275rem;
+  background-color: var(--color-section-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--color-shadow);
+  width: 100%;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.85rem;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.action-button {
+  background-color: var(--color-action-button);
+  color: white;
+  padding: 0.6375rem 1.275rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  text-align: center;
+  flex: 1;
+  white-space: nowrap;
+}
+
+.action-button:hover {
+  background-color: var(--color-action-button-hover);
+}
+
+/* Botones de acción secundarios */
+.action-button:disabled {
+  background-color: var(--color-action-button-disabled);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/*Botones logra contacto*/
+
+/* Botones dinámicos */
+#botonesContacto {
+  margin-top: 8.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 8.5px;
+}
+
+/* Popup */
+.popup-mensaje {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--color-modal-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.popup-content {
+  background: var(--color-background);
+  padding: 20.4px 27.2px;
+  border-radius: 8px;
+  text-align: center;
+}
+.popup-content button {
+  margin-top: 13.6px;
+  padding: 6.8px 17px;
+  background: var(--color-action-button);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.popup-content button:hover {
+  background: var(--color-action-button-hover);
+}
+
+/*==============================================================================
+   8. MODAL Y POPUPS
+==============================================================================*/
+
+/* Modal FEP */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-modal-overlay);
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--color-background);
+  margin: 5% auto;
+  padding: 1.7rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 510px;
+  box-shadow: 0 4px 6px var(--color-shadow);
+  position: relative;
+  color: var(--color-text);
+}
+
+.modal-description {
+  margin: 1rem 0;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.mini-editor-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--color-editor-toolbar);
+  border: 1px solid var(--color-editor-border);
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+}
+
+.mini-editor-container {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.mini-text-editor {
+  width: 100%;
+  min-height: 85px;
+  padding: 0.68rem;
+  border: 1px solid var(--color-editor-border);
+  border-radius: 0 0 4px 4px;
+  font-size: 0.765rem;
+  line-height: 1.4;
+  background-color: var(--color-input-bg);
+  color: var(--color-input-text);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.85rem;
+  margin-top: 1.275rem;
+}
+
+/* Alertas popup */
+.alerta-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-modal-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.alerta-contenido {
+  background-color: var(--color-background);
+  padding: 1.7rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px var(--color-shadow);
+  text-align: center;
+  min-width: 255px;
+}
+
+.alerta-contenido p {
+  margin-bottom: 1.275rem;
+  font-size: 0.935rem;
+  color: var(--color-text);
+}
+
+.alerta-contenido button {
+  padding: 0.51rem 1.02rem;
+  font-size: 0.85rem;
+  background-color: var(--color-action-button);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.alerta-contenido button:hover {
+  background-color: var(--color-action-button-hover);
+}
+
+/* Estilos para el popup de Solicitud de Antecedentes */
+.antecedentes-list {
+  max-height: 340px;
+  margin: 17px 0;
+  padding: 8.5px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background-color: var(--color-input-bg);
+}
+
+.antecedente-item {
+  display: flex;
+  align-items: center;
+  padding: 6.8px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.antecedente-item:last-child {
+  border-bottom: none;
+}
+
+.antecedente-item input[type="checkbox"] {
+  margin-right: 8.5px;
+}
+
+.antecedente-item label {
+  cursor: pointer;
+  flex: 1;
+  color: var(--color-text);
+}
+
+.antecedente-item:hover {
+  background-color: var(--color-table-row-hover);
+}
+
+/*Logra ser contactado*/
+
+.select-container {
+  margin: 8.5px 0;
+}
+
+.contact-select {
+  width: 100%;
+  padding: 6.8px;
+  border: 1px solid var(--color-input-border);
+  border-radius: 4px;
+  font-size: 11.9px;
+  background-color: var(--color-input-bg);
+  color: var(--color-input-text);
+  cursor: pointer;
+}
+
+.contact-select:hover {
+  border-color: var(--color-border);
+}
+
+.contact-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.expediente-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.expediente-container .Apertura-EE {
+  background-color: var(--color-section-bg);
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  flex-grow: 1;
+  color: var(--color-text);
+}
+
+.expediente-container .action-button {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.notificacion-contacto-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.notificacion-contacto-row button,
+.notificacion-contacto-row .Logra-contacto {
+  flex: 1;
+
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  flex-grow: 1;
+}
+
+.notificacion-contacto-row .Logra-contacto select {
+  width: 100%;
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 768px) {
+  .notificacion-contacto-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Estilos para hacer que los elementos tengan el mismo ancho */
+.expediente-container,
+.notificacion-contacto-row {
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.expediente-container button,
+.notificacion-contacto-row button {
+  flex: 1;
+  width: 50%;
+  min-width: 200px;
+}
+
+.Apertura-EE,
+.Logra-contacto {
+  flex: 1;
+  width: 50%;
+}
+
+.Logra-contacto select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Para asegurarnos que ambas filas tienen el mismo ancho total */
+.primera-notificacion > div {
+  width: 100%;
+}
+
+/*==============================================================================
+   9. EDITOR DE TEXTO
+==============================================================================*/
+
+/*Estilo Principal Contenedor de comentarios */
+.comments-section,
+.editor-container,
+.comentarios-section {
+  background-color: var(--color-section-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 2px var(--color-shadow);
+}
+
+/* Barra de herramientas */
+.editor-toolbar {
+  display: flex;
+  gap: 0.425rem;
+  padding: 0.425rem;
+  background-color: var(--color-editor-toolbar);
+  border: 1px solid var(--color-editor-border);
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+}
+
+.toolbar-button {
+  padding: 0.34rem 0.68rem;
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-editor-border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  min-width: 2.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: var(--color-text);
+}
+
+.toolbar-button:hover {
+  background-color: var(--color-button-hover);
+  border-color: var(--color-input-border);
+}
+
+.toolbar-button.active {
+  background-color: var(--color-button-hover);
+  border-color: var(--color-primary);
+}
+
+/* Área de edición */
+.editor-container {
+  position: relative;
+}
+
+.rich-text-editor {
+  min-height: 170px;
+  max-height: 340px;
+  padding: 0.85rem;
+  font-size: 0.85rem;
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-editor-border);
+  border-radius: 0 0 4px 4px;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  color: var(--color-input-text);
+}
+
+.rich-text-editor:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+}
+
+.rich-text-editor ul,
+.rich-text-editor ol {
+  padding-left: 1.7rem;
+  margin: 0.425rem 0;
+}
+
+.character-count {
+  position: absolute;
+  bottom: -1.275rem;
+  right: 0;
+  font-size: 0.68rem;
+  color: var(--color-text);
+}
+
+/*==============================================================================
+   10. SECCIÓN FEP (FISCALIZACIÓN ESPECIAL PREVIA)
+==============================================================================*/
+
+/* Contenedor principal FEP */
+.fep-section {
+  margin-top: 1.7rem;
+  padding: 1.275rem;
+  background-color: var(--color-section-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--color-shadow);
+}
+
+.fep-info {
+  margin: 1.275rem 0;
+}
+
+.fep-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.7rem;
+  margin-bottom: 0.85rem;
+  align-items: center;
+}
+
+.fep-field {
+  flex: 1;
+}
+
+.fep-field label {
+  display: block;
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-bottom: 0.425rem;
+}
+
+.fep-field span {
+  display: block;
+  padding: 0.425rem;
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text);
+}
+
+.Apertura-EE span {
+  display: block;
+  padding: 0.425rem;
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text);
+}
+
+/* Subsecciones colapsables */
+.fep-subsection {
+  margin-bottom: 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.subsection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem;
+  background-color: var(--color-section-bg);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.subsection-header:hover {
+  background-color: var(--color-button-hover);
+}
+
+.subsection-header h4 {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+.toggle-icon {
+  transition: transform 0.3s ease;
+  color: var(--color-primary);
+  font-size: 1.02rem;
+}
+
+.subsection-header.collapsed .toggle-icon {
+  transform: rotate(-90deg);
+}
+
+.subsection-content {
+  max-height: 1700px;
+  transition: max-height 0.3s ease-out;
+  background-color: var(--color-background);
+  overflow: hidden;
+}
+
+.subsection-content.collapsed {
+  max-height: 0;
+  padding: 0;
+  border-top: none;
+}
+
+/* Layout en paralelo para secciones FEP */
+.parallel-fep-sections {
+  display: flex;
+  gap: 1.7rem;
+  margin-bottom: 1.7rem;
+}
+
+.parallel-fep-sections .fep-subsection {
+  flex: 1;
+  min-width: 0; /* Evita desbordamiento en flex items */
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 1024px) {
+  .parallel-fep-sections {
+    flex-direction: column;
+  }
+
+  .parallel-fep-sections .fep-subsection {
+    width: 100%;
+  }
+}
+
+/*==============================================================================
+   11. SECCIÓN DE DECISIÓN 15 DÍAS
+==============================================================================*/
+
+/* Contenedor y encabezados */
+.decision-15-dias-section {
+  margin-top: 1.7rem;
+  padding: 1.275rem;
+  background-color: var(--color-section-bg);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+.decision-15-dias-section h4 {
+  color: var(--color-primary);
+  margin-bottom: 1.275rem;
+  font-size: 1.02rem;
+  padding-bottom: 0.425rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.decision-15-container {
+  display: flex;
+  gap: 1.7rem;
+  margin-bottom: 1.275rem;
+}
+
+/* Formularios y campos */
+.decision-options {
+  flex: 1;
+  padding: 0.85rem;
+  background-color: var(--color-background);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px var(--color-shadow);
+}
+
+.radio-group-15dias {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.montos-autorizados-15 {
+  flex: 1;
+  padding: 1.275rem;
+  background-color: var(--color-background);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px var(--color-shadow);
+}
+
+.montos-autorizados-15 h5 {
+  color: var(--color-primary);
+  margin-bottom: 0.85rem;
+  font-size: 0.935rem;
+}
+
+.montos-container-15 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.monto-group-15 {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.monto-group-15 label {
+  min-width: 127.5px;
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+.monto-utm-group {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex: 1;
+}
+
+.amount-input-15 {
+  padding: 0.425rem;
+  width: 127.5px;
+  background-color: var(--color-input-bg);
+  color: var(--color-input-text);
+  border: 1px solid var(--color-input-border);
+}
+
+.utm-input-15 {
+  width: 85px;
+  padding: 0.425rem;
+  font-size: 0.765rem;
+  background-color: var(--color-input-disabled);
+  color: var(--color-input-text);
+  border: 1px solid var(--color-input-border);
+}
+
+.utm-value {
+  display: flex;
+  align-items: center;
+  gap: 0.425rem;
+  color: var(--color-text);
+}
+
+.decision-15-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-top: 1.275rem;
+  padding-top: 1.275rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/*==============================================================================
+   12. SECCIÓN DE SEGUNDA REVISIÓN
+==============================================================================*/
+
+/* Contenedor y layout */
+.decision-segunda-container {
+  display: flex;
+  gap: 1.7rem;
+  margin: 0.85rem;
+}
+
+/* Radio buttons y opciones */
+.radio-group-segunda {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Contenedor de montos autorizados */
+.montos-autorizados-segunda {
+  flex: 1;
+  padding: 1.275rem;
+  background-color: var(--color-background);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px var(--color-shadow);
+}
+
+.montos-autorizados-segunda h5 {
+  color: var(--color-primary);
+  margin-bottom: 0.85rem;
+  font-size: 0.935rem;
+}
+
+.montos-container-segunda {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.monto-group-segunda {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.monto-group-segunda label {
+  min-width: 127.5px;
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+.amount-input-segunda {
+  padding: 0.425rem;
+  width: 127.5px;
+  background-color: var(--color-input-bg);
+  color: var(--color-input-text);
+  border: 1px solid var(--color-input-border);
+}
+
+.utm-input-segunda {
+  width: 85px;
+  padding: 0.425rem;
+  font-size: 0.765rem;
+  background-color: var(--color-input-disabled);
+  color: var(--color-input-text);
+  border: 1px solid var(--color-input-border);
+}
+
+/* Botones y controles */
+.decision-segunda-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.85rem;
+  margin: 1.275rem;
+  padding-top: 1.275rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/*==============================================================================
+   13. UTILIDADES Y HELPERS
+==============================================================================*/
+
+/* Márgenes y espaciado */
+.m-0 {
+  margin: 0;
+}
+.p-0 {
+  padding: 0;
+}
+
+/* Estados */
+.collapsed .arrow-icon {
+  transform: rotate(-90deg);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Estilos de transición */
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+/* Flexbox helpers */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+/* Grid helpers */
+.grid {
+  display: grid;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Sombras */
+.shadow-sm {
+  box-shadow: 0 1px 2px var(--color-shadow);
+}
+
+.shadow-md {
+  box-shadow: 0 2px 4px var(--color-shadow);
+}
+
+/* Bordes */
+.rounded {
+  border-radius: 4px;
+}
+
+.rounded-lg {
+  border-radius: 8px;
+}
+
+/* Colores de texto */
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-gray {
+  color: var(--color-text);
+}
+
+/* Fondos */
+.bg-white {
+  background-color: var(--color-background);
+}
+
+.bg-gray-50 {
+  background-color: var(--color-section-bg);
+}
+
+/* Tamaños de texto */
+.text-sm {
+  font-size: 0.9rem;
+}
+
+.text-base {
+  font-size: 1rem;
+}
+
+.text-lg {
+  font-size: 1.2rem;
+}
+
+/* Pesos de fuente */
+.font-bold {
+  font-weight: bold;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+/* Interactividad */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+html {
+  font-size: 85%;
+}
+
+/* Colores específicos para tipos de alertas */
+.alerta-error {
+  border-left: 4px solid var(--color-error);
+}
+
+.alerta-success {
+  border-left: 4px solid var(--color-success);
+}
+
+.alerta-warning {
+  border-left: 4px solid var(--color-warning);
+}
+
+.alerta-info {
+  border-left: 4px solid var(--color-info);
+}
+
+/*==============================================================================
+   ESTILOS PARA POPUP HOJA DE TRABAJO
+==============================================================================*/
+
+/* Contenedor principal del popup */
+.worksheet-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+/* Contenido del popup */
+.worksheet-content {
+    position: relative;
+    background-color: var(--color-background);
+    margin: 2% auto;
+    padding: 2rem;
+    width: 95%;
+    max-width: 1400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--color-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Contenedor para el header */
+.worksheet-header {
+    width: 100%;
+}
+
+/* Estilos para títulos */
+.worksheet-title {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.worksheet-subtitle {
+    color: var(--color-text);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Contenedor principal de las tablas */
+.worksheet-tables-container {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Sección de tabla principal (Códigos 3600) */
+.worksheet-section:nth-child(3) {
+    flex: 0 0 50%;
+    max-height: calc(100vh - 400px);
+    overflow-y: auto;
+}
+
+/* Contenedor para tablas secundarias y checklist */
+.worksheet-secondary-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-height: calc(100vh - 400px);
+    overflow-y: auto;
+}
+
+/* Secciones del worksheet */
+.worksheet-section {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--color-section-bg);
+    border-radius: 6px;
+    border: 1px solid var(--color-section-border);
+}
+
+.worksheet-section h3 {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+/* Tablas */
+.worksheet-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.worksheet-table th,
+.worksheet-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid var(--color-border);
+}
+
+.worksheet-table th {
+    background-color: var(--color-table-header);
+    color: var(--color-table-header-text);
+    position: sticky;
+    top: 0;
+}
+
+.worksheet-table tr:nth-child(even) {
+    background-color: var(--color-table-row-even);
+}
+
+.worksheet-table tr:hover {
+    background-color: var(--color-table-row-hover);
+}
+
+/* Sección inferior (comentarios y botones) */
+.worksheet-footer {
+    width: 100%;
+    margin-top: auto;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+}
+
+/* Área de comentarios */
+.worksheet-comentarios {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-input-border);
+    border-radius: 4px;
+    resize: vertical;
+    min-height: 100px;
+    background-color: var(--color-input-bg);
+    color: var(--color-input-text);
+    margin-bottom: 1.5rem;
+}
+
+/* Contenedor de botones */
+.worksheet-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+/* Estilos de botones */
+.worksheet-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.justify-btn {
+    background-color: var(--color-info);
+    color: white;
+}
+
+.justify-btn:hover {
+    background-color: var(--color-help-button-hover);
+}
+
+.save-btn {
+    background-color: var(--color-success);
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: var(--color-success);
+    opacity: 0.9;
+}
+
+.exit-btn {
+    background-color: var(--color-error);
+    color: white;
+}
+
+.exit-btn:hover {
+    background-color: var(--color-error);
+    opacity: 0.9;
+}
+
+/* Checklist */
+.checklist-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: var(--color-input-bg);
+    border: 1px solid var(--color-input-border);
+    border-radius: 4px;
+}
+
+/* Estilos para el campo de fecha */
+.date-input {
+    padding: 6px 8px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background-color: var(--color-input-bg);
+    color: var(--color-text);
+    margin-top: 4px;
+    width: 180px;
+    font-family: inherit;
+}
+
+/* Modo oscuro para el input de fecha */
+.dark-theme .date-input {
+    background-color: var(--color-input-bg);
+    color: var(--color-text);
+    border-color: var(--color-border);
+}
+
+/* Aplicar estilo de fecha-maxima a fechaLimite15Dias */
+#fechaLimite15Dias.fecha-maxima {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 6px 8px;
+    font-weight: bold;
+    color: #dc3545;
+    background-color: #fff5f5;
+    border: 1px solid #dc3545;
+    border-radius: 4px;
+    min-width: 100px;
+}
+
+/* Aplicar estilo de fecha-maxima a fechaLimiteSegunda */
+#fechaLimiteSegunda.fecha-maxima {
+    display: inline-block !important;
+    margin-top: 4px;
+    padding: 6px 8px;
+    font-weight: bold;
+    color: #dc3545;
+    background-color: #fff5f5;
+    border: 1px solid #dc3545;
+    border-radius: 4px;
+    min-width: 100px;
+    min-height: 18px;
+    animation: highlight-fecha 1s ease-in-out;
+}
+
+@keyframes highlight-fecha {
+    0% { background-color: #ffcccc; }
+    50% { background-color: #ff8888; }
+    100% { background-color: #fff5f5; }
+}
+
+.dark-theme #fechaLimite15Dias.fecha-maxima {
+    background-color: #3a2222;
+    color: #ff8080;
+}
+
+.dark-theme #fechaLimiteSegunda.fecha-maxima {
+    background-color: #3a2222;
+    color: #ff8080;
+}
+
+/* Estilos para alinear el botón Apertura-EE-Fep con los demás botones */
+.fep-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 1.275rem 0;
+  align-items: center;
+}
+
+.fep-buttons .action-button {
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+/* Estilos para alinear el checkbox y la fecha en la misma línea */
+.checkbox-date-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1.7rem;
+  margin-bottom: 0.85rem;
+}
+
+.checkbox-field {
+  flex: 1.5;
+  display: flex;
+  align-items: center;
+}
+
+.date-field {
+  flex: 1;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+  .checkbox-date-container {
+    flex-direction: column;
+  }
+  
+  .checkbox-field, .date-field {
+    flex: 1 1 100%;
+    margin-bottom: 10px;
+  }
+}
+
+/* Estilos para dark theme */
+.dark-theme .checkbox-label {
+  color: var(--color-text);
+}
+
+.dark-theme .checkbox-date-container input[type="checkbox"] {
+  accent-color: var(--color-primary);
+}
