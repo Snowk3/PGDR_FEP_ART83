@@ -9,6 +9,14 @@ function addToolbars() {
     const sections = document.querySelectorAll('.section');
     
     sections.forEach(section => {
+        // Check if this section already has a toolbar
+        if (section.querySelector('.editor-toolbar')) {
+            // Toolbar already exists, just update its display property
+            const existingToolbar = section.querySelector('.editor-toolbar');
+            existingToolbar.style.display = editMode ? 'flex' : 'none';
+            return;
+        }
+        
         const sectionContent = section.querySelector('.section-content');
         const sectionTitle = section.querySelector('.section-title');
         
@@ -129,6 +137,8 @@ function saveContent() {
 
 // Initialize editor when page loads
 window.addEventListener('DOMContentLoaded', () => {
+    // Clear any existing toolbars and add fresh ones
+    document.querySelectorAll('.editor-toolbar').forEach(toolbar => toolbar.remove());
     addToolbars();
     
     // Set up auto-save
@@ -142,6 +152,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const saved = localStorage.getItem('resolution_draft');
     if (saved && confirm('¿Desea cargar el borrador guardado anteriormente?')) {
         document.querySelector('.document-container').innerHTML = saved;
+        // Remove any old toolbars that might have been in the saved content
+        document.querySelectorAll('.editor-toolbar').forEach(toolbar => toolbar.remove());
         // Reapply toolbars after loading content
         addToolbars();
     }

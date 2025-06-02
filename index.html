@@ -311,6 +311,26 @@
                             </div>
 
                     </div>
+
+      <!-- Contenedor de botones de acción principales -->
+                    <div class="action-buttons-container">
+                        <div class="action-buttons">
+                            <!-- Botón para ingresar la decisión al sistema -->
+                            <button id="btnIngresarDecision" class="action-button"
+                                onclick="validarYProcesarDecision('ingresar')">Ingresar Decisión</button>                            <!-- Botón para generar el documento de resolución -->
+                            <button id="btnGenerarResolucion" class="action-button"
+                                onclick="validarYProcesarDecision('resolucion')">Generar Resolución</button>
+                            <!-- Botón para enviar notificación al contribuyente -->
+                            <button id="btnNotificar" class="action-button"
+                                onclick="validarYProcesarDecision('notificar')">Notificar Desición al
+                                Contribuyente</button>
+                            <!-- Botón para activar el proceso de Fiscalización Especial Previa -->
+                            <button id="btnDisponeFep" class="action-button"
+                                onclick="validarYProcesarDecision('disponerFep')">Dispone FEP</button>
+                        </div>
+</div>
+
+
                     <!-- Sección de comentarios y justificación de rechazo -->
                     <section class="comments-section">
                         <h3>Comentarios/Causales de Rechazo</h3>
@@ -345,23 +365,8 @@
                             </div>
                         </div>
                     </section>
-                    <!-- Contenedor de botones de acción principales -->
-                    <div class="action-buttons-container">
-                        <div class="action-buttons">
-                            <!-- Botón para ingresar la decisión al sistema -->
-                            <button id="btnIngresarDecision" class="action-button"
-                                onclick="validarYProcesarDecision('ingresar')">Ingresar Decisión</button>                            <!-- Botón para generar el documento de resolución -->
-                            <button id="btnGenerarResolucion" class="action-button"
-                                onclick="validarYProcesarDecision('resolucion')">Generar Resolución</button>
-                            <!-- Botón para enviar notificación al contribuyente -->
-                            <button id="btnNotificar" class="action-button"
-                                onclick="validarYProcesarDecision('notificar')">Notificar Desición al
-                                Contribuyente</button>
-                            <!-- Botón para activar el proceso de Fiscalización Especial Previa -->
-                            <button id="btnDisponeFep" class="action-button"
-                                onclick="validarYProcesarDecision('disponerFep')">Dispone FEP</button>
-                        </div>
-                    </div>
+              
+                    
                 </div>
             </div>
             <div class="title-container">
