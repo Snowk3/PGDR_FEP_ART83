@@ -880,9 +880,14 @@ function notificarContribuyenteFep() {
     const mesActual = (fechaActual.getMonth() + 1).toString().padStart(2, '0');
     const añoActual = fechaActual.getFullYear();
     const fechaFormateada = `${diaActual}/${mesActual}/${añoActual}`;
-    
-    document.getElementById('fechaNotificacionFep').textContent = fechaFormateada;
-      // Calcular y mostrar la fecha límite
+      document.getElementById('fechaNotificacionFep').textContent = fechaFormateada;
+
+    // Calculate and display fecha maxima recepcion (notificacion + 10 days)
+    const fechaMaxRecepcion = new Date(fechaActual);
+    fechaMaxRecepcion.setDate(fechaMaxRecepcion.getDate() + 10);
+    document.getElementById('fechaMaxRecepcionFep').textContent = formatoFecha(fechaMaxRecepcion);
+      
+    // Calcular y mostrar la fecha límite
     calcularFechaLimite();
     
     // Mostrar la sección de aviso vencimiento primera revisión
