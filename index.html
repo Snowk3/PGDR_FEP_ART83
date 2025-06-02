@@ -65,7 +65,7 @@
                     Justificadas</button>
                 <button class="tab-button" onclick="handleTabNavigation(event, 'tab2')">Observaciones
                     Justificadas</button>
-                <button class="tab-button" onclick="handleTabNavigation(event, 'tab3')">Decisión</button>
+                <button class="tab-button" onclick="handleTabNavigation(event, 'tab3')">Desición</button>
                 <button class="tab-button" onclick="handleTabNavigation(event, 'tabFep')">FEP</button>
                 <button class="tab-button" onclick="handleTabNavigation(event, 'tabexpediente')">Expediente
                     Electronico</button>
@@ -361,7 +361,7 @@
                     <!-- Subsección: Notificación FEP -->
                     <section class="fep-subsection">
                         <div class="subsection-header">
-                            <h4>Notificación FEP</h4>
+                            <h4>Notificación y Requerimiento de Antecedentes - FEP</h4>
                         </div>
                         <div id="notificacionFep" class="subsection-content">
                             <div class="fep-info">
@@ -386,6 +386,14 @@
                                     </div>
                                 </div>
                             </div>
+<!--Fecha Maxima Notificación FEP-->
+<div class="fep-row">
+    <div class="fep-field">
+        <label>Fecha Máxima de Notificación:</label>
+        <span id="fechaMaximaNotificacionFep" class="fecha-maxima"></span>
+    </div>
+</div>
+                            
                             <div class="fep-buttons">
                                 <button id="Apertura-EE-Fep" class="action-button" onclick="AbrirExpedienteFep()">
                                     Abrir Expediente Electrónico
@@ -393,7 +401,7 @@
                                 <button id="btnGenerarResolucionFep" class="action-button"
                                     onclick="generarResolucionFep()">Generar Resolución Inicio FEP</button>
                                 <button id="btnNotificarFep" class="action-button" onclick="notificarContribuyenteFep()"
-                                    disabled>Notificar al
+                                    enable>Notificar al
                                     Contribuyente Inicio FEP</button>
                             </div>
                         </div>
@@ -402,7 +410,7 @@
                     <!-- Subsección: Aviso Primera Revisión -->
                     <aside class="fep-subsection">
                         <div class="subsection-header">
-                            <h4>Aviso Vencimiento Desición FEP</h4>
+                            <h4>Recepción de Antecedentes - FEP</h4>
                         </div>
                         <div id="avisoPrimeraRevision" class="subsection-content">
                             <div class="fep-info">
@@ -847,7 +855,7 @@
 
                 <!-- Sección de comentarios -->
                 <section class="comments-section popup-comments">
-                    <h4>Comentarios/Causales de Rechazo</h4>
+                    <h4>Comentarios de la desición</h4>
                     <p class="comments-description">Detallar claramente las causales por las cuales se rechaza
                         el monto solicitado o una parte de él.</p>
                     <div class="editor-toolbar">

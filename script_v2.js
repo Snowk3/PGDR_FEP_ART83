@@ -13,7 +13,7 @@
 // Valores y constantes globales
 const UTM_VALOR = 65182;
 const DEVOLUCION_SOLICITADA = 150000000;
-const FECHA_SOLICITUD = new Date('2025-05-21');
+const FECHA_SOLICITUD = new Date('2025-06-04');
 const folioformulario = 123456789
 
 // Formatos de moneda y números
@@ -263,6 +263,10 @@ function handleTabNavigation(event, tabId) {
         document.getElementById('periodoTributario').textContent = '202504';
         document.getElementById('folioSolicitud').textContent = generarFolioSolicitud();
         
+        // Calculate and display fecha maxima notificacion
+        const fechaMaxNotif = calcularFechaMaxNotificacion();
+        document.getElementById('fechaMaximaNotificacionFep').textContent = formatoFecha(fechaMaxNotif);
+        
         // Sincronizar el ID del expediente entre secciones
         const mainIdExpediente = document.getElementById('idExpediente').textContent;
         if (mainIdExpediente) {
@@ -508,6 +512,17 @@ function calcularFechaMaxDesc48() {
     fechaMax.setDate(fechaMax.getDate() + 5); // Sumar 5 días a la fecha de solicitud
     return fechaMax;
 }
+
+/**
+ * Calcula la fecha máxima de notificación sumando 10 días a la fecha de solicitud
+ * @returns {Date} Fecha máxima para notificación
+ */
+function calcularFechaMaxNotificacion() {
+    const fechaMax = new Date(FECHA_SOLICITUD);
+    fechaMax.setDate(fechaMax.getDate() + 10);
+    return fechaMax;
+}
+
 /**
  * Valida que se haya seleccionado una decisión
  * @returns {boolean} true si hay una decisión seleccionada
@@ -771,6 +786,10 @@ function enviarSolicitudFep() {
     document.getElementById('periodoTributario').textContent = '202504';
     document.getElementById('folioSolicitud').textContent = generarFolioSolicitud();
     document.getElementById('montoSolicitadoFep').textContent = document.getElementById('devolucionSolicitada').value;
+    
+    // Calculate and display fecha maxima notificacion
+    const fechaMaxNotif = calcularFechaMaxNotificacion();
+    document.getElementById('fechaMaximaNotificacionFep').textContent = formatoFecha(fechaMaxNotif);
     
     // Asegurar que el ID de expediente esté sincronizado
     const mainIdExpediente = document.getElementById('idExpediente').textContent;
