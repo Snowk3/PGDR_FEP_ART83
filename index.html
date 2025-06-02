@@ -313,11 +313,10 @@
                     </div>
 
       <!-- Contenedor de botones de acción principales -->
-                    <div class="action-buttons-container">
-                        <div class="action-buttons">
+                    <div class="action-buttons-container">                        <div class="action-buttons">
                             <!-- Botón para ingresar la decisión al sistema -->
                             <button id="btnIngresarDecision" class="action-button"
-                                onclick="validarYProcesarDecision('ingresar')">Ingresar Decisión</button>                            <!-- Botón para generar el documento de resolución -->
+                                onclick="mostrarPopupIngresarDecision()">Ingresar Decisión</button>                            <!-- Botón para generar el documento de resolución -->
                             <button id="btnGenerarResolucion" class="action-button"
                                 onclick="validarYProcesarDecision('resolucion')">Generar Resolución</button>
                             <!-- Botón para enviar notificación al contribuyente -->
@@ -331,40 +330,7 @@
 </div>
 
 
-                    <!-- Sección de comentarios y justificación de rechazo -->
-                    <section class="comments-section">
-                        <h3>Comentarios/Causales de Rechazo</h3>
-                        <!-- Descripción del propósito de los comentarios -->
-                        <p class="comments-description">Detallar claramente las causales por las cuales se rechaza
-                            el monto solicitado o una parte de él.</p>
-                        <div class="editor-toolbar">
-                            <button type="button" class="toolbar-button" onclick="formatText('bold')" title="Negrita">
-                                <strong>B</strong>
-                            </button>
-                            <button type="button" class="toolbar-button" onclick="formatText('italic')" title="Cursiva">
-                                <em>I</em>
-                            </button>
-                            <button type="button" class="toolbar-button" onclick="formatText('underline')"
-                                title="Subrayado">
-                                <u>U</u>
-                            </button>
-                            <button type="button" class="toolbar-button" onclick="insertList('unordered')"
-                                title="Lista con viñetas">
-                                •
-                            </button>
-                            <button type="button" class="toolbar-button" onclick="insertList('ordered')"
-                                title="Lista numerada">
-                                1.
-                            </button>
-                        </div>
-                        <div class="editor-container">
-                            <div id="comentarios" class="rich-text-editor" contenteditable="true"
-                                data-max-length="10000"></div>
-                            <div class="character-count">
-                                <span id="charCount">0</span>/10000 caracteres
-                            </div>
-                        </div>
-                    </section>
+                   
               
                     
                 </div>
@@ -842,9 +808,7 @@
                     <button id="btnSalir" class="worksheet-btn exit-btn">Salir</button>
                 </div>            </div>
         </div>
-    </div>
-
-    <!-- Popup para la resolución -->
+    </div>    <!-- Popup para la resolución -->
     <div id="resolucionPopup" class="resolucion-popup">
         <div class="resolucion-content">
             <button class="resolucion-close" onclick="cerrarPopupResolucion()">&times;</button>
@@ -853,6 +817,67 @@
                 <button class="action-button" onclick="enviarResolucionParaFirma()">Enviar Resolución para Firma</button>
                 <button class="action-button" onclick="guardarResolucion()">Guardar</button>
                 <button class="action-button" onclick="cerrarPopupResolucion()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup para Ingresar Decisión -->
+    <div id="ingresarDecisionPopup" class="modal">
+        <div class="modal-content decision-popup-content">
+            <div class="modal-header">
+                <h3>Ingresar Desición</h3>
+                <button class="close-btn" onclick="cerrarPopupIngresarDecision()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Subheader con información de la decisión -->
+                <div class="decision-summary">
+                    <p id="decisionSummaryText">
+                        Usted a selecionado <strong id="selectedDecision">-</strong>, con una devolución autorizada de <strong id="selectedAmount">-</strong>. 
+                        Favor deje sus comentarios respecto de la desición para la autorización por parte de sus jefaturas:
+                    </p>
+                </div>
+
+                <!-- Sección de comentarios -->
+                <section class="comments-section popup-comments">
+                    <h4>Comentarios/Causales de Rechazo</h4>
+                    <p class="comments-description">Detallar claramente las causales por las cuales se rechaza
+                        el monto solicitado o una parte de él.</p>
+                    <div class="editor-toolbar">
+                        <button type="button" class="toolbar-button" onclick="formatDecisionText('bold')" title="Negrita">
+                            <strong>B</strong>
+                        </button>
+                        <button type="button" class="toolbar-button" onclick="formatDecisionText('italic')" title="Cursiva">
+                            <em>I</em>
+                        </button>
+                        <button type="button" class="toolbar-button" onclick="formatDecisionText('underline')"
+                            title="Subrayado">
+                            <u>U</u>
+                        </button>
+                        <button type="button" class="toolbar-button" onclick="insertDecisionList('unordered')"
+                            title="Lista con viñetas">
+                            •
+                        </button>
+                        <button type="button" class="toolbar-button" onclick="insertDecisionList('ordered')"
+                            title="Lista numerada">
+                            1.
+                        </button>
+                    </div>
+                    <div class="editor-container">
+                        <div id="decisionComentarios" class="rich-text-editor" contenteditable="true"
+                            data-max-length="10000"></div>
+                        <div class="character-count">
+                            <span id="decisionCharCount">0</span>/10000 caracteres
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Footer con botones de acción -->
+            <div class="modal-footer">
+                <button class="action-button secondary" onclick="cerrarPopupIngresarDecision()">Cerrar</button>
+                <button class="action-button primary" onclick="guardarDecisionComentarios()">Guardar</button>
+                <button class="action-button primary" onclick="enviarDecisionComentarios()">Enviar</button>
             </div>
         </div>
     </div>

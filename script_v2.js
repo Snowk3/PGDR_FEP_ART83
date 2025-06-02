@@ -1322,8 +1322,23 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const text = e.clipboardData.getData('text/plain');
             document.execCommand('insertText', false, text);
+        });    }
+
+    // Configurar editor de comentarios para popup de decisión
+    const decisionEditor = document.getElementById('decisionComentarios');
+    if (decisionEditor) {
+        decisionEditor.addEventListener('input', function() {
+            actualizarContadorDecisionComentarios();
         });
-    }    // Asegurar que todas las secciones FEP sean visibles inicialmente
+        
+        decisionEditor.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const text = e.clipboardData.getData('text/plain');
+            document.execCommand('insertText', false, text);
+        });
+    }
+
+    // Asegurar que todas las secciones FEP sean visibles inicialmente
     document.querySelectorAll('.subsection-content').forEach(section => {
         section.style.display = 'block';
         section.classList.remove('collapsed');
@@ -1630,4 +1645,169 @@ function generarNumeroResolucion() {
     const numero = Math.floor(Math.random() * 9000) + 1000; // Número aleatorio entre 1000 y 9999
     
     return `${numero}/${año}`;
+}
+
+/******************************************************************************
+ * 11. MÓDULO DE POPUP INGRESAR DECISIÓN
+ * - Gestión del popup para ingresar decisiones y comentarios
+ ******************************************************************************/
+
+/**
+ * Muestra el popup para ingresar la decisión
+ */
+function mostrarPopupIngresarDecision() {
+    // Validar que se haya seleccionado una decisión
+    const decisionSeleccionada = document.querySelector('input[name="decisionCruce"]:checked');
+    if (!decisionSeleccionada) {
+        mostrarAlerta('Debe seleccionar una decisión antes de continuar', 'error');
+        return;
+    }
+
+    // Validar que se hayan ingresado los montos requeridos
+    const devolucionSolicitada = obtenerValorNumerico('devolucionSolicitada');
+    const montoAutorizado = obtenerValorNumerico('montoAutorizado');
+    
+    if (devolucionSolicitada <= 0) {
+        mostrarAlerta('Debe ingresar el monto de devolución solicitada', 'error');
+        return;
+    }
+
+    if (montoAutorizado < 0 || montoAutorizado > devolucionSolicitada) {
+        mostrarAlerta('El monto autorizado debe ser válido', 'error');
+        return;
+    }
+
+    // Obtener el texto de la decisión seleccionada
+    const labelDecision = document.querySelector(`label[for="${decisionSeleccionada.id}"]`);
+    const textoDecision = labelDecision ? labelDecision.textContent : decisionSeleccionada.value;
+    
+    // Obtener el monto autorizado formateado
+    const montoAutorizadoFormateado = document.getElementById('montoAutorizado').value;
+
+    // Actualizar el contenido del popup
+    document.getElementById('selectedDecision').textContent = textoDecision;
+    document.getElementById('selectedAmount').textContent = montoAutorizadoFormateado;
+
+    // Cargar comentarios guardados si existen
+    const comentariosPrevios = localStorage.getItem('decisionComentarios');
+    if (comentariosPrevios) {
+        document.getElementById('decisionComentarios').innerHTML = comentariosPrevios;
+        actualizarContadorDecisionComentarios();
+    }
+
+    // Mostrar el popup
+    document.getElementById('ingresarDecisionPopup').style.display = 'flex';
+    
+    // Enfocar el editor de comentarios
+    document.getElementById('decisionComentarios').focus();
+}
+
+/**
+ * Cierra el popup de ingresar decisión
+ */
+function cerrarPopupIngresarDecision() {
+    document.getElementById('ingresarDecisionPopup').style.display = 'none';
+}
+
+/**
+ * Aplica formato al texto en el editor de decisión
+ * @param {string} command - El comando de formato a aplicar
+ */
+function formatDecisionText(command) {
+    document.execCommand(command, false, null);
+    document.getElementById('decisionComentarios').focus();
+}
+
+/**
+ * Inserta una lista en el editor de decisión
+ * @param {string} type - Tipo de lista ('ordered' o 'unordered')
+ */
+function insertDecisionList(type) {
+    const command = type === 'ordered' ? 'insertOrderedList' : 'insertUnorderedList';
+    document.execCommand(command, false, null);
+    document.getElementById('decisionComentarios').focus();
+}
+
+/**
+ * Actualiza el contador de caracteres del editor de decisión
+ */
+function actualizarContadorDecisionComentarios() {
+    const editor = document.getElementById('decisionComentarios');
+    const contador = document.getElementById('decisionCharCount');
+    const maxLength = parseInt(editor.dataset.maxLength);
+    const currentLength = editor.innerText.length;
+    
+    contador.textContent = currentLength;
+    
+    // Cambiar color si se acerca al límite
+    if (currentLength > maxLength * 0.9) {
+        contador.style.color = 'var(--color-warning)';
+    } else if (currentLength >= maxLength) {
+        contador.style.color = 'var(--color-error)';
+    } else {
+        contador.style.color = 'var(--color-text)';
+    }
+}
+
+/**
+ * Guarda los comentarios de la decisión sin enviar
+ */
+function guardarDecisionComentarios() {
+    const comentarios = document.getElementById('decisionComentarios').innerHTML;
+    
+    // Guardar en localStorage para persistencia
+    localStorage.setItem('decisionComentarios', comentarios);
+    
+    // Copiar comentarios al editor principal si existe
+    const editorPrincipal = document.getElementById('comentarios');
+    if (editorPrincipal) {
+        editorPrincipal.innerHTML = comentarios;
+        // Actualizar contador del editor principal
+        if (typeof updateCharCount === 'function') {
+            updateCharCount();
+        }
+    }
+    
+    mostrarAlerta('Comentarios guardados correctamente', 'success');
+}
+
+/**
+ * Envía los comentarios de la decisión y procesa la decisión
+ */
+function enviarDecisionComentarios() {
+    const comentarios = document.getElementById('decisionComentarios').innerText.trim();
+    const decisionSeleccionada = document.querySelector('input[name="decisionCruce"]:checked');
+    
+    // Validar comentarios para decisiones que los requieren
+    if (decisionSeleccionada) {
+        const valorDecision = decisionSeleccionada.value;
+        const montoAutorizado = obtenerValorNumerico('montoAutorizado');
+        const devolucionSolicitada = obtenerValorNumerico('devolucionSolicitada');
+        
+        // Requiere comentarios si es parcial o no ha lugar
+        const requiereComentarios = (valorDecision === 'lugarParcial') || 
+                                   (valorDecision === 'noLugar') ||
+                                   (montoAutorizado < devolucionSolicitada);
+        
+        if (requiereComentarios && comentarios.length === 0) {
+            mostrarAlerta('Debe ingresar comentarios para justificar esta decisión', 'error');
+            return;
+        }
+    }
+    
+    // Guardar comentarios primero
+    guardarDecisionComentarios();
+    
+    // Procesar la decisión
+    const decision = decisionSeleccionada.value;
+    const montoAutorizado = document.getElementById('montoAutorizado').value;
+    
+    // Habilitar el siguiente botón en el flujo
+    document.getElementById('btnGenerarResolucion').disabled = false;
+    document.getElementById('btnIngresarDecision').disabled = true;
+    
+    // Cerrar el popup
+    cerrarPopupIngresarDecision();
+      // Mostrar mensaje de éxito
+    mostrarAlerta(`Decisión ingresada exitosamente: ${decision} - Monto: ${montoAutorizado}`, 'success');
 }
