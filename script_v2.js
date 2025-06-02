@@ -12,7 +12,7 @@
 
 // Valores y constantes globales
 const UTM_VALOR = 65182;
-const DEVOLUCION_SOLICITADA = 15000000;
+const DEVOLUCION_SOLICITADA = 150000000;
 const FECHA_SOLICITUD = new Date('2025-05-21');
 const folioformulario = 123456789
 
@@ -553,14 +553,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnIngresarDecision = document.getElementById('btnIngresarDecision');
     const btnGenerarResolucion = document.getElementById('btnGenerarResolucion');
     const btnNotificar = document.getElementById('btnNotificar');
-    const btnDisponeFep = document.getElementById('btnDisponeFep');
-
-    // Estado de botones
+    const btnDisponeFep = document.getElementById('btnDisponeFep');    // Estado de botones - Todos habilitados
     btnIngresarDecision.disabled = false;
-    btnGenerarResolucion.disabled = true;
-    btnNotificar.disabled = true;
-    btnDisponeFep.disabled = true;
-    btnDisponeFep.disabled = true; // Siempre deshabilitado al inicio
+    btnGenerarResolucion.disabled = false;
+    btnNotificar.disabled = false;
+    btnDisponeFep.disabled = false;
 
     // Helper para limpiar y bloquear/desbloquear campos
     function setMontoAutorizado(valor, readOnly = false) {
@@ -578,22 +575,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Lógica de selección de decisión
-    function handleDecisionChange() {
-        if (radioLugar.checked) {
+    function handleDecisionChange() {        if (radioLugar.checked) {
             // 1. Devolución ha lugar: monto autorizado = monto solicitada, bloqueado
             setMontoAutorizado(montoSolicitada.value, true);
             requireComentarios(false);
-            btnDisponeFep.disabled = true;
+            // Button state management removed - all buttons remain enabled
         } else if (radioParcial.checked) {
             // 2. Parcial: monto autorizado editable (>0), comentarios requeridos
             setMontoAutorizado('', false);
             requireComentarios(true);
-            btnDisponeFep.disabled = true;
+            // Button state management removed - all buttons remain enabled
         } else if (radioNoLugar.checked) {
             // 3. No ha lugar: monto autorizado = 0, bloqueado, comentarios requeridos
             setMontoAutorizado('0', true);
             requireComentarios(true);
-            btnDisponeFep.disabled = false;
+            // Button state management removed - all buttons remain enabled
         }
              // --- Lógica adicional: montoRechazado ---
         // Si montoAutorizado == devolucionSolicitada, montoRechazado = 0
@@ -648,21 +644,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         alert('Debe seleccionar una opción de decisión.');
         return false;
-    }
-
-    // Flujo de botones
+    }    // Flujo de botones - Mantener todos habilitados
     btnIngresarDecision.addEventListener('click', function (e) {
         if (!validarDecision()) {
             e.preventDefault();
             return;
         }
-        btnGenerarResolucion.disabled = false;
-        btnIngresarDecision.disabled = true;
+        // Botones permanecen habilitados
     });
 
     btnGenerarResolucion.addEventListener('click', function () {
-        btnNotificar.disabled = false;
-        btnGenerarResolucion.disabled = true;
+        // Botones permanecen habilitados
     });
 
     // El botón Notificar no habilita ningún otro botón en este flujo
@@ -703,24 +695,19 @@ function validarYProcesarDecision(accion) {
     }
 
     const decision = document.querySelector('input[name="decisionCruce"]:checked').value;
-    const montoAutorizado = document.getElementById('montoAutorizado').value;
-
-    switch (accion) {
+    const montoAutorizado = document.getElementById('montoAutorizado').value;    switch (accion) {
         case 'ingresar':
             // Procesar el ingreso de la decisión
             mostrarAlerta(`Decisión ingresada: ${decision} - Monto: ${montoAutorizado}`, 'success');
-            document.getElementById('btnGenerarResolucion').disabled = false;
             break;
 
         case 'resolucion':
             // Mostrar el popup con la plantilla de resolución
             mostrarPopupResolucion();
-            document.getElementById('btnNotificar').disabled = false;
             break;
 
         case 'notificar':
             // Notificar al contribuyente
-            document.getElementById('btnDisponeFep').disabled = false;
             mostrarAlerta('Notificación enviada al contribuyente', 'success');
             break;
     }
@@ -852,14 +839,11 @@ function generarActaRecepcion() {
 function generarResolucionFep() {
     // Generar y almacenar número de resolución
     const numeroResolucion = generarNumeroResolucion();
-    document.getElementById('numeroResolucionFep').textContent = numeroResolucion;
-
-    // Almacenar fecha de generación
+    document.getElementById('numeroResolucionFep').textContent = numeroResolucion;    // Almacenar fecha de generación
     const fechaGeneracion = formatoFecha(new Date());
     document.getElementById('fechaGeneracionFep').textContent = fechaGeneracion;
 
-    // Habilitar botón de notificación
-    document.getElementById('btnNotificarFep').disabled = false;
+    // Button state management removed - all buttons remain enabled throughout workflow
     
     mostrarAlerta('Resolución FEP generada correctamente', 'success');
 }
@@ -957,13 +941,11 @@ function generarResolucion15Dias() {
     // Generar y almacenar número de resolución
     const numeroResolucion = generarIdResolucion();
     document.getElementById('numeroResolucionFepSegunda').textContent = numeroResolucion;
-    
-    // Almacenar fecha de generación
+      // Almacenar fecha de generación
     const fechaGeneracion = new Date();
     document.getElementById('fechaGeneracionFepSegunda').textContent = formatoFecha(fechaGeneracion);
     
-    // Habilitar siguiente paso
-    document.getElementById('btnNotificar15').disabled = false;
+    // Button state management removed - all buttons remain enabled throughout workflow
     mostrarAlerta('Resolución generada correctamente', 'success');
 }
 
@@ -987,10 +969,9 @@ function notificarContribuyente15Dias() {
 
         }
     }
-    
-    // Continuar con el comportamiento normal de la función
+      // Continuar con el comportamiento normal de la función
     mostrarAlerta('Notificación enviada al contribuyente', 'success');
-    document.getElementById('btnEnviarDecision15').disabled = false;
+    // Button state management removed - all buttons remain enabled throughout workflow
 }
 
 /**
@@ -1038,14 +1019,15 @@ function calcularMontos15() {
  * Valida y actualiza el estado de los botones de la sección 15 días
  */
 function validarYActualizarBotonesDecision15() {
+    // Button validation function updated - all buttons remain enabled throughout workflow
+    // Original validation logic preserved for form validation but button state management removed
     const decisionSeleccionada = Array.from(document.getElementsByName('decision15Dias')).some(radio => radio.checked);
     const montoAutorizado = obtenerValorNumerico('montoAutorizado15');
     const montoSolicitado = obtenerValorNumerico('montoSolicitado15');
     
     const valido = decisionSeleccionada && 
                   (montoAutorizado >= 0 && montoAutorizado <= montoSolicitado);
-    
-    document.getElementById('btnGenerarResolucion15').disabled = !valido;
+      // Button state management removed - validation logic preserved for other UI elements if needed
 }
 
 
@@ -1801,10 +1783,7 @@ function enviarDecisionComentarios() {
     // Procesar la decisión
     const decision = decisionSeleccionada.value;
     const montoAutorizado = document.getElementById('montoAutorizado').value;
-    
-    // Habilitar el siguiente botón en el flujo
-    document.getElementById('btnGenerarResolucion').disabled = false;
-    document.getElementById('btnIngresarDecision').disabled = true;
+      // Button state management removed - all buttons remain enabled throughout workflow
     
     // Cerrar el popup
     cerrarPopupIngresarDecision();

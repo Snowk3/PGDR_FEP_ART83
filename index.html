@@ -312,11 +312,13 @@
 
                     </div>
 
-      <!-- Contenedor de botones de acción principales -->
-                    <div class="action-buttons-container">                        <div class="action-buttons">
+                    <!-- Contenedor de botones de acción principales -->
+                    <div class="action-buttons-container">
+                        <div class="action-buttons">
                             <!-- Botón para ingresar la decisión al sistema -->
                             <button id="btnIngresarDecision" class="action-button"
-                                onclick="mostrarPopupIngresarDecision()">Ingresar Decisión</button>                            <!-- Botón para generar el documento de resolución -->
+                                onclick="mostrarPopupIngresarDecision()">Ingresar Decisión</button>
+                            <!-- Botón para generar el documento de resolución -->
                             <button id="btnGenerarResolucion" class="action-button"
                                 onclick="validarYProcesarDecision('resolucion')">Generar Resolución</button>
                             <!-- Botón para enviar notificación al contribuyente -->
@@ -327,12 +329,12 @@
                             <button id="btnDisponeFep" class="action-button"
                                 onclick="validarYProcesarDecision('disponerFep')">Dispone FEP</button>
                         </div>
-</div>
+                    </div>
 
 
-                   
-              
-                    
+
+
+
                 </div>
             </div>
             <div class="title-container">
@@ -582,7 +584,8 @@
                                     onclick="notificarContribuyente15Dias()" disabled>Notificar al
                                     Contribuyente</button>
                                 <button id="btnEnviarDecision15" class="action-button" onclick="enviarDecision15Dias()"
-                                    disabled>Enviar Decisión</button>                            </div>
+                                    disabled>Enviar Decisión</button>
+                            </div>
                     </div>
                 </div>
 
@@ -806,15 +809,17 @@
                         Grupo</button>
                     <button id="btnGrabar" class="worksheet-btn save-btn">Grabar</button>
                     <button id="btnSalir" class="worksheet-btn exit-btn">Salir</button>
-                </div>            </div>
+                </div>
+            </div>
         </div>
-    </div>    <!-- Popup para la resolución -->
+    </div> <!-- Popup para la resolución -->
     <div id="resolucionPopup" class="resolucion-popup">
         <div class="resolucion-content">
             <button class="resolucion-close" onclick="cerrarPopupResolucion()">&times;</button>
             <iframe id="resolucionFrame" class="resolucion-iframe"></iframe>
             <div class="resolucion-footer">
-                <button class="action-button" onclick="enviarResolucionParaFirma()">Enviar Resolución para Firma</button>
+                <button class="action-button" onclick="enviarResolucionParaFirma()">Enviar Resolución para
+                    Firma</button>
                 <button class="action-button" onclick="guardarResolucion()">Guardar</button>
                 <button class="action-button" onclick="cerrarPopupResolucion()">Cerrar</button>
             </div>
@@ -828,13 +833,15 @@
                 <h3>Ingresar Desición</h3>
                 <button class="close-btn" onclick="cerrarPopupIngresarDecision()">&times;</button>
             </div>
-            
+
             <div class="modal-body">
                 <!-- Subheader con información de la decisión -->
                 <div class="decision-summary">
                     <p id="decisionSummaryText">
-                        Usted a selecionado <strong id="selectedDecision">-</strong>, con una devolución autorizada de <strong id="selectedAmount">-</strong>. 
-                        Favor deje sus comentarios respecto de la desición para la autorización por parte de sus jefaturas:
+                        Usted a selecionado <strong id="selectedDecision">-</strong>, con una devolución autorizada de
+                        <strong id="selectedAmount">-</strong>.
+                        Favor deje sus comentarios respecto de la desición para la autorización por parte de sus
+                        jefaturas:
                     </p>
                 </div>
 
@@ -844,10 +851,12 @@
                     <p class="comments-description">Detallar claramente las causales por las cuales se rechaza
                         el monto solicitado o una parte de él.</p>
                     <div class="editor-toolbar">
-                        <button type="button" class="toolbar-button" onclick="formatDecisionText('bold')" title="Negrita">
+                        <button type="button" class="toolbar-button" onclick="formatDecisionText('bold')"
+                            title="Negrita">
                             <strong>B</strong>
                         </button>
-                        <button type="button" class="toolbar-button" onclick="formatDecisionText('italic')" title="Cursiva">
+                        <button type="button" class="toolbar-button" onclick="formatDecisionText('italic')"
+                            title="Cursiva">
                             <em>I</em>
                         </button>
                         <button type="button" class="toolbar-button" onclick="formatDecisionText('underline')"
