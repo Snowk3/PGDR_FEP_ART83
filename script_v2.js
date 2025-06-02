@@ -1537,357 +1537,141 @@ function calcularFechaLimiteFep() {
 }
 
 
-  // Inicializar fechaLimiteSegunda si ya hay una fecha de notificación
-    const fechaNotificacionSegunda = document.getElementById('fechaNotificacionSegundaRevision');
-    if (fechaNotificacionSegunda && fechaNotificacionSegunda.textContent) {
-        // Si ya hay una fecha de notificación, calcular la fecha límite
-        setTimeout(() => calcularFechaLimiteSegunda(), 500);
-    }
-
-/**
- * Guarda la fecha de generación del acta y muestra confirmación para la sección FEP
- */
-function guardarFechaActaFep() {
-    const fechaGeneracionActa = document.getElementById('fechaGeneracionActaFep');
-    
-    // Verificar que se haya ingresado una fecha
-    if (!fechaGeneracionActa || !fechaGeneracionActa.value) {
-        mostrarAlerta('Debe ingresar una fecha de generación del acta', 'error');
-        return;
-    }
-    
-    // Formatear la fecha para mostrar
-    const fecha = new Date(fechaGeneracionActa.value);
-    const fechaFormateada = fecha.toLocaleDateString('es-CL');
-    
-    // Aquí se implementaría la lógica para guardar en el sistema de Consulta Estado
-    // Esta es una simulación del proceso de guardado
-    
-    // Actualizar la fecha límite basada en esta fecha
-    calcularFechaLimiteFep();
-    
-    // Mostrar mensaje de confirmación
-    mostrarAlerta('Evento registrado en Consulta Estado', 'success');
-}
-
-/**
- * Abre el expediente electrónico para la sección FEP
- */
-function AbrirExpedienteFep() {
-    // Check if an ID already exists in the FEP section
-    const idExpedienteFep = document.getElementById('idExpedienteFep');
-    if (idExpedienteFep && idExpedienteFep.textContent) {
-        // ID already exists, show message
-        mostrarAlerta('Expediente ya ha sido generado para la solicitud', 'info');
-    } else {
-        // No ID yet, generate one
-        actualizarIdExpediente();
-    }
-}
-
 /******************************************************************************
- * 10. SECCIÓN SEGUNDA REVISION
- * - Proceso de segunda revisión y validaciones
+ * GESTIÓN DE PLANTILLAS Y DOCUMENTOS
+ * - Funciones para manejar plantillas de resoluciones y documentos
  ******************************************************************************/
 
 /**
- * Valida que se haya seleccionado una decisión en la segunda revisión
- * @returns {boolean} true si hay una decisión seleccionada
+ * Abre la plantilla de resolución en un iframe
  */
-function validarDecisionSegunda() {
-    const radioButtons = document.getElementsByName('decisionSegunda');
-    return Array.from(radioButtons).some(radio => radio.checked);
+function abrirPlantillaResolucion() {
+    const plantillaPreview = document.getElementById('plantillaPreview');
+    const plantillaFrame = document.getElementById('plantillaFrame');
+    
+    plantillaFrame.src = 'RES_TYPE_DES.HTML';
+    plantillaPreview.style.display = 'block';
+    
+    // Agregar datos del contribuyente a la plantilla
+    plantillaFrame.onload = function() {
+        try {
+            const frameDoc = plantillaFrame.contentDocument || plantillaFrame.contentWindow.document;
+            
+            // Completar campos básicos de la plantilla con datos del sistema
+            const campos = {
+                'DR': 'DR METROPOLITANA SANTIAGO ORIENTE',
+                'DEPTO': 'DEPARTAMENTO DE FISCALIZACIÓN',
+                'GRUPO': 'GRUPO N° 8 IVA EXPORTADOR',
+                'R_Social': document.getElementById('folioSolicitud') ? document.getElementById('folioSolicitud').textContent : '[RAZÓN SOCIAL]',
+                'RUT_CONTR': '12.345.678-9', // Obtener de datos del sistema
+                'DESICIÓN': 'RESOLUCIÓN DE INICIO DE FEP',
+                'Numero_RES': generateRandomId(5), // Generar número aleatorio para demo
+                'FECHA': new Date().toLocaleDateString('es-CL')
+            };
+            
+            // Establecer valores en la plantilla
+            Object.keys(campos).forEach(key => {
+                const elements = frameDoc.querySelectorAll(`[data-placeholder="${key}"]`);
+                elements.forEach(el => {
+                    el.textContent = campos[key];
+                });
+            });
+        } catch (e) {
+            console.error('Error al cargar datos en la plantilla:', e);
+        }
+    };
 }
 
 /**
- * Valida que se hayan ingresado los montos requeridos en la segunda revisión
- * @returns {boolean} true si los montos están ingresados correctamente
+ * Crea una nueva plantilla basada en la actual pero con campos vacíos
  */
-function validarMontosSegunda() {
-    const montoAutorizado = obtenerValorNumerico('montoAutorizadoSegunda');
-    return montoAutorizado >= 0;
-}
-
-/**
- * Actualiza el estado de habilitación de los botones según las validaciones de la segunda revisión
- */
-function validarYActualizarBotonesDecisionSegunda() {
-    const todoValido = validarDecisionSegunda() && validarMontosSegunda();
-    const botones = document.querySelectorAll('.accion-btn-segunda');
-    botones.forEach(boton => {
-        boton.disabled = !todoValido;
+function crearNuevaPlantilla() {
+    // Crear ventana popup para elegir tipo de plantilla
+    const tipoPlantillas = [
+        { id: 'fep_inicio', nombre: 'Resolución de Inicio FEP' },
+        { id: 'fep_decision', nombre: 'Resolución de Decisión FEP' },
+        { id: 'solicitud_antecedentes', nombre: 'Solicitud de Antecedentes' },
+        { id: 'acta_recepcion', nombre: 'Acta de Recepción' },
+        { id: 'plantilla_vacia', nombre: 'Plantilla Vacía' }
+    ];
+    
+    // Crear y mostrar popup
+    const popup = document.createElement('div');
+    popup.className = 'modal';
+    popup.style.display = 'block';
+    popup.style.position = 'fixed';
+    popup.style.zIndex = '1000';
+    popup.style.left = '0';
+    popup.style.top = '0';
+    popup.style.width = '100%';
+    popup.style.height = '100%';
+    popup.style.overflow = 'auto';
+    popup.style.backgroundColor = 'rgba(0,0,0,0.4)';
+    
+    // Contenido del popup
+    const popupContent = document.createElement('div');
+    popupContent.className = 'modal-content';
+    popupContent.style.backgroundColor = '#fefefe';
+    popupContent.style.margin = '15% auto';
+    popupContent.style.padding = '20px';
+    popupContent.style.border = '1px solid #888';
+    popupContent.style.width = '50%';
+    popupContent.style.borderRadius = '5px';
+    
+    // Título
+    const title = document.createElement('h3');
+    title.textContent = 'Seleccione tipo de plantilla';
+    
+    // Lista de opciones
+    const list = document.createElement('ul');
+    list.style.listStyle = 'none';
+    list.style.padding = '0';
+    
+    tipoPlantillas.forEach(tipo => {
+        const item = document.createElement('li');
+        item.style.padding = '10px';
+        item.style.margin = '5px 0';
+        item.style.backgroundColor = '#f5f5f5';
+        item.style.borderRadius = '3px';
+        item.style.cursor = 'pointer';
+        
+        item.textContent = tipo.nombre;
+        
+        item.onclick = function() {
+            abrirPlantillaResolucion();
+            popup.style.display = 'none';
+        };
+        
+        list.appendChild(item);
     });
+    
+    // Botón cerrar
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = 'Cancelar';
+    closeBtn.className = 'action-button';
+    closeBtn.style.marginTop = '15px';
+    closeBtn.onclick = function() {
+        popup.style.display = 'none';
+    };
+    
+    // Añadir elementos al popup
+    popupContent.appendChild(title);
+    popupContent.appendChild(list);
+    popupContent.appendChild(closeBtn);
+    popup.appendChild(popupContent);
+    
+    // Añadir popup al body
+    document.body.appendChild(popup);
 }
 
 /**
- * Formatea un número con separadores de miles para la sección Segunda Revisión
- * @param {HTMLInputElement} input - El elemento input a formatear
+ * Genera un ID aleatorio para usar en resoluciones de demo
  */
-function formatNumberSegunda(input) {
-    let valor = input.value.replace(/\D/g, '');
-    if (valor) {
-        input.value = FORMATO_MONEDA.format(parseInt(valor));
+function generateRandomId(length) {
+    const characters = '0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
-    calcularMontosSegunda();
-}
-
-/**
- * Calcula los montos y conversiones UTM para la sección Segunda Revisión
- */
-function calcularMontosSegunda() {
-    const montoSolicitado = obtenerValorNumerico('montoSolicitadoSegunda');
-    const montoAutorizado = obtenerValorNumerico('montoAutorizadoSegunda');
-    const montoRechazado = montoSolicitado - montoAutorizado;
-    
-    if (montoSolicitado > 0) {
-        document.getElementById('montoRechazadoSegunda').value = FORMATO_MONEDA.format(montoRechazado);
-    }
-    
-    actualizarUTM('montoSolicitadoSegunda', 'montoSolicitadoUTMSegunda');
-    actualizarUTM('montoAutorizadoSegunda', 'montoAutorizadoUTMSegunda');
-    actualizarUTM('montoRechazadoSegunda', 'montoRechazadoUTMSegunda');
-    
-    validarYActualizarBotonesDecisionSegunda();
-}
-
-/**
- * Genera la resolución para la segunda revisión
- */
-function generarResolucionSegunda() {
-    const decision = document.querySelector('input[name="decisionSegunda"]:checked');
-    if (!decision) {
-        mostrarAlerta('Debe seleccionar una decisión', 'error');
-        return;
-    }
-
-    const montoAutorizado = document.getElementById('montoAutorizadoSegunda').value;
-    if (montoAutorizado === '' && decision.value !== 'retencionTotal') {
-        mostrarAlerta('Debe ingresar un monto autorizado', 'error');
-        return;
-    }
-
-    // Generar y almacenar número de resolución
-    const numeroResolucion = generarIdResolucion();
-    // Almacenar fecha de generación
-    const fechaGeneracion = new Date();
-    
-    // Habilitar siguiente paso
-    document.getElementById('btnNotificarSegunda').disabled = false;
-    mostrarAlerta('Resolución Segunda Revisión generada correctamente', 'success');
-}
-
-/**
- * Notifica al contribuyente sobre la decisión de la segunda revisión
- */
-function notificarContribuyenteSegunda() {
-    // Establecer la fecha actual como fecha de notificación
-    const fechaActual = new Date();
-    const fechaFormateada = formatoFecha(fechaActual);
-    
-    // Actualizar el elemento con la fecha actual
-    const fechaNotificacionElement = document.getElementById('fechaNotificacionSegundaRevision');
-    if (fechaNotificacionElement) {
-        fechaNotificacionElement.textContent = fechaFormateada;
-        fechaNotificacionElement.style.display = 'inline-block'; // Asegurar visibilidad
-        
-        // Calcular inmediatamente la fecha límite
-        setTimeout(() => calcularFechaLimiteSegunda(), 100);
-    }
-    
-    mostrarAlerta('Notificación de Segunda Revisión enviada al contribuyente', 'success');
-    document.getElementById('btnEnviarDecisionSegunda').disabled = false;
-}
-/**
- * Envía la decisión final de la segunda revisión
- */
-function enviarDecisionSegunda() {
-    const decision = document.querySelector('input[name="decisionSegunda"]:checked').value;
-    const montoAutorizado = document.getElementById('montoAutorizadoSegunda').value;
-    
-    mostrarAlerta(`Decisión de Segunda Revisión enviada exitosamente: ${decision} - Monto: ${montoAutorizado}`, 'success');
-}
-
-/**
- * Maneja la lógica de selección de decisión para los radio buttons de decisión segunda
- */
-function handleDecisionSegundaChange() {
-    // Obtener los radio buttons
-    const radioDevolucionTotal = document.getElementById('devolucionTotalSegunda');
-    const radioRetencionTotal = document.getElementById('retencionTotalSegunda');
-    const montoAutorizado = document.getElementById('montoAutorizadoSegunda');
-    
-    // Establecer el valor del monto autorizado según la selección
-    if (radioDevolucionTotal && radioDevolucionTotal.checked) {
-        // Para devolución total, el monto autorizado es igual al solicitado
-        montoAutorizado.value = FORMATO_MONEDA.format(DEVOLUCION_SOLICITADA);
-        montoAutorizado.readOnly = true; // Bloquear edición
-    } else if (radioRetencionTotal && radioRetencionTotal.checked) {
-        // Para retención total, el monto autorizado es 0
-        montoAutorizado.value = FORMATO_MONEDA.format(0);
-        montoAutorizado.readOnly = true; // Bloquear edición
-    } else {
-        // Para las demás opciones, permitir edición
-        montoAutorizado.readOnly = false;
-    }
-    
-    // Recalcular montos y UTMs
-    calcularMontosSegunda();
-}
-
-/**
- * Calcula y muestra la fecha límite para la Segunda Revisión (fecha notificación + 25 días)
- */
-function calcularFechaLimiteSegunda() {
-    console.log("Iniciando cálculo de fecha límite segunda revisión");
-    
-    // Obtener la fecha de notificación de la segunda revisión
-    const fechaNotificacionElement = document.getElementById('fechaNotificacionSegundaRevision');
-    if (!fechaNotificacionElement) {
-        console.error("Elemento fechaNotificacionSegundaRevision no encontrado");
-        return;
-    }
-    
-    if (!fechaNotificacionElement.textContent || fechaNotificacionElement.textContent.trim() === '') {
-        console.error("Elemento fechaNotificacionSegundaRevision no tiene contenido:", fechaNotificacionElement.textContent);
-        
-        // Si no hay fecha, establecer la fecha actual como fecha de notificación
-        const fechaActual = new Date();
-        const diaActual = fechaActual.getDate().toString().padStart(2, '0');
-        const mesActual = (fechaActual.getMonth() + 1).toString().padStart(2, '0');
-        const añoActual = fechaActual.getFullYear();
-        fechaNotificacionElement.textContent = `${diaActual}/${mesActual}/${añoActual}`;
-        console.log("Se estableció la fecha actual como fecha de notificación:", fechaNotificacionElement.textContent);
-    }
-    
-    console.log("Fecha de notificación encontrada:", fechaNotificacionElement.textContent);
-    
-    // Parsear la fecha (formato dd/mm/yyyy)
-    const partesFecha = fechaNotificacionElement.textContent.split('/');
-    if (partesFecha.length !== 3) {
-        console.error("Formato de fecha incorrecto:", fechaNotificacionElement.textContent);
-        return;
-    }
-    
-    const dia = parseInt(partesFecha[0], 10);
-    const mes = parseInt(partesFecha[1], 10) - 1; // En JavaScript los meses van de 0-11
-    const año = parseInt(partesFecha[2], 10);
-    
-    console.log("Fecha parseada:", dia, mes + 1, año);
-    
-    // Crear objeto Date con la fecha de notificación
-    const fechaBase = new Date(año, mes, dia);
-    
-    // Sumar 25 días
-    const fechaLimite = new Date(fechaBase);
-    fechaLimite.setDate(fechaLimite.getDate() + 25);
-    
-    console.log("Fecha límite calculada:", fechaLimite);
-    
-    // Formatear la fecha límite (dd/mm/yyyy)
-    const diaLimite = fechaLimite.getDate().toString().padStart(2, '0');
-    const mesLimite = (fechaLimite.getMonth() + 1).toString().padStart(2, '0');
-    const añoLimite = fechaLimite.getFullYear();
-    const fechaLimiteFormateada = `${diaLimite}/${mesLimite}/${añoLimite}`;
-    
-    console.log("Fecha límite formateada:", fechaLimiteFormateada);
-    
-    // Mostrar la fecha límite en el elemento correspondiente
-    const fechaLimiteElement = document.getElementById('fechaLimiteSegunda');
-    if (!fechaLimiteElement) {
-        console.error("Elemento fechaLimiteSegunda no encontrado");
-        
-        // Verificar si el elemento existe pero no puede ser encontrado directamente
-        const todosLosSpans = document.querySelectorAll('span');
-        let encontrado = false;
-        todosLosSpans.forEach(span => {
-            if (span.id === 'fechaLimiteSegunda') {
-                span.textContent = fechaLimiteFormateada;
-                span.classList.add('fecha-maxima');
-                encontrado = true;
-                console.log("Elemento fechaLimiteSegunda encontrado mediante querySelectorAll");
-            }
-        });
-        
-        if (!encontrado) {
-            console.error("Elemento fechaLimiteSegunda no pudo ser encontrado por ningún método");
-            return;
-        }
-    } else {
-        // El elemento fue encontrado correctamente
-        fechaLimiteElement.textContent = fechaLimiteFormateada;
-        
-        // Aplicar clase de estilo
-        fechaLimiteElement.classList.add('fecha-maxima');
-        
-        // Asegurar visibilidad
-        fechaLimiteElement.style.display = 'inline-block';
-        
-        console.log("Fecha límite establecida correctamente en el elemento:", fechaLimiteElement);
-    }
-    
-    // Verificar que el elemento tenga el contenido esperado
-    setTimeout(() => {
-        const verificacion = document.getElementById('fechaLimiteSegunda');
-        if (verificacion) {
-            console.log("Verificación: El elemento fechaLimiteSegunda tiene el contenido:", verificacion.textContent);
-        }
-    }, 100);
-    
-    return fechaLimiteFormateada;
-}
-
-/**
- * Aplica formato al texto en el editor de comentarios de antecedentes
- * @param {string} command - El comando de formato a aplicar
- */
-function formatAntecedentesText(command) {
-    document.execCommand(command, false, null);
-}
-
-// Inicializar el contador de caracteres para el editor de comentarios de antecedentes
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar el editor de comentarios de antecedentes
-    const antecedentesEditor = document.getElementById('antecedentesComentarios');
-    if (antecedentesEditor) {
-        antecedentesEditor.addEventListener('input', function() {
-            const text = antecedentesEditor.innerText || '';
-            const maxLength = parseInt(antecedentesEditor.dataset.maxLength || 200, 10);
-            const charCount = text.length;
-            
-            // Actualizar el contador de caracteres
-            document.getElementById('antecedentesCharCount').textContent = charCount;
-            
-            // Limitar el número de caracteres
-            if (charCount > maxLength) {
-                // Si se excede el límite, truncar el texto
-                const selection = window.getSelection();
-                const range = selection.getRangeAt(0);
-                
-                antecedentesEditor.innerText = text.substring(0, maxLength);
-                
-                // Restaurar la posición del cursor
-                range.setStart(antecedentesEditor.firstChild, maxLength);
-                range.setEnd(antecedentesEditor.firstChild, maxLength);
-                selection.removeAllRanges();
-                selection.addRange(range);
-            }
-        });
-    }
-});
-
-/**
- * Genera una Anotación 41 para el contribuyente
- */
-function generarAnotacion41() {
-    const comentarios = document.getElementById('fepComentarios').innerText;
-    if (comentarios.trim().length === 0) {
-        mostrarAlerta('Debe ingresar comentarios para generar la Anotación 41', 'error');
-        return;
-    }
-    
-    // Aquí iría la lógica para generar la Anotación 41
-    console.log('Generando Anotación 41 con comentarios:', comentarios);
-    
-    // Mostrar mensaje de éxito
-    mostrarAlerta('Anotación 41 generada exitosamente', 'success');
+    return result;
 }

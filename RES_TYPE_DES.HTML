@@ -1,0 +1,73 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantilla de Resolución SIFM</title>
+    <link rel="stylesheet" href="RES_TYPE_DES.CSS">
+    <script src="RES_TYPE_DES.JS"></script>
+</head>
+
+<body>
+    <button class="edit-button" onclick="toggleEdit()">Activar Edición</button>
+    <button class="print-button" onclick="window.print()">Imprimir</button>
+    
+    <div class="document-container">
+        <div class="header" style="text-align: left;">
+            <img src="https://www.sii.cl/sobre_el_sii/logoSII250x108.jpg" alt="SII Logo" style="height: 50px; margin-bottom: 10px;">
+            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+                <div><span class="field" contenteditable="false" data-placeholder="DR">[DR]</span></div>
+                <div><span class="field" contenteditable="false" data-placeholder="DEPTO">[DEPTO]</span></div>
+                <div><span class="field" contenteditable="false" data-placeholder="GRUPO">[GRUPO]</span></div>
+            </div>
+        </div>
+
+        <div style="text-align: right; margin: 5px 0;">
+            <span class="field" contenteditable="false" data-placeholder="R_Social">[R_Social]</span>
+        </div>
+
+        <div style="text-align: right; margin: 5px 0;">
+            RUT <span class="field" contenteditable="false" data-placeholder="RUT_CONTR">[RUT_CONTR]</span>
+        </div>
+        
+        <div style="text-align: right; margin: 5px 0;">
+            <span class="field" contenteditable="false" data-placeholder="DESICIÓN">[DESICIÓN]</span>
+        </div>
+        
+        <div style="text-align: right; margin: 5px 0;">
+            RES.EX N° <span class="field" contenteditable="false" data-placeholder="Numero_RES">[Numero_RES]</span>
+        </div>
+        
+        <div class="date">
+            <span class="field" contenteditable="false" data-placeholder="FECHA">[FECHA]</span>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">VISTOS:</div>
+            <div class="section-content" contenteditable="false">
+                <p><em>Haga clic aquí para agregar el contenido de la sección VISTOS...</em></p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">CONSIDERANDO:</div>
+            <div class="section-content" contenteditable="false">
+                <p><em>Haga clic aquí para agregar el contenido de la sección CONSIDERANDO...</em></p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">RESUELVO:</div>
+            <div class="section-content" contenteditable="false">
+                <p><em>Haga clic aquí para agregar el contenido de la sección RESUELVO...</em></p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <strong>ANÓTESE, COMUNÍQUESE Y NOTIFÍQUESE</strong>
+        </div>
+    </div>
+</body>
+</html>

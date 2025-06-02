@@ -1,0 +1,220 @@
+
+  body {
+            font-family: 'Times New Roman', serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 15px;
+            line-height: 1.4;
+            background-color: #f8f9fa;
+        }
+        
+        .document-container {
+            background: white;
+            padding: 25px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 6px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+        }
+          .field {
+            background-color: #e3f2fd;
+            border: 1px dashed #1976d2;
+            padding: 4px 8px;
+            margin: 5px 0;
+            border-radius: 3px;
+            display: inline-block;
+            font-weight: bold;
+            color: #1976d2;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .field:hover {
+            background-color: #bbdefb;
+            transform: scale(1.01);
+        }
+        
+        .field[contenteditable="true"]:focus {
+            outline: none;
+            background-color: #fff3e0;
+            border-color: #f57c00;
+            color: #f57c00;
+        }
+          .resolution-number {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .date {
+            text-align: right;
+            margin: 15px 0;
+        }
+        
+        .section {
+            margin: 20px 0;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 10px;
+            text-decoration: underline;
+        }
+        
+        .section-content {
+            min-height: 80px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 3px;
+            background-color: #fafafa;
+        }
+        
+        .section-content[contenteditable="true"] {
+            cursor: text;
+        }
+        
+        .section-content[contenteditable="true"]:focus {
+            outline: none;
+            background-color: white;
+            border-color: #1976d2;
+            box-shadow: 0 0 5px rgba(25, 118, 210, 0.3);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-weight: bold;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+        }
+        
+        .edit-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .edit-button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .print-button {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .print-button:hover {
+            background: #1976d2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+          @media print {
+            body {
+                background-color: white;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .document-container {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 15px;
+            }
+            
+            .edit-button, .print-button, .editor-toolbar {
+                display: none;
+            }
+            
+            .field {
+                border: none;
+                background: transparent;
+                color: black;
+                padding: 0;
+            }
+            
+            .section-content {
+                border: none;
+                background: transparent;
+                padding: 0;
+            }
+        }
+        
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+        
+        .instructions h4 {
+            margin-top: 0;
+            color: #856404;
+        }
+        
+        /* Editor toolbar styles */
+        .editor-toolbar {
+            display: flex;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            padding: 4px;
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .editor-toolbar button {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-right: 4px;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .editor-toolbar button:hover {
+            background-color: #e6e6e6;
+        }
+        
+        .editor-toolbar button:active {
+            background-color: #d4d4d4;
+        }
+        
+        .section-container {
+            position: relative;
+        }
+        
+        .section-content.with-toolbar {
+            border-top: none;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }

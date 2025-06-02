@@ -1849,3 +1849,49 @@ html {
 .dark-theme .checkbox-date-container input[type="checkbox"] {
   accent-color: var(--color-primary);
 }
+
+/*==============================================================================
+   PLANTILLAS Y DOCUMENTOS
+==============================================================================*/
+
+.plantillas-section {
+    margin-top: 20px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    background-color: var(--color-card-bg);
+}
+
+.plantilla-preview {
+    margin-top: 15px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 10px;
+    background-color: var(--color-background);
+}
+
+/* Estilos para el popup de selección de plantilla */
+.plantilla-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.plantilla-item {
+    padding: 10px 15px;
+    margin: 5px 0;
+    background-color: var(--color-card-bg);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.plantilla-item:hover {
+    background-color: var(--color-hover);
+}
+
+/* Responsive para iframe de plantilla */
+@media (max-width: 768px) {
+    .plantilla-preview iframe {
+        height: 300px;
+    }
+}
