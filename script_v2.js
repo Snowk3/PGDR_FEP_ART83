@@ -713,10 +713,9 @@ function validarYProcesarDecision(accion) {
             break;
 
         case 'resolucion':
-            if (generarResolucion()) {
-                document.getElementById('btnNotificar').disabled = false;
-                mostrarAlerta('Resolución generada exitosamente', 'success');
-            }
+            // Mostrar el popup con la plantilla de resolución
+            mostrarPopupResolucion();
+            document.getElementById('btnNotificar').disabled = false;
             break;
 
         case 'notificar':
@@ -1538,34 +1537,40 @@ function calcularFechaLimiteFep() {
 
 
 /******************************************************************************
- * GESTIÓN DE PLANTILLAS Y DOCUMENTOS
- * - Funciones para manejar plantillas de resoluciones y documentos
+ * 10. MÓDULO DE RESOLUCIÓN
+ * - Generación y gestión de resoluciones
+    * - Popup para visualización y edición de resoluciones
  ******************************************************************************/
 
+
+
 /**
- * Abre la plantilla de resolución en un iframe
+ * Abre el popup con la resolución
  */
-function abrirPlantillaResolucion() {
-    const plantillaPreview = document.getElementById('plantillaPreview');
-    const plantillaFrame = document.getElementById('plantillaFrame');
+function mostrarPopupResolucion() {
+    const popup = document.getElementById('resolucionPopup');
+    const iframe = document.getElementById('resolucionFrame');
     
-    plantillaFrame.src = 'RES_TYPE_DES.HTML';
-    plantillaPreview.style.display = 'block';
+    // Cargar el contenido de la plantilla en el iframe
+    iframe.src = 'RES_TYPE_DES.HTML';
     
-    // Agregar datos del contribuyente a la plantilla
-    plantillaFrame.onload = function() {
+    // Mostrar el popup
+    popup.style.display = 'block';
+    
+    // Cuando el iframe termine de cargar, llenamos los datos
+    iframe.onload = function() {
         try {
-            const frameDoc = plantillaFrame.contentDocument || plantillaFrame.contentWindow.document;
+            const frameDoc = iframe.contentDocument || iframe.contentWindow.document;
             
             // Completar campos básicos de la plantilla con datos del sistema
             const campos = {
                 'DR': 'DR METROPOLITANA SANTIAGO ORIENTE',
                 'DEPTO': 'DEPARTAMENTO DE FISCALIZACIÓN',
                 'GRUPO': 'GRUPO N° 8 IVA EXPORTADOR',
-                'R_Social': document.getElementById('folioSolicitud') ? document.getElementById('folioSolicitud').textContent : '[RAZÓN SOCIAL]',
-                'RUT_CONTR': '12.345.678-9', // Obtener de datos del sistema
-                'DESICIÓN': 'RESOLUCIÓN DE INICIO DE FEP',
-                'Numero_RES': generateRandomId(5), // Generar número aleatorio para demo
+                'R_Social': document.getElementById('folioSolicitud') ? document.getElementById('folioSolicitud').textContent : 'IMPORTADORA EJEMPLO S.A.',
+                'RUT_CONTR': '12.345.678-9', // Debería obtenerse de datos del sistema
+                'DESICIÓN': 'RESOLUCIÓN DE DEVOLUCIÓN',
+                'Numero_RES': generarNumeroResolucion(), 
                 'FECHA': new Date().toLocaleDateString('es-CL')
             };
             
@@ -1576,6 +1581,13 @@ function abrirPlantillaResolucion() {
                     el.textContent = campos[key];
                 });
             });
+            
+            // Activar el modo de edición en la plantilla
+            const editButton = frameDoc.querySelector('.edit-button');
+            if (editButton) {
+                // Simulamos un clic en el botón de edición
+                editButton.click();
+            }
         } catch (e) {
             console.error('Error al cargar datos en la plantilla:', e);
         }
@@ -1583,95 +1595,39 @@ function abrirPlantillaResolucion() {
 }
 
 /**
- * Crea una nueva plantilla basada en la actual pero con campos vacíos
+ * Cierra el popup de resolución
  */
-function crearNuevaPlantilla() {
-    // Crear ventana popup para elegir tipo de plantilla
-    const tipoPlantillas = [
-        { id: 'fep_inicio', nombre: 'Resolución de Inicio FEP' },
-        { id: 'fep_decision', nombre: 'Resolución de Decisión FEP' },
-        { id: 'solicitud_antecedentes', nombre: 'Solicitud de Antecedentes' },
-        { id: 'acta_recepcion', nombre: 'Acta de Recepción' },
-        { id: 'plantilla_vacia', nombre: 'Plantilla Vacía' }
-    ];
-    
-    // Crear y mostrar popup
-    const popup = document.createElement('div');
-    popup.className = 'modal';
-    popup.style.display = 'block';
-    popup.style.position = 'fixed';
-    popup.style.zIndex = '1000';
-    popup.style.left = '0';
-    popup.style.top = '0';
-    popup.style.width = '100%';
-    popup.style.height = '100%';
-    popup.style.overflow = 'auto';
-    popup.style.backgroundColor = 'rgba(0,0,0,0.4)';
-    
-    // Contenido del popup
-    const popupContent = document.createElement('div');
-    popupContent.className = 'modal-content';
-    popupContent.style.backgroundColor = '#fefefe';
-    popupContent.style.margin = '15% auto';
-    popupContent.style.padding = '20px';
-    popupContent.style.border = '1px solid #888';
-    popupContent.style.width = '50%';
-    popupContent.style.borderRadius = '5px';
-    
-    // Título
-    const title = document.createElement('h3');
-    title.textContent = 'Seleccione tipo de plantilla';
-    
-    // Lista de opciones
-    const list = document.createElement('ul');
-    list.style.listStyle = 'none';
-    list.style.padding = '0';
-    
-    tipoPlantillas.forEach(tipo => {
-        const item = document.createElement('li');
-        item.style.padding = '10px';
-        item.style.margin = '5px 0';
-        item.style.backgroundColor = '#f5f5f5';
-        item.style.borderRadius = '3px';
-        item.style.cursor = 'pointer';
-        
-        item.textContent = tipo.nombre;
-        
-        item.onclick = function() {
-            abrirPlantillaResolucion();
-            popup.style.display = 'none';
-        };
-        
-        list.appendChild(item);
-    });
-    
-    // Botón cerrar
-    const closeBtn = document.createElement('button');
-    closeBtn.textContent = 'Cancelar';
-    closeBtn.className = 'action-button';
-    closeBtn.style.marginTop = '15px';
-    closeBtn.onclick = function() {
-        popup.style.display = 'none';
-    };
-    
-    // Añadir elementos al popup
-    popupContent.appendChild(title);
-    popupContent.appendChild(list);
-    popupContent.appendChild(closeBtn);
-    popup.appendChild(popupContent);
-    
-    // Añadir popup al body
-    document.body.appendChild(popup);
+function cerrarPopupResolucion() {
+    const popup = document.getElementById('resolucionPopup');
+    popup.style.display = 'none';
 }
 
 /**
- * Genera un ID aleatorio para usar en resoluciones de demo
+ * Envía la resolución para firma
  */
-function generateRandomId(length) {
-    const characters = '0123456789';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return result;
+function enviarResolucionParaFirma() {
+    // Aquí iría la lógica para enviar la resolución al sistema de firma
+    alert('La resolución ha sido enviada para firma.');
+    
+    // Podríamos desactivar el botón después de enviar
+    document.querySelector('.resolucion-footer button:first-child').disabled = true;
+}
+
+/**
+ * Guarda la resolución
+ */
+function guardarResolucion() {
+    // Aquí iría la lógica para guardar la resolución en el sistema
+    alert('La resolución ha sido guardada correctamente.');
+}
+
+/**
+ * Genera un número de resolución aleatorio para demostración
+ */
+function generarNumeroResolucion() {
+    const fecha = new Date();
+    const año = fecha.getFullYear();
+    const numero = Math.floor(Math.random() * 9000) + 1000; // Número aleatorio entre 1000 y 9999
+    
+    return `${numero}/${año}`;
 }

@@ -350,10 +350,9 @@
                         <div class="action-buttons">
                             <!-- Botón para ingresar la decisión al sistema -->
                             <button id="btnIngresarDecision" class="action-button"
-                                onclick="validarYProcesarDecision('ingresar')">Ingresar Decisión</button>
-                            <!-- Botón para generar el documento de resolución -->
+                                onclick="validarYProcesarDecision('ingresar')">Ingresar Decisión</button>                            <!-- Botón para generar el documento de resolución -->
                             <button id="btnGenerarResolucion" class="action-button"
-                                onclick="validarYProcesarDecision('resolucion')">Generar Resolución Desición</button>
+                                onclick="validarYProcesarDecision('resolucion')">Generar Resolución</button>
                             <!-- Botón para enviar notificación al contribuyente -->
                             <button id="btnNotificar" class="action-button"
                                 onclick="validarYProcesarDecision('notificar')">Notificar Desición al
@@ -836,7 +835,19 @@
                         Grupo</button>
                     <button id="btnGrabar" class="worksheet-btn save-btn">Grabar</button>
                     <button id="btnSalir" class="worksheet-btn exit-btn">Salir</button>
-                </div>
+                </div>            </div>
+        </div>
+    </div>
+
+    <!-- Popup para la resolución -->
+    <div id="resolucionPopup" class="resolucion-popup">
+        <div class="resolucion-content">
+            <button class="resolucion-close" onclick="cerrarPopupResolucion()">&times;</button>
+            <iframe id="resolucionFrame" class="resolucion-iframe"></iframe>
+            <div class="resolucion-footer">
+                <button class="action-button" onclick="enviarResolucionParaFirma()">Enviar Resolución para Firma</button>
+                <button class="action-button" onclick="guardarResolucion()">Guardar</button>
+                <button class="action-button" onclick="cerrarPopupResolucion()">Cerrar</button>
             </div>
         </div>
     </div>
