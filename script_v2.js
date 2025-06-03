@@ -1538,7 +1538,7 @@ function calcularFechaLimiteFep() {
     
     // Sumar 15 días
     const fechaLimite = new Date(fechaBase);
-    fechaLimite.setDate(fechaLimite.getDate() + 15);
+    fechaLimite.setDate(fechaLimite.getDate() + 25);
     
     // Formatear la fecha límite (dd/mm/yyyy)
     const diaLimite = fechaLimite.getDate().toString().padStart(2, '0');

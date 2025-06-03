@@ -6,901 +6,1181 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="light">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atención Formularios de Devolución</title>
-    <!-- Enlaces a recursos externos -->
-    <!-- Iconos de Font Awesome para el botón de modo oscuro -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="sytle_v2.css">
-    <script src="script_v2.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Atención Formularios de Devolución</title>
+        <!-- Enlaces a recursos externos -->
+        <!-- Iconos de Font Awesome para el botón de modo oscuro -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="sytle_v2.css">
+        <script src="script_v2.js"></script>
+    </head>
 
-<body>
-    <!-- Botón para cambiar tema claro/oscuro -->
-    <button class="theme-toggle" id="themeToggle" title="Cambiar modo claro/oscuro">
-        <i class="fas fa-moon dark-icon"></i>
-        <i class="fas fa-sun light-icon"></i>
-    </button>
-    <!-- Barra de navegación superior -->
-    <header>
-        <!-- Menú principal de navegación -->
-        <nav class="nav-buttons">
-            <button class="nav-button">Consulta Integral</button>
-            <button class="nav-button">Agenda</button>
-            <button class="nav-button">Vectores</button>
-            <button class="nav-button">Tramitación de Solicitudes</button>
-            <button class="nav-button">Consulta y Descargo de Giro</button>
-            <button class="nav-button">Confirmación y Descargo de Giros</button>
-            <button class="nav-button">Cambiar RUT/Cerrar Atención</button>
-            <button class="nav-button">Salir</button>
-        </nav>
-    </header>
+    <body>
+        <!-- Botón para cambiar tema claro/oscuro -->
+        <button class="theme-toggle" id="themeToggle"
+            title="Cambiar modo claro/oscuro">
+            <i class="fas fa-moon dark-icon"></i>
+            <i class="fas fa-sun light-icon"></i>
+        </button>
+        <!-- Barra de navegación superior -->
+        <header>
+            <!-- Menú principal de navegación -->
+            <nav class="nav-buttons">
+                <button class="nav-button">Consulta Integral</button>
+                <button class="nav-button">Agenda</button>
+                <button class="nav-button">Vectores</button>
+                <button class="nav-button">Tramitación de Solicitudes</button>
+                <button class="nav-button">Consulta y Descargo de Giro</button>
+                <button class="nav-button">Confirmación y Descargo de
+                    Giros</button>
+                <button class="nav-button">Cambiar RUT/Cerrar Atención</button>
+                <button class="nav-button">Salir</button>
+            </nav>
+        </header>
 
-    <!-- Contenido principal --> <!-- Contenido principal -->
-    <main>
-        <!-- Títulos y descripción general -->
-        <h1 class="main-title">Atención Contribuyente</h1>
-        <h2 class="sub-title">Solicitud Devolución Formularios F3560,F3280,F3281</h2>
+        <!-- Contenido principal --> <!-- Contenido principal -->
+        <main>
+            <!-- Títulos y descripción general -->
+            <h1 class="main-title">Atención Contribuyente</h1>
+            <h2 class="sub-title">Solicitud Devolución Formularios
+                F3560,F3280,F3281</h2>
 
-        <!-- Descripción del proceso de fiscalización -->
-        <p class="description">
-            A continuación se muestran las observaciones producto de los cruces de fiscalización aplicados,
-            clasificadas de acuerdo a si han sido justificadas o no (pestañas respectivas).
-            Para justificar una observación no justificada o modificar una justificación ingrese a la hoja de trabajo
-            correspondiente.
-            Adicionalmente en la tercera pestaña puede agregar antecedentes mediante upload de archivos.
-            Para rectificar presione el botón correspondiente. Para utilizar la información ingresada en las hojas de
-            trabajo presione Procesar,
-            se realizará el cruce en línea con la nueva información. Para seguir trabajando más adelante o salir sin
-            ingresar información presione el botón Finalizar.
-        </p>
+            <!-- Descripción del proceso de fiscalización -->
+            <p class="description">
+                A continuación se muestran las observaciones producto de los
+                cruces de fiscalización aplicados,
+                clasificadas de acuerdo a si han sido justificadas o no
+                (pestañas respectivas).
+                Para justificar una observación no justificada o modificar una
+                justificación ingrese a la hoja de trabajo
+                correspondiente.
+                Adicionalmente en la tercera pestaña puede agregar antecedentes
+                mediante upload de archivos.
+                Para rectificar presione el botón correspondiente. Para utilizar
+                la información ingresada en las hojas de
+                trabajo presione Procesar,
+                se realizará el cruce en línea con la nueva información. Para
+                seguir trabajando más adelante o salir sin
+                ingresar información presione el botón Finalizar.
+            </p>
 
-        <!-- Sistema de pestañas -->
-        <div class="tabs-container">
-            <!-- Botones de navegación entre pestañas -->
-            <div class="tabs">
-                <button class="tab-button active" onclick="handleTabNavigation(event, 'tab1')">Observaciones No
-                    Justificadas</button>
-                <button class="tab-button" onclick="handleTabNavigation(event, 'tab2')">Observaciones
-                    Justificadas</button>
-                <button class="tab-button" onclick="handleTabNavigation(event, 'tab3')">Desición</button>
-                <button class="tab-button" onclick="handleTabNavigation(event, 'tabFep')">FEP</button>
-                <button class="tab-button" onclick="handleTabNavigation(event, 'tabexpediente')">Expediente
-                    Electronico</button>
+            <!-- Sistema de pestañas -->
+            <div class="tabs-container">
+                <!-- Botones de navegación entre pestañas -->
+                <div class="tabs">
+                    <button class="tab-button active"
+                        onclick="handleTabNavigation(event, 'tab1')">Observaciones
+                        No
+                        Justificadas</button>
+                    <button class="tab-button"
+                        onclick="handleTabNavigation(event, 'tab2')">Observaciones
+                        Justificadas</button>
+                    <button class="tab-button"
+                        onclick="handleTabNavigation(event, 'tab3')">Desición</button>
+                    <button class="tab-button"
+                        onclick="handleTabNavigation(event, 'tabFep')">FEP</button>
+                    <button class="tab-button"
+                        onclick="handleTabNavigation(event, 'tabexpediente')">Expediente
+                        Electronico</button>
+                </div>
+
+                <!-- Contenido de la pestaña "Observaciones No Justificadas" -->
+                <div id="tab1" class="tab-content active">
+                    <h2>Observaciones No Justificadas</h2>
+                    <div class="table-container">
+                        <table class="observations-table">
+                            <thead>
+                                <tr>
+                                    <th>Observación</th>
+                                    <th>Descripción</th>
+                                    <th>Diferencia</th>
+                                    <th>Discriminante</th>
+                                    <th>Retención</th>
+                                    <th>Ayuda</th>
+                                    <th>Hoja de Trabajo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>OBS001</td>
+                                    <td>Diferencia en monto declarado</td>
+                                    <td>$500.000</td>
+                                    <td>Alto</td>
+                                    <td>10%</td>
+                                    <td><button class="help-button"
+                                            onclick="mostrarAyuda('OBS001')">?</button></td>
+                                    <td><button class="worksheet-button"
+                                            onclick="abrirHojaTrabajo('OBS001')">Abrir</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>OBS002</td>
+                                    <td>Documentación incompleta</td>
+                                    <td>$750.000</td>
+                                    <td>Medio</td>
+                                    <td>15%</td>
+                                    <td><button class="help-button"
+                                            onclick="mostrarAyuda('OBS002')">?</button></td>
+                                    <td><button class="worksheet-button"
+                                            onclick="abrirHojaTrabajo('OBS002')">Abrir</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="Button-Contanier-OBS_NJ">
+                        <button id class="action-button">Rectificar</button>
+                        <button id class="action-button">Procesar</button>
+                        <button id class="action-button">Finalizar</button>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Contenido de la pestaña "Observaciones No Justificadas" -->
-            <div id="tab1" class="tab-content active">
-                <h2>Observaciones No Justificadas</h2>
+            <!-- Contenido de la pestaña "Observaciones Justificadas" -->
+            <div id="tab2" class="tab-content">
+                <h2>Observaciones Justificadas</h2>
                 <div class="table-container">
                     <table class="observations-table">
                         <thead>
                             <tr>
                                 <th>Observación</th>
                                 <th>Descripción</th>
-                                <th>Diferencia</th>
-                                <th>Discriminante</th>
-                                <th>Retención</th>
                                 <th>Ayuda</th>
                                 <th>Hoja de Trabajo</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>OBS001</td>
-                                <td>Diferencia en monto declarado</td>
-                                <td>$500.000</td>
-                                <td>Alto</td>
-                                <td>10%</td>
-                                <td><button class="help-button" onclick="mostrarAyuda('OBS001')">?</button></td>
-                                <td><button class="worksheet-button" onclick="abrirHojaTrabajo('OBS001')">Abrir</button>
+                                <td>OBS003</td>
+                                <td>Diferencia en factura de exportación</td>
+                                <td><button class="help-button"
+                                        onclick="mostrarAyuda('OBS003')">?</button></td>
+                                <td><button class="worksheet-button"
+                                        onclick="abrirHojaTrabajo('OBS003')">Abrir</button>
                                 </td>
                             </tr>
                             <tr>
-                                <td>OBS002</td>
-                                <td>Documentación incompleta</td>
-                                <td>$750.000</td>
-                                <td>Medio</td>
-                                <td>15%</td>
-                                <td><button class="help-button" onclick="mostrarAyuda('OBS002')">?</button></td>
-                                <td><button class="worksheet-button" onclick="abrirHojaTrabajo('OBS002')">Abrir</button>
+                                <td>OBS004</td>
+                                <td>Documentos de respaldo faltantes</td>
+                                <td><button class="help-button"
+                                        onclick="mostrarAyuda('OBS004')">?</button></td>
+                                <td><button class="worksheet-button"
+                                        onclick="abrirHojaTrabajo('OBS004')">Abrir</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="Button-Contanier-OBS_NJ">
-                    <button id="" class="action-button">Rectificar</button>
-                    <button id="" class="action-button">Procesar</button>
-                    <button id="" class="action-button">Finalizar</button>
-                </div>
             </div>
 
+            <!-- Pestaña de Decisión - Contiene el formulario principal de decisión -->
+            <div id="tab3" class="tab-content">
+                <!-- Contenedor principal de la decisión -->
+                <div class="title-container">
+                    <!-- Encabezado con título -->
+                    <div class="title-header">
+                        <h2 class="main-title">Desición Solicitud de Devolución
+                            (Artículo 81 de la LIVS)</h2>
+                    </div>
+                    <!-- Contenedor de las secciones de decisión -->
+                    <div id="decisionContent"
+                        class="decision-sections-container">
+                        <!-- Secciones en paralelo: Decisión y Montos -->
+                        <div class="parallel-sections">
 
+                            <!-- Sección de primera notificación: manejo de expediente y contacto -->
+                            <div class="decision-section primera-notificacion">
+                                <h3>Acciones para Desición</h3>
 
-
-
-        </div>
-
-        <!-- Contenido de la pestaña "Observaciones Justificadas" -->
-        <div id="tab2" class="tab-content">
-            <h2>Observaciones Justificadas</h2>
-            <div class="table-container">
-                <table class="observations-table">
-                    <thead>
-                        <tr>
-                            <th>Observación</th>
-                            <th>Descripción</th>
-                            <th>Ayuda</th>
-                            <th>Hoja de Trabajo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>OBS003</td>
-                            <td>Diferencia en factura de exportación</td>
-                            <td><button class="help-button" onclick="mostrarAyuda('OBS003')">?</button></td>
-                            <td><button class="worksheet-button" onclick="abrirHojaTrabajo('OBS003')">Abrir</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>OBS004</td>
-                            <td>Documentos de respaldo faltantes</td>
-                            <td><button class="help-button" onclick="mostrarAyuda('OBS004')">?</button></td>
-                            <td><button class="worksheet-button" onclick="abrirHojaTrabajo('OBS004')">Abrir</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Pestaña de Decisión - Contiene el formulario principal de decisión -->
-        <div id="tab3" class="tab-content">
-            <!-- Contenedor principal de la decisión -->
-            <div class="title-container">
-                <!-- Encabezado con título -->
-                <div class="title-header">
-                    <h2 class="main-title">Desición Solicitud de Devolución (Artículo 81 de la LIVS)</h2>
-                </div>
-                <!-- Contenedor de las secciones de decisión -->
-                <div id="decisionContent" class="decision-sections-container">
-                    <!-- Secciones en paralelo: Decisión y Montos -->
-                    <div class="parallel-sections">
-
-
-                        <!-- Sección de primera notificación: manejo de expediente y contacto -->
-                        <div class="decision-section primera-notificacion">
-                            <h3>Acciones para Desición</h3>
-
-                            <!-- Sección expediente y solicitar antecedentes en paralelo -->
-                            <div class="expediente-container">
-                                <button id="Apertura-EE" class="action-button"
-                                    onclick="AbrirExpediente('idExpediente')">
-                                    Abrir Expediente Electrónico
-                                </button>
-                                <div class="Apertura-EE">
-                                    <label>ID: </label>
-                                    <span id="idExpediente"></span>
+                                <!-- Sección expediente y solicitar antecedentes en paralelo -->
+                                <div class="expediente-container">
+                                    <button id="Apertura-EE"
+                                        class="action-button"
+                                        onclick="AbrirExpediente('idExpediente')">
+                                        Abrir Expediente Electrónico
+                                    </button>
+                                    <div class="Apertura-EE">
+                                        <label>ID: </label>
+                                        <span id="idExpediente"></span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <!-- Botón solicitar antecedentes y contacto en paralelo -->
-                            <div class="notificacion-contacto-row">
-                                <button id="Solicita-Antecedentes" class="action-button"
-                                    onclick="mostrarPopupAntecedentes('solicitaAntecedentesPopup')">
-                                    Solicitar Antecedentes
-                                </button>
+                                <!-- Botón solicitar antecedentes y contacto en paralelo -->
+                                <div class="notificacion-contacto-row">
+                                    <button id="Solicita-Antecedentes"
+                                        class="action-button"
+                                        onclick="mostrarPopupAntecedentes('solicitaAntecedentesPopup')">
+                                        Solicitar Antecedentes
+                                    </button>
 
-                                <div class="Logra-contacto">
-                                    <label for="contactoContribuyente">Logra contacto con el contribuyente:</label>
-                                    <select id="contactoContribuyente" name="contactoContribuyente"
-                                        class="contact-select" onchange="toggleBotonesContacto()">
-                                        <option value="">Seleccione una opción</option>
-                                        <option value="contactado">Si, toma conocimiento</option>
-                                        <option value="noContactado">No logra ser Contactado</option>
-                                    </select>
+                                    <div class="Logra-contacto">
+                                        <label for="contactoContribuyente">Logra
+                                            contacto con el
+                                            contribuyente:</label>
+                                        <select id="contactoContribuyente"
+                                            name="contactoContribuyente"
+                                            class="contact-select"
+                                            onchange="toggleBotonesContacto()">
+                                            <option value>Seleccione una
+                                                opción</option>
+                                            <option value="contactado">Si, toma
+                                                conocimiento</option>
+                                            <option value="noContactado">No
+                                                logra ser Contactado</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div> <!-- Botones dinámicos según selección (sin cambios) -->
-                            <div id="botonesContacto">
-                                <!-- Checkbox para confirmar información recibida -->
-                                <label class="checkbox-label" style="display: none;">
-                                    <input type="checkbox" id="checkInfoRecibida" onchange="toggleActaRecepcion()">
-                                    Contribuyente ha enviado toda la información Requerida
-                                </label>
-                                <!-- Botón para generar acta -->
-                                <button id="btnGenerarActa" class="action-button" onclick="generarActaRecepcion()"
-                                    style="display: none;" disabled>
-                                    Generar Acta Recepción (F3309)
-                                </button>
-                                <!-- Botón para contactado -->
-                                <button id="btnGuardar" class="action-button" onclick="registrarEvento()"
+                                <!-- Botones dinámicos según selección (sin cambios) -->
+                                <div id="botonesContacto">
+                                    <!-- Checkbox para confirmar información recibida -->
+                                    <label class="checkbox-label"
+                                        style="display: none;">
+                                        <input type="checkbox"
+                                            id="checkInfoRecibida"
+                                            onchange="toggleActaRecepcion()">
+                                        Contribuyente ha enviado toda la
+                                        información Requerida
+                                    </label>
+                                    <!-- Botón para generar acta -->
+                                    <button id="btnGenerarActa"
+                                        class="action-button"
+                                        onclick="generarActaRecepcion()"
+                                        style="display: none;" disabled>
+                                        Generar Acta Recepción (F3309)
+                                    </button>
+                                    <!-- Botón para contactado -->
+                                    <button id="btnGuardar"
+                                        class="action-button"
+                                        onclick="registrarEvento()"
+                                        style="display: none;">
+                                        Guardar
+                                    </button>
+                                    <!-- Botones para no contactado -->
+                                    <button id="btnAnotacion42"
+                                        class="action-button"
+                                        onclick="generarAnotacion42()"
+                                        style="display: none;">
+                                        Anotación 42
+                                    </button>
+
+                                </div>
+
+                                <!-- Popup para mensajes de confirmación -->
+                                <div id="popupContacto" class="popup-mensaje"
                                     style="display: none;">
-                                    Guardar
-                                </button>
-                                <!-- Botones para no contactado -->
-                                <button id="btnAnotacion42" class="action-button" onclick="generarAnotacion42()"
-                                    style="display: none;">
-                                    Anotación 42
-                                </button>
-
-                            </div>
-
-                            <!-- Popup para mensajes de confirmación -->
-                            <div id="popupContacto" class="popup-mensaje" style="display: none;">
-                                <div class="popup-content">
-                                    <p id="popupMensaje"></p>
-                                    <button onclick="cerrarPopupContacto()">Aceptar</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Sección de selección de tipo de decisión -->
-                        <section class="decision-section">
-                            <h3>Desición Cruce</h3>
-                            <!--Datos de la solicitud (fecha, folio,monto)-->
-                            <div class="info-formulario">
-                                <div class="info-item">
-                                    <label class="info-label">Fecha Solicitud:</label>
-                                    <span id="fechaSolicitud" class="info-value"></span>
-                                </div>
-                                <div class="info-item">
-                                    <label class="info-label">Folio Formulario:</label>
-                                    <span id="folioFormulario" class="info-value"></span>
-                                </div>
-                                <div class="info-item">
-                                    <label class="info-label">Fecha Máx. Decisión:</label>
-                                    <span id="fechaMaxDesc48" class="info-value fecha-maxima"></span>
-                                </div>
-                            </div>
-                            <div class="radio-group">
-                                <div class="radio-option">
-                                    <input type="radio" id="devolucionLugar" name="decisionCruce" value="lugarTotal">
-                                    <label for="devolucionLugar">Devolución ha lugar</label>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" id="devolucionParcial" name="decisionCruce"
-                                        value="lugarParcial">
-                                    <label for="devolucionParcial">Devolución ha lugar en parte</label>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" id="devolucionNoLugar" name="decisionCruce" value="noLugar">
-                                    <label for="devolucionNoLugar">Devolución Denegatoria(no ha lugar)</label>
-                                </div>
-                            </div>
-                            <!-- Sección de ingreso de montos y conversión UTM -->
-                            <h3>Ingreso de Monto a Devolver</h3>
-                            <!-- Información del valor UTM actual -->
-                            <div class="utm-info">
-                                <p>Valor UTM actual: $<span id="valorUTM">65.182</span></p>
-                            </div>
-                            <div class="amount-inputs">
-                                <div class="input-group">
-                                    <label for="devolucionSolicitada">Devolución solicitada:</label>
-                                    <div class="input-with-utm">
-                                        <input type="text" id="devolucionSolicitada" class="amount-input"
-                                            onkeyup="formatNumber(this)" onchange="calcularMontos()">
-                                        <div class="utm-conversion">
-                                            <span>UTM: </span>
-                                            <input type="text" id="devolucionSolicitadaUTM" class="utm-input" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="input-group">
-                                    <label for="montoAutorizado">Monto Autorizado:</label>
-                                    <div class="input-with-utm">
-                                        <input type="text" id="montoAutorizado" class="amount-input"
-                                            onkeyup="formatNumber(this)" onchange="calcularMontos()">
-                                        <div class="utm-conversion">
-                                            <span>UTM: </span>
-                                            <input type="text" id="montoAutorizadoUTM" class="utm-input" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="input-group">
-                                    <label for="montoRechazado">Monto Rechazado:</label>
-                                    <div class="input-with-utm">
-                                        <input type="text" id="montoRechazado" class="amount-input" readonly>
-                                        <div class="utm-conversion">
-                                            <span>UTM: </span>
-                                            <input type="text" id="montoRechazadoUTM" class="utm-input" readonly>
-                                        </div>
+                                    <div class="popup-content">
+                                        <p id="popupMensaje"></p>
+                                        <button
+                                            onclick="cerrarPopupContacto()">Aceptar</button>
                                     </div>
                                 </div>
                             </div>
-
-                    </div>
-
-                    <!-- Contenedor de botones de acción principales -->
-                    <div class="action-buttons-container">
-                        <div class="action-buttons">
-                            <!-- Botón para ingresar la decisión al sistema -->
-                            <button id="btnIngresarDecision" class="action-button"
-                                onclick="mostrarPopupIngresarDecision()">Ingresar Decisión</button>
-                            <!-- Botón para generar el documento de resolución -->
-                            <button id="btnGenerarResolucion" class="action-button"
-                                onclick="validarYProcesarDecision('resolucion')">Generar Resolución</button>
-                            <!-- Botón para enviar notificación al contribuyente -->
-                            <button id="btnNotificar" class="action-button"
-                                onclick="validarYProcesarDecision('notificar')">Notificar Desición al
-                                Contribuyente</button>
-                            <!-- Botón para activar el proceso de Fiscalización Especial Previa -->
-                            <button id="btnDisponeFep" class="action-button"
-                                onclick="validarYProcesarDecision('disponerFep')">Dispone FEP</button>
-                        </div>
-                    </div>
-
-
-
-
-
-                </div>
-            </div>
-            <div class="title-container">
-                <h1>Devolución solicitadas fuera de plazo (artículo 126 del Código Tributario)</h1>
-            </div>
-
-
-
-
-
-
-        </div>
-        <!-- Nueva pestaña FEP -->
-        <div id="tabFep" class="tab-content">
-            <div class="title-container">
-                <h2 class="main-title">Fiscalización Especial Previa (Articulo 83 de la LIVS)</h2>
-            </div>
-            <!-- Contenido FEP (movido desde la sección anterior) -->
-            <div id="seccionFep" class="fep-section">
-
-
-                <!-- Secciones en paralelo: Notificación FEP y Aviso Vencimiento -->
-                <div class="parallel-fep-sections">
-                    <!-- Subsección: Notificación FEP -->
-                    <section class="fep-subsection">
-                        <div class="subsection-header">
-                            <h4>Notificación y Requerimiento de Antecedentes - FEP</h4>
-                        </div>
-                        <div id="notificacionFep" class="subsection-content">
-                            <div class="fep-info">
-                                <div class="fep-row">
-                                    <div class="fep-field">
-                                        <label>Fecha de la decisión FEP:</label>
-                                        <span id="fechaFep"></span>
+                            <!-- Sección de selección de tipo de decisión -->
+                            <section class="decision-section">
+                                <h3>Desición Cruce</h3>
+                                <!--Datos de la solicitud (fecha, folio,monto)-->
+                                <div class="info-formulario">
+                                    <div class="info-item">
+                                        <label class="info-label">Fecha
+                                            Solicitud:</label>
+                                        <span id="fechaSolicitud"
+                                            class="info-value"></span>
                                     </div>
-                                    <div class="fep-field">
-                                        <label>Periodo Tributario:</label>
-                                        <span id="periodoTributario"></span>
+                                    <div class="info-item">
+                                        <label class="info-label">Folio
+                                            Formulario:</label>
+                                        <span id="folioFormulario"
+                                            class="info-value"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label class="info-label">Fecha Máx.
+                                            Decisión:</label>
+                                        <span id="fechaMaxDesc48"
+                                            class="info-value fecha-maxima"></span>
                                     </div>
                                 </div>
-                                <div class="fep-row">
-                                    <div class="fep-field">
-                                        <label>Folio solicitud:</label>
-                                        <span id="folioSolicitud"></span>
-                                    </div>
-                                    <div class="fep-field">
-                                        <label>Monto Solicitado:</label>
-                                        <span id="montoSolicitadoFep"></span>
-                                    </div>
-                                </div>
-                            </div>
-<!--Fecha Maxima Notificación FEP-->
-<div class="fep-row">
-    <div class="fep-field">
-        <label>Fecha Máxima de Notificación:</label>
-        <span id="fechaMaximaNotificacionFep" class="fecha-maxima"></span>
-    </div>
-</div>
-                            
-                            <div class="fep-buttons">
-                                <button id="Apertura-EE-Fep" class="action-button" onclick="AbrirExpedienteFep()">
-                                    Abrir Expediente Electrónico
-                                </button>
-                                <button id="btnGenerarResolucionFep" class="action-button"
-                                    onclick="generarResolucionFep()">Generar Resolución Inicio FEP</button>
-                                <button id="btnNotificarFep" class="action-button" onclick="notificarContribuyenteFep()"
-                                    enable>Notificar al
-                                    Contribuyente Inicio FEP</button>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Subsección: Aviso Primera Revisión -->
-                    <aside class="fep-subsection">
-                        <div class="subsection-header">
-                            <h4>Recepción de Antecedentes - FEP</h4>
-                        </div>
-                        <div id="avisoPrimeraRevision" class="subsection-content">
-                            <div class="fep-info">
-                                <div class="fep-row">
-                                    <div class="fep-field">
-                                        <label>Número de Resolución FEP:</label>
-                                        <span id="numeroResolucionFep"></span>
-                                    </div>
-                                    <div class="fep-field">
-                                        <label>Fecha de Generación Resolución FEP:</label>
-                                        <span id="fechaGeneracionFep"></span>
-                                    </div>
-                                </div>
-                                <div class="fep-row">                                    <div class="fep-field">
-                                        <label>Fecha Notificación al Contribuyente:</label>
-                                        <span id="fechaNotificacionFep"></span>
-                                    </div>
-                                    <div class="fep-field">
-                                        <label>Fecha Máxima Recepción de Antecedentes:</label>
-                                        <span id="fechaMaxRecepcionFep" class="fecha-maxima"></span>
-                                    </div>
-                                    <div class="fep-field">
-                                        <label>ID Expediente Electrónico (E.E):</label>
-                                        <span id="idExpedienteFep"></span>
-                                    </div>
-                                </div>
-                                <div class="fep-row checkbox-date-container">
-                                    <div class="fep-field checkbox-field">
-                                        <label class="checkbox-label">
-                                            <input type="checkbox" id="checkInfoRecibidaFep"
-                                                onchange="toggleActaRecepcionFep()">
-                                            Contribuyente ha enviado toda la información Requerida
-                                        </label>
-                                    </div>
-                                    <div class="fep-field date-field">
-                                        <label>Fecha Generación Acta:</label>
-                                        <input type="date" id="fechaGeneracionActaFep" class="date-input"
-                                            onchange="calcularFechaLimiteFep()">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="fep-buttons">
-                                <button id="btnGenerarActaFep" class="action-button" onclick="generarActaRecepcionFep()"
-                                    enable>
-                                    Generar Acta Recepción (F3309)
-                                </button>
-                                <button id="btnGuardarFechaActaFep" class="action-button"
-                                    onclick="guardarFechaActaFep()">
-                                    Guardar en Consulta Estado
-                                </button>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
-
-                <!-- Subsección: Decisión 15 Días -->
-                <div class="fep-subsection">
-                    <div class="subsection-header">
-                        <h4>Decisión FEP</h4>
-                    </div>
-                    <!-- fecha limite 15 dias -->
-                    <div class="fecha-max-15">
-                        <p>Fecha Maxima de Decisión: <span id="fechaLimite15Dias" class="fecha-maxima"></span>
-                        </p>
-                    </div>
-                    <div id="decision15Dias" class="subsection-content">
-                        <div class="decision-15-container">
-                            <div class="decision-options">
-                                <div class="radio-group-15dias">
+                                <div class="radio-group">
                                     <div class="radio-option">
-                                        <input type="radio" id="devolucionTotal15" name="decision15Dias"
-                                            value="devolucionTotal">
-                                        <label for="devolucionTotal15">Devolución Total</label>
+                                        <input type="radio" id="devolucionLugar"
+                                            name="decisionCruce"
+                                            value="lugarTotal">
+                                        <label for="devolucionLugar">Devolución
+                                            ha lugar</label>
                                     </div>
                                     <div class="radio-option">
-                                        <input type="radio" id="devolucionParcial15" name="decision15Dias"
-                                            value="devolucionParcial">
-                                        <label for="devolucionParcial15">Devolución Parcial</label>
+                                        <input type="radio"
+                                            id="devolucionParcial"
+                                            name="decisionCruce"
+                                            value="lugarParcial">
+                                        <label
+                                            for="devolucionParcial">Devolución
+                                            ha lugar en parte</label>
                                     </div>
                                     <div class="radio-option">
-                                        <input type="radio" id="devolucionParcial15" name="decision15Dias"
-                                            value="devolucionParcialcitacion">
-                                        <label for="devolucionParcial15">Devolución Parcial con Citación</label>
-                                    </div>
-                                    <div class="radio-option">
-                                        <input type="radio" id="retencionTotal15" name="decision15Dias"
-                                            value="retencionTotal">
-                                        <label for="retencionTotal15">Denegatoria(no ha lugar)</label>
-                                    </div>
-                                    <div class="radio-option">
-                                        <input type="radio" id="plazoAdicional15" name="decision15Dias"
-                                            value="plazoAdicional">
-                                        <label for="plazoAdicional15">Plazo Adicional</label>
+                                        <input type="radio"
+                                            id="devolucionNoLugar"
+                                            name="decisionCruce"
+                                            value="noLugar">
+                                        <label
+                                            for="devolucionNoLugar">Devolución
+                                            Denegatoria(no ha lugar)</label>
                                     </div>
                                 </div>
-                            </div>
-
-                            <aside class="montos-autorizados-15">
-                                <h5>Monto Autorizado de Devolución</h5>
+                                <!-- Sección de ingreso de montos y conversión UTM -->
+                                <h3>Ingreso de Monto a Devolver</h3>
+                                <!-- Información del valor UTM actual -->
                                 <div class="utm-info">
-                                    <p>Valor UTM actual: $<span id="valorUTM15">65.182</span></p>
+                                    <p>Valor UTM actual: $<span
+                                            id="valorUTM">65.182</span></p>
                                 </div>
-                                <div class="montos-container-15">
-                                    <div class="monto-group-15">
-                                        <label>Monto Solicitado:</label>
-                                        <div class="monto-utm-group">
-                                            <input type="text" id="montoSolicitado15" class="amount-input-15" readonly>
-                                            <div class="utm-value">
+                                <div class="amount-inputs">
+                                    <div class="input-group">
+                                        <label
+                                            for="devolucionSolicitada">Devolución
+                                            solicitada:</label>
+                                        <div class="input-with-utm">
+                                            <input type="text"
+                                                id="devolucionSolicitada"
+                                                class="amount-input"
+                                                onkeyup="formatNumber(this)"
+                                                onchange="calcularMontos()">
+                                            <div class="utm-conversion">
                                                 <span>UTM: </span>
-                                                <input type="text" id="montoSolicitadoUTM15" class="utm-input-15"
-                                                    readonly>
+                                                <input type="text"
+                                                    id="devolucionSolicitadaUTM"
+                                                    class="utm-input" readonly>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="monto-group-15">
-                                        <label>Monto Autorizado:</label>
-                                        <div class="monto-utm-group">
-                                            <input type="text" id="montoAutorizado15" class="amount-input-15"
-                                                onkeyup="formatNumber15(this)" onchange="calcularMontos15()">
-                                            <div class="utm-value">
+                                    <div class="input-group">
+                                        <label for="montoAutorizado">Monto
+                                            Autorizado:</label>
+                                        <div class="input-with-utm">
+                                            <input type="text"
+                                                id="montoAutorizado"
+                                                class="amount-input"
+                                                onkeyup="formatNumber(this)"
+                                                onchange="calcularMontos()">
+                                            <div class="utm-conversion">
                                                 <span>UTM: </span>
-                                                <input type="text" id="montoAutorizadoUTM15" class="utm-input-15"
-                                                    readonly>
+                                                <input type="text"
+                                                    id="montoAutorizadoUTM"
+                                                    class="utm-input" readonly>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="monto-group-15">
-                                        <label>Monto Rechazado:</label>
-                                        <div class="monto-utm-group">
-                                            <input type="text" id="montoRechazado15" class="amount-input-15" readonly>
-                                            <div class="utm-value">
+                                    <div class="input-group">
+                                        <label for="montoRechazado">Monto
+                                            Rechazado:</label>
+                                        <div class="input-with-utm">
+                                            <input type="text"
+                                                id="montoRechazado"
+                                                class="amount-input" readonly>
+                                            <div class="utm-conversion">
                                                 <span>UTM: </span>
-                                                <input type="text" id="montoRechazadoUTM15" class="utm-input-15"
-                                                    readonly>
+                                                <input type="text"
+                                                    id="montoRechazadoUTM"
+                                                    class="utm-input" readonly>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Contenedor de botones de acción principales -->
+                            <div class="action-buttons-container">
+                                <div class="action-buttons">
+                                    <!-- Botón para ingresar la decisión al sistema -->
+                                    <button id="btnIngresarDecision"
+                                        class="action-button"
+                                        onclick="mostrarPopupIngresarDecision()">Ingresar
+                                        Decisión</button>
+                                    <!-- Botón para generar el documento de resolución -->
+                                    <button id="btnGenerarResolucion"
+                                        class="action-button"
+                                        onclick="validarYProcesarDecision('resolucion')">Generar
+                                        Resolución</button>
+                                    <!-- Botón para enviar notificación al contribuyente -->
+                                    <button id="btnNotificar"
+                                        class="action-button"
+                                        onclick="validarYProcesarDecision('notificar')">Notificar
+                                        Desición al
+                                        Contribuyente</button>
+                                    <!-- Botón para activar el proceso de Fiscalización Especial Previa -->
+                                    <button id="btnDisponeFep"
+                                        class="action-button"
+                                        onclick="validarYProcesarDecision('disponerFep')">Dispone
+                                        FEP</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="title-container">
+                        <h1>Devolución solicitadas fuera de plazo (artículo 126
+                            del Código Tributario)</h1>
+                    </div>
+
+                </div>
+                <!-- Nueva pestaña FEP -->
+                <div id="tabFep" class="tab-content">
+                    <div class="title-container">
+                        <h2 class="main-title">Fiscalización Especial Previa
+                            (Articulo 83 de la LIVS)</h2>
+                    </div>
+                    <!-- Contenido FEP (movido desde la sección anterior) -->
+                    <div id="seccionFep" class="fep-section">
+
+                        <!-- Secciones en paralelo: Notificación FEP y Aviso Vencimiento -->
+                        <div class="parallel-fep-sections">
+                            <!-- Subsección: Notificación FEP -->
+                            <section class="fep-subsection">
+                                <div class="subsection-header">
+                                    <h4>Notificación y Requerimiento de
+                                        Antecedentes - FEP</h4>
+                                </div>
+
+                                <!--Fecha Maxima Notificación FEP-->
+
+                                <div class="fecha-max-15">
+                                    <p> Fecha Máxima de Notificación: <span
+                                            id="fechaMaximaNotificacionFep"
+                                            class="fecha-maxima"></span>
+                                    </p>
+                                </div>
+
+                                <div id="notificacionFep"
+                                    class="subsection-content">
+                                    <div class="fep-info">
+                                        <div class="fep-row">
+                                            <div class="fep-field">
+                                                <label>Fecha de la decisión
+                                                    FEP:</label>
+                                                <span id="fechaFep"></span>
+                                            </div>
+                                            <div class="fep-field">
+                                                <label>Periodo
+                                                    Tributario:</label>
+                                                <span
+                                                    id="periodoTributario"></span>
+                                            </div>
+                                        </div>
+                                        <div class="fep-row">
+                                            <div class="fep-field">
+                                                <label>Folio solicitud:</label>
+                                                <span
+                                                    id="folioSolicitud"></span>
+                                            </div>
+                                            <div class="fep-field">
+                                                <label>Monto Solicitado:</label>
+                                                <span
+                                                    id="montoSolicitadoFep"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="fep-buttons">
+                                        <button id="Apertura-EE-Fep"
+                                            class="action-button"
+                                            onclick="AbrirExpedienteFep()">
+                                            Abrir Expediente Electrónico
+                                        </button>
+                                        <button id="btnGenerarResolucionFep"
+                                            class="action-button"
+                                            onclick="generarResolucionFep()">Generar
+                                            Resolución Inicio FEP</button>
+                                        <button id="btnNotificarFep"
+                                            class="action-button"
+                                            onclick="notificarContribuyenteFep()"
+                                            enable>Notificar al
+                                            Contribuyente Inicio FEP</button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Subsección: Aviso Primera Revisión -->
+                            <aside class="fep-subsection">
+                                <div class="subsection-header">
+                                    <h4>Recepción de Antecedentes - FEP</h4>
+                                </div>
+
+                                <!--Fecha Maxima MAX RECP ANTECEDENTES-->
+                                <div class="fecha-max-15">
+                                    <p>Fecha Máxima Recepción de Antecedentes:
+                                        <span
+                                            id="fechaMaxRecepcionFep"
+                                            class="fecha-maxima"></span>
+                                    </p>
+                                </div>
+
+                                <div id="avisoPrimeraRevision"
+                                    class="subsection-content">
+                                    <div class="fep-info">
+                                        <div class="fep-row">
+                                            <div class="fep-field">
+                                                <label>Número de Resolución
+                                                    FEP:</label>
+                                                <span
+                                                    id="numeroResolucionFep"></span>
+                                            </div>
+                                            <div class="fep-field">
+                                                <label>Fecha de Generación
+                                                    Resolución FEP:</label>
+                                                <span
+                                                    id="fechaGeneracionFep"></span>
+                                            </div>
+                                        </div>
+                                        <div class="fep-row">
+                                            <div class="fep-field">
+                                                <label>Fecha Notificación al
+                                                    Contribuyente:</label>
+                                                <span
+                                                    id="fechaNotificacionFep"></span>
+                                            </div>
+
+                                            <div class="fep-field">
+                                                <label>ID Expediente Electrónico
+                                                    (E.E):</label>
+                                                <span
+                                                    id="idExpedienteFep"></span>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="fep-row checkbox-date-container">
+                                            <div
+                                                class="fep-field checkbox-field">
+                                                <div class="form-group">
+                                                    <label
+                                                        class="checkbox-label"
+                                                        for="checkInfoRecibidaFep">Estado
+                                                        de
+                                                        Recepción de
+                                                        Antecedentes</label>
+                                                    <select
+                                                        id="checkInfoRecibidaFep"
+                                                        class="fep-select"
+                                                        onchange="toggleActaRecepcionFep()">
+                                                        <option value>Seleccione
+                                                            una
+                                                            opción</option>
+                                                        <option value="true">Si,
+                                                            Ha
+                                                            enviado todos los
+                                                            antecedentes</option>
+                                                        <option value="false">No
+                                                            aporta
+                                                            antecedentes</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="fep-field date-field">
+                                                <label>Fecha Generación
+                                                    Acta:</label>
+                                                <input type="date"
+                                                    id="fechaGeneracionActaFep"
+                                                    class="date-input"
+                                                    onchange="calcularFechaLimiteFep()">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fep-buttons">
+                                        <button id="btnGenerarActaFep"
+                                            class="action-button"
+                                            onclick="generarActaRecepcionFep()"
+                                            enable>
+                                            Generar Acta Recepción (F3309)
+                                        </button>
+                                        <button id="btnGuardarFechaActaFep"
+                                            class="action-button"
+                                            onclick="guardarFechaActaFep()">
+                                            Guardar en Consulta Estado
+                                        </button>
                                     </div>
                                 </div>
                             </aside>
                         </div>
 
-                        <!-- Sección de comentarios y justificación de rechazo Desición 15 dias-->
-                        <section class="comments-section">
-                            <h3>Comentarios Desición Primera Revisión</h3>
-                            <!-- Descripción del propósito de los comentarios -->
-                            <p class="comments-description">Detallar claramente las causales por las cuales se
-                                rechaza el monto solicitado o una parte de él.</p>
-                            <div class="editor-toolbar">
-                                <button type="button" class="toolbar-button" onclick="formatText('bold')"
-                                    title="Negrita">
-                                    <strong>B</strong>
-                                </button>
-                                <button type="button" class="toolbar-button" onclick="formatText('italic')"
-                                    title="Cursiva">
-                                    <em>I</em>
-                                </button>
-                                <button type="button" class="toolbar-button" onclick="formatText('underline')"
-                                    title="Subrayado">
-                                    <u>U</u>
-                                </button>
-                                <button type="button" class="toolbar-button" onclick="insertList('unordered')"
-                                    title="Lista con viñetas">
-                                    •
-                                </button>
-                                <button type="button" class="toolbar-button" onclick="insertList('ordered')"
-                                    title="Lista numerada">
-                                    1.
-                                </button>
+                        <!-- Subsección: Decisión 15 Días -->
+                        <div class="fep-subsection">
+                            <div class="subsection-header">
+                                <h4>Decisión FEP</h4>
                             </div>
-                            <div class="editor-container">
-                                <div id="comentarios" class="rich-text-editor" contenteditable="true"
-                                    data-max-length="10000"></div>
-                                <div class="character-count">
-                                    <span id="charCount">0</span>/10000 caracteres
+                            <!-- fecha limite 15 dias -->
+                            <div class="fecha-max-15">
+                                <p>Fecha Maxima de Decisión: <span
+                                        id="fechaLimite15Dias"
+                                        class="fecha-maxima"></span>
+                                </p>
+                            </div>
+                            <div id="decision15Dias" class="subsection-content">
+                                <div class="decision-15-container">
+                                    <div class="decision-options">
+                                        <div class="radio-group-15dias">
+                                            <div class="radio-option">
+                                                <input type="radio"
+                                                    id="devolucionTotal15"
+                                                    name="decision15Dias"
+                                                    value="devolucionTotal">
+                                                <label
+                                                    for="devolucionTotal15">Devolución
+                                                    Total</label>
+                                            </div>
+                                            <div class="radio-option">
+                                                <input type="radio"
+                                                    id="devolucionParcial15"
+                                                    name="decision15Dias"
+                                                    value="devolucionParcial">
+                                                <label
+                                                    for="devolucionParcial15">Devolución
+                                                    Parcial</label>
+                                            </div>
+                                            <div class="radio-option">
+                                                <input type="radio"
+                                                    id="devolucionParcial15"
+                                                    name="decision15Dias"
+                                                    value="devolucionParcialcitacion">
+                                                <label
+                                                    for="devolucionParcial15">Devolución
+                                                    Parcial con Citación</label>
+                                            </div>
+                                            <div class="radio-option">
+                                                <input type="radio"
+                                                    id="retencionTotal15"
+                                                    name="decision15Dias"
+                                                    value="retencionTotal">
+                                                <label
+                                                    for="retencionTotal15">Denegatoria(no
+                                                    ha lugar)</label>
+                                            </div>
+                                            <div class="radio-option">
+                                                <input type="radio"
+                                                    id="plazoAdicional15"
+                                                    name="decision15Dias"
+                                                    value="plazoAdicional">
+                                                <label
+                                                    for="plazoAdicional15">Plazo
+                                                    Adicional</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <aside class="montos-autorizados-15">
+                                        <h5>Monto Autorizado de Devolución</h5>
+                                        <div class="utm-info">
+                                            <p>Valor UTM actual: $<span
+                                                    id="valorUTM15">65.182</span></p>
+                                        </div>
+                                        <div class="montos-container-15">
+                                            <div class="monto-group-15">
+                                                <label>Monto Solicitado:</label>
+                                                <div class="monto-utm-group">
+                                                    <input type="text"
+                                                        id="montoSolicitado15"
+                                                        class="amount-input-15"
+                                                        readonly>
+                                                    <div class="utm-value">
+                                                        <span>UTM: </span>
+                                                        <input type="text"
+                                                            id="montoSolicitadoUTM15"
+                                                            class="utm-input-15"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="monto-group-15">
+                                                <label>Monto Autorizado:</label>
+                                                <div class="monto-utm-group">
+                                                    <input type="text"
+                                                        id="montoAutorizado15"
+                                                        class="amount-input-15"
+                                                        onkeyup="formatNumber15(this)"
+                                                        onchange="calcularMontos15()">
+                                                    <div class="utm-value">
+                                                        <span>UTM: </span>
+                                                        <input type="text"
+                                                            id="montoAutorizadoUTM15"
+                                                            class="utm-input-15"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="monto-group-15">
+                                                <label>Monto Rechazado:</label>
+                                                <div class="monto-utm-group">
+                                                    <input type="text"
+                                                        id="montoRechazado15"
+                                                        class="amount-input-15"
+                                                        readonly>
+                                                    <div class="utm-value">
+                                                        <span>UTM: </span>
+                                                        <input type="text"
+                                                            id="montoRechazadoUTM15"
+                                                            class="utm-input-15"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </aside>
+                                </div>
+
+                                <!-- Sección de comentarios y justificación de rechazo Desición 15 dias-->
+                                <section class="comments-section">
+                                    <h3>Comentarios Desición Primera
+                                        Revisión</h3>
+                                    <!-- Descripción del propósito de los comentarios -->
+                                    <p class="comments-description">Detallar
+                                        claramente las causales por las cuales
+                                        se
+                                        rechaza el monto solicitado o una parte
+                                        de
+                                        él.</p>
+                                    <div class="editor-toolbar">
+                                        <button type="button"
+                                            class="toolbar-button"
+                                            onclick="formatText('bold')"
+                                            title="Negrita">
+                                            <strong>B</strong>
+                                        </button>
+                                        <button type="button"
+                                            class="toolbar-button"
+                                            onclick="formatText('italic')"
+                                            title="Cursiva">
+                                            <em>I</em>
+                                        </button>
+                                        <button type="button"
+                                            class="toolbar-button"
+                                            onclick="formatText('underline')"
+                                            title="Subrayado">
+                                            <u>U</u>
+                                        </button>
+                                        <button type="button"
+                                            class="toolbar-button"
+                                            onclick="insertList('unordered')"
+                                            title="Lista con viñetas">
+                                            •
+                                        </button>
+                                        <button type="button"
+                                            class="toolbar-button"
+                                            onclick="insertList('ordered')"
+                                            title="Lista numerada">
+                                            1.
+                                        </button>
+                                    </div>
+                                    <div class="editor-container">
+                                        <div id="comentarios"
+                                            class="rich-text-editor"
+                                            contenteditable="true"
+                                            data-max-length="10000"></div>
+                                        <div class="character-count">
+                                            <span id="charCount">0</span>/10000
+                                            caracteres
+                                        </div>
+                                    </div>
+
+                                    <div class="decision-15-buttons">
+                                        <button id="btnGenerarResolucion15"
+                                            class="action-button"
+                                            onclick="generarResolucion15Dias()">Generar
+                                            Resolución Primera Desición</button>
+                                        <button id="btnNotificar15"
+                                            class="action-button"
+                                            onclick="notificarContribuyente15Dias()"
+                                            disabled>Notificar al
+                                            Contribuyente</button>
+                                        <button id="btnEnviarDecision15"
+                                            class="action-button"
+                                            onclick="enviarDecision15Dias()"
+                                            disabled>Enviar Decisión</button>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="decision-15-buttons">
-                                <button id="btnGenerarResolucion15" class="action-button"
-                                    onclick="generarResolucion15Dias()">Generar Resolución Primera Desición</button>
-                                <button id="btnNotificar15" class="action-button"
-                                    onclick="notificarContribuyente15Dias()" disabled>Notificar al
-                                    Contribuyente</button>
-                                <button id="btnEnviarDecision15" class="action-button" onclick="enviarDecision15Dias()"
-                                    disabled>Enviar Decisión</button>
+                            <!-- [REMOVED: Aviso Vencimiento Segunda Revisión (25 Días) section] -->
+                        </div>
+                    </div>
+                </main>
+
+                <!------------------------------------------------------------- SECCION POP-UP ------------------------------------------------------>
+
+                <!-- POP UP Solicita Antecedentes -->
+                <div id="solicitaAntecedentesPopup" class="modal">
+                    <div class="modal-content">
+                        <h3>Solicitud de Antecedentes</h3>
+                        <p class="modal-description">
+                            Seleccione los antecedentes que desea solicitar al
+                            contribuyente:
+                        </p>
+                        <div class="antecedentes-list">
+                            <div class="antecedente-item">
+                                <input type="checkbox" id="ant1" value="1">
+                                <label for="ant1">Antecedente 1: Documento Único
+                                    de
+                                    Salida (DUS)</label>
                             </div>
-                    </div>
-                </div>
+                            <div class="antecedente-item">
+                                <input type="checkbox" id="ant2" value="2">
+                                <label for="ant2">Antecedente 2: Informe de
+                                    Variación de Valor (IVV)</label>
+                            </div>
+                            <div class="antecedente-item">
+                                <input type="checkbox" id="ant3" value="3">
+                                <label for="ant3">Antecedente 3: Declaración de
+                                    Ingreso (DIN)</label>
+                            </div>
+                            <div class="antecedente-item">
+                                <input type="checkbox" id="ant4" value="4">
+                                <label for="ant4">Antecedente 4: Declaración de
+                                    Tránsito Interno (DTI)</label>
+                            </div>
+                            <div class="antecedente-item">
+                                <input type="checkbox" id="ant5" value="5">
+                                <label for="ant5">Antecedente 5: Declaración
+                                    Jurada
+                                    Simple (Anexo 12-C)</label>
+                            </div>
+                            <div class="antecedente-item">
+                                <input type="checkbox" id="ant6" value="6">
+                                <label for="ant6">Antecedente 6: Factura
+                                    Comercial</label>
+                            </div>
+                            <div class="antecedente-item">
+                                <input type="checkbox" id="ant7" value="7">
+                                <label for="ant7">Antecedente 7: Conocimiento de
+                                    Embarque (Bill of Lading o B/L)</label>
+                            </div>
 
-                <!-- [REMOVED: Aviso Vencimiento Segunda Revisión (25 Días) section] -->
-            </div>
-        </div>
-    </main>
-
-
-    <!------------------------------------------------------------- SECCION POP-UP ------------------------------------------------------>
-
-
-
-    <!-- POP UP Solicita Antecedentes -->
-    <div id="solicitaAntecedentesPopup" class="modal">
-        <div class="modal-content">
-            <h3>Solicitud de Antecedentes</h3>
-            <p class="modal-description">
-                Seleccione los antecedentes que desea solicitar al contribuyente:
-            </p>
-            <div class="antecedentes-list">
-                <div class="antecedente-item">
-                    <input type="checkbox" id="ant1" value="1">
-                    <label for="ant1">Antecedente 1: Documento Único de Salida (DUS)</label>
-                </div>
-                <div class="antecedente-item">
-                    <input type="checkbox" id="ant2" value="2">
-                    <label for="ant2">Antecedente 2: Informe de Variación de Valor (IVV)</label>
-                </div>
-                <div class="antecedente-item">
-                    <input type="checkbox" id="ant3" value="3">
-                    <label for="ant3">Antecedente 3: Declaración de Ingreso (DIN)</label>
-                </div>
-                <div class="antecedente-item">
-                    <input type="checkbox" id="ant4" value="4">
-                    <label for="ant4">Antecedente 4: Declaración de Tránsito Interno (DTI)</label>
-                </div>
-                <div class="antecedente-item">
-                    <input type="checkbox" id="ant5" value="5">
-                    <label for="ant5">Antecedente 5: Declaración Jurada Simple (Anexo 12-C)</label>
-                </div>
-                <div class="antecedente-item">
-                    <input type="checkbox" id="ant6" value="6">
-                    <label for="ant6">Antecedente 6: Factura Comercial</label>
-                </div>
-                <div class="antecedente-item">
-                    <input type="checkbox" id="ant7" value="7">
-                    <label for="ant7">Antecedente 7: Conocimiento de Embarque (Bill of Lading o B/L)</label>
-                </div>
-
-                <div class="antecedente-item">
-                    <input type="checkbox" id="ant10" value="10">
-                    <label for="ant10">Antecedente 10: Otros documentos relevantes</label>
-                </div>
-            </div>
-            <div class="antecedentes-comments">
-                <h4>Comentarios adicionales</h4>
-                <div class="mini-editor-toolbar">
-                    <button type="button" class="toolbar-button" onclick="formatAntecedentesText('bold')"
-                        title="Negrita">
-                        <strong>B</strong>
-                    </button>
-                    <button type="button" class="toolbar-button" onclick="formatAntecedentesText('italic')"
-                        title="Cursiva">
-                        <em>I</em>
-                    </button>
-                    <button type="button" class="toolbar-button" onclick="formatAntecedentesText('underline')"
-                        title="Subrayado">
-                        <u>U</u>
-                    </button>
-                </div>
-                <div class="mini-editor-container">
-                    <div id="antecedentesComentarios" class="mini-text-editor" contenteditable="true"
-                        data-max-length="200">
-                    </div>
-                    <div class="character-count">
-                        <span id="antecedentesCharCount">0</span>/200 caracteres
-                    </div>
-                </div>
-            </div>
-            <div class="modal-buttons">
-                <button class="action-button" onclick="cerrarPopupAntecedentes()">Cancelar</button>
-                <button class="action-button" onclick="enviarSolicitudAntecedentes()">Enviar Solicitud</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- POP UP FEP -->
-    <div id="fepPopup" class="modal">
-        <div class="modal-content">
-            <p class="modal-description">
-                Dada su revisión y análisis respecto de la solicitud, está por habilitar una Fiscalización Especial
-                Previa (FEP).
-                Esta solicitud será relevada a su jefatura, la cual confirmará la decisión.
-            </p>
-            <div class="fep-comments">
-                <h4>Agregue breves comentarios para la solicitud</h4>
-                <div class="mini-editor-toolbar">
-                    <button type="button" class="toolbar-button" onclick="formatFepText('bold')" title="Negrita">
-                        <strong>B</strong>
-                    </button>
-                    <button type="button" class="toolbar-button" onclick="formatFepText('italic')" title="Cursiva">
-                        <em>I</em>
-                    </button>
-                    <button type="button" class="toolbar-button" onclick="formatFepText('underline')" title="Subrayado">
-                        <u>U</u>
-                    </button>
-                </div>
-                <div class="mini-editor-container">
-                    <div id="fepComentarios" class="mini-text-editor" contenteditable="true" data-max-length="200">
-                    </div>
-                    <div class="character-count">
-                        <span id="fepCharCount">0</span>/200 caracteres
-                    </div>
-                </div>
-            </div>
-            <div class="modal-buttons">
-                <button class="action-button" onclick="cerrarPopupFep()">Salir</button>
-                <button class="action-button" onclick="generarAnotacion41()">Generar Anotación 41</button>
-                <button class="action-button" onclick="enviarSolicitudFep()">Enviar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Popup para Hoja de Trabajo -->
-    <div id="worksheetPopup" class="worksheet-popup">
-        <div class="worksheet-content">
-            <div class="worksheet-header">
-                <h2 class="worksheet-title">HOJA DE TRABAJO OBSERVACIÓN <span id="obsNumber"></span> DEL FORMULARIO
-                    F3600</h2>
-                <p class="worksheet-subtitle">A continuación se presentan 5 secciones con la información utilizada para
-                    generar la observación y las revisiones requeridas para justificar la observación</p>
-            </div>
-
-            <div class="worksheet-tables-container">
-                <!-- Sección 1: Códigos 3600 propios (Tabla Principal) -->
-                <div class="worksheet-section">
-                    <h3>Listado de Códigos 3600 propios</h3>
-                    <table class="worksheet-table">
-                        <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Nombre</th>
-                                <th>Valor</th>
-                            </tr>
-                        </thead>
-                        <tbody id="codigos3600Table">
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Contenedor para tablas secundarias y checklist -->
-                <div class="worksheet-secondary-content">
-                    <!-- Sección 2: Vectores Información Propia -->
-                    <div class="worksheet-section">
-                        <h3>Listado Vectores Información Propia</h3>
-                        <table class="worksheet-table">
-                            <thead>
-                                <tr>
-                                    <th>Código</th>
-                                    <th>Nombre</th>
-                                    <th>Valor</th>
-                                </tr>
-                            </thead>
-                            <tbody id="vectoresPropiosTable">
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Sección 3: Vectores Complementables -->
-                    <div class="worksheet-section">
-                        <h3>Listado Vectores Complementables o Reemplazables Vectores DDJJ</h3>
-                        <table class="worksheet-table">
-                            <thead>
-                                <tr>
-                                    <th>Código</th>
-                                    <th>Nombre</th>
-                                    <th>Valor</th>
-                                </tr>
-                            </thead>
-                            <tbody id="vectoresComplementablesTable">
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Sección 4: Vectores Terceros -->
-                    <div class="worksheet-section">
-                        <h3>Vectores Terceros</h3>
-                        <table class="worksheet-table">
-                            <thead>
-                                <tr>
-                                    <th>Código</th>
-                                    <th>Nombre</th>
-                                    <th>Valor</th>
-                                </tr>
-                            </thead>
-                            <tbody id="vectoresTercerosTable">
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Sección 5: Checklist de Revisiones -->
-                    <div class="worksheet-section">
-                        <h3>Chequeo de Revisiones</h3>
-                        <div class="checklist-container" id="revisionesChecklist">
+                            <div class="antecedente-item">
+                                <input type="checkbox" id="ant10" value="10">
+                                <label for="ant10">Antecedente 10: Otros
+                                    documentos
+                                    relevantes</label>
+                            </div>
+                        </div>
+                        <div class="antecedentes-comments">
+                            <h4>Comentarios adicionales</h4>
+                            <div class="mini-editor-toolbar">
+                                <button type="button" class="toolbar-button"
+                                    onclick="formatAntecedentesText('bold')"
+                                    title="Negrita">
+                                    <strong>B</strong>
+                                </button>
+                                <button type="button" class="toolbar-button"
+                                    onclick="formatAntecedentesText('italic')"
+                                    title="Cursiva">
+                                    <em>I</em>
+                                </button>
+                                <button type="button" class="toolbar-button"
+                                    onclick="formatAntecedentesText('underline')"
+                                    title="Subrayado">
+                                    <u>U</u>
+                                </button>
+                            </div>
+                            <div class="mini-editor-container">
+                                <div id="antecedentesComentarios"
+                                    class="mini-text-editor"
+                                    contenteditable="true"
+                                    data-max-length="200">
+                                </div>
+                                <div class="character-count">
+                                    <span
+                                        id="antecedentesCharCount">0</span>/200
+                                    caracteres
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-buttons">
+                            <button class="action-button"
+                                onclick="cerrarPopupAntecedentes()">Cancelar</button>
+                            <button class="action-button"
+                                onclick="enviarSolicitudAntecedentes()">Enviar
+                                Solicitud</button>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="worksheet-footer">
-                <!-- Sección 6: Comentarios -->
-                <div class="worksheet-section">
-                    <h3>Comentarios</h3>
-                    <textarea id="worksheetComentarios" class="worksheet-comentarios" rows="4"></textarea>
-                </div>
-
-                <!-- Sección 7: Botones -->
-                <div class="worksheet-buttons">
-                    <button id="btnJustificacionJefe" class="worksheet-btn justify-btn">Justificación de Jefe de
-                        Grupo</button>
-                    <button id="btnGrabar" class="worksheet-btn save-btn">Grabar</button>
-                    <button id="btnSalir" class="worksheet-btn exit-btn">Salir</button>
-                </div>
-            </div>
-        </div>
-    </div> <!-- Popup para la resolución -->
-    <div id="resolucionPopup" class="resolucion-popup">
-        <div class="resolucion-content">
-            <button class="resolucion-close" onclick="cerrarPopupResolucion()">&times;</button>
-            <iframe id="resolucionFrame" class="resolucion-iframe"></iframe>
-            <div class="resolucion-footer">
-                <button class="action-button" onclick="enviarResolucionParaFirma()">Enviar Resolución para
-                    Firma</button>
-                <button class="action-button" onclick="guardarResolucion()">Guardar</button>
-                <button class="action-button" onclick="cerrarPopupResolucion()">Cerrar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Popup para Ingresar Decisión -->
-    <div id="ingresarDecisionPopup" class="modal">
-        <div class="modal-content decision-popup-content">
-            <div class="modal-header">
-                <h3>Ingresar Desición</h3>
-                <button class="close-btn" onclick="cerrarPopupIngresarDecision()">&times;</button>
-            </div>
-
-            <div class="modal-body">
-                <!-- Subheader con información de la decisión -->
-                <div class="decision-summary">
-                    <p id="decisionSummaryText">
-                        Usted a selecionado <strong id="selectedDecision">-</strong>, con una devolución autorizada de
-                        <strong id="selectedAmount">-</strong>.
-                        Favor deje sus comentarios respecto de la desición para la autorización por parte de sus
-                        jefaturas:
-                    </p>
-                </div>
-
-                <!-- Sección de comentarios -->
-                <section class="comments-section popup-comments">
-                    <h4>Comentarios de la desición</h4>
-                    <p class="comments-description">Detallar claramente las causales por las cuales se rechaza
-                        el monto solicitado o una parte de él.</p>
-                    <div class="editor-toolbar">
-                        <button type="button" class="toolbar-button" onclick="formatDecisionText('bold')"
-                            title="Negrita">
-                            <strong>B</strong>
-                        </button>
-                        <button type="button" class="toolbar-button" onclick="formatDecisionText('italic')"
-                            title="Cursiva">
-                            <em>I</em>
-                        </button>
-                        <button type="button" class="toolbar-button" onclick="formatDecisionText('underline')"
-                            title="Subrayado">
-                            <u>U</u>
-                        </button>
-                        <button type="button" class="toolbar-button" onclick="insertDecisionList('unordered')"
-                            title="Lista con viñetas">
-                            •
-                        </button>
-                        <button type="button" class="toolbar-button" onclick="insertDecisionList('ordered')"
-                            title="Lista numerada">
-                            1.
-                        </button>
-                    </div>
-                    <div class="editor-container">
-                        <div id="decisionComentarios" class="rich-text-editor" contenteditable="true"
-                            data-max-length="10000"></div>
-                        <div class="character-count">
-                            <span id="decisionCharCount">0</span>/10000 caracteres
+                <!-- POP UP FEP -->
+                <div id="fepPopup" class="modal">
+                    <div class="modal-content">
+                        <p class="modal-description">
+                            Dada su revisión y análisis respecto de la
+                            solicitud,
+                            está por habilitar una Fiscalización Especial
+                            Previa (FEP).
+                            Esta solicitud será relevada a su jefatura, la cual
+                            confirmará la decisión.
+                        </p>
+                        <div class="fep-comments">
+                            <h4>Agregue breves comentarios para la
+                                solicitud</h4>
+                            <div class="mini-editor-toolbar">
+                                <button type="button" class="toolbar-button"
+                                    onclick="formatFepText('bold')"
+                                    title="Negrita">
+                                    <strong>B</strong>
+                                </button>
+                                <button type="button" class="toolbar-button"
+                                    onclick="formatFepText('italic')"
+                                    title="Cursiva">
+                                    <em>I</em>
+                                </button>
+                                <button type="button" class="toolbar-button"
+                                    onclick="formatFepText('underline')"
+                                    title="Subrayado">
+                                    <u>U</u>
+                                </button>
+                            </div>
+                            <div class="mini-editor-container">
+                                <div id="fepComentarios"
+                                    class="mini-text-editor"
+                                    contenteditable="true"
+                                    data-max-length="200">
+                                </div>
+                                <div class="character-count">
+                                    <span id="fepCharCount">0</span>/200
+                                    caracteres
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-buttons">
+                            <button class="action-button"
+                                onclick="cerrarPopupFep()">Salir</button>
+                            <button class="action-button"
+                                onclick="generarAnotacion41()">Generar Anotación
+                                41</button>
+                            <button class="action-button"
+                                onclick="enviarSolicitudFep()">Enviar</button>
                         </div>
                     </div>
-                </section>
-            </div>
+                </div>
 
-            <!-- Footer con botones de acción -->
-            <div class="modal-footer">
-                <button class="action-button secondary" onclick="cerrarPopupIngresarDecision()">Cerrar</button>
-                <button class="action-button primary" onclick="guardarDecisionComentarios()">Guardar</button>
-                <button class="action-button primary" onclick="enviarDecisionComentarios()">Enviar</button>
-            </div>
-        </div>
-    </div>
-</body>
+                <!-- Popup para Hoja de Trabajo -->
+                <div id="worksheetPopup" class="worksheet-popup">
+                    <div class="worksheet-content">
+                        <div class="worksheet-header">
+                            <h2 class="worksheet-title">HOJA DE TRABAJO
+                                OBSERVACIÓN
+                                <span id="obsNumber"></span> DEL FORMULARIO
+                                F3600</h2>
+                            <p class="worksheet-subtitle">A continuación se
+                                presentan 5 secciones con la información
+                                utilizada
+                                para
+                                generar la observación y las revisiones
+                                requeridas
+                                para justificar la observación</p>
+                        </div>
 
-</html>
+                        <div class="worksheet-tables-container">
+                            <!-- Sección 1: Códigos 3600 propios (Tabla Principal) -->
+                            <div class="worksheet-section">
+                                <h3>Listado de Códigos 3600 propios</h3>
+                                <table class="worksheet-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Nombre</th>
+                                            <th>Valor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="codigos3600Table">
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Contenedor para tablas secundarias y checklist -->
+                            <div class="worksheet-secondary-content">
+                                <!-- Sección 2: Vectores Información Propia -->
+                                <div class="worksheet-section">
+                                    <h3>Listado Vectores Información Propia</h3>
+                                    <table class="worksheet-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Nombre</th>
+                                                <th>Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="vectoresPropiosTable">
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Sección 3: Vectores Complementables -->
+                                <div class="worksheet-section">
+                                    <h3>Listado Vectores Complementables o
+                                        Reemplazables Vectores DDJJ</h3>
+                                    <table class="worksheet-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Nombre</th>
+                                                <th>Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody
+                                            id="vectoresComplementablesTable">
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Sección 4: Vectores Terceros -->
+                                <div class="worksheet-section">
+                                    <h3>Vectores Terceros</h3>
+                                    <table class="worksheet-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Nombre</th>
+                                                <th>Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="vectoresTercerosTable">
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Sección 5: Checklist de Revisiones -->
+                                <div class="worksheet-section">
+                                    <h3>Chequeo de Revisiones</h3>
+                                    <div class="checklist-container"
+                                        id="revisionesChecklist">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="worksheet-footer">
+                            <!-- Sección 6: Comentarios -->
+                            <div class="worksheet-section">
+                                <h3>Comentarios</h3>
+                                <textarea id="worksheetComentarios"
+                                    class="worksheet-comentarios"
+                                    rows="4"></textarea>
+                            </div>
+
+                            <!-- Sección 7: Botones -->
+                            <div class="worksheet-buttons">
+                                <button id="btnJustificacionJefe"
+                                    class="worksheet-btn justify-btn">Justificación
+                                    de Jefe de
+                                    Grupo</button>
+                                <button id="btnGrabar"
+                                    class="worksheet-btn save-btn">Grabar</button>
+                                <button id="btnSalir"
+                                    class="worksheet-btn exit-btn">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Popup para la resolución -->
+                <div id="resolucionPopup" class="resolucion-popup">
+                    <div class="resolucion-content">
+                        <button class="resolucion-close"
+                            onclick="cerrarPopupResolucion()">&times;</button>
+                        <iframe id="resolucionFrame"
+                            class="resolucion-iframe"></iframe>
+                        <div class="resolucion-footer">
+                            <button class="action-button"
+                                onclick="enviarResolucionParaFirma()">Enviar
+                                Resolución para
+                                Firma</button>
+                            <button class="action-button"
+                                onclick="guardarResolucion()">Guardar</button>
+                            <button class="action-button"
+                                onclick="cerrarPopupResolucion()">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Popup para Ingresar Decisión -->
+                <div id="ingresarDecisionPopup" class="modal">
+                    <div class="modal-content decision-popup-content">
+                        <div class="modal-header">
+                            <h3>Ingresar Desición</h3>
+                            <button class="close-btn"
+                                onclick="cerrarPopupIngresarDecision()">&times;</button>
+                        </div>
+
+                        <div class="modal-body">
+                            <!-- Subheader con información de la decisión -->
+                            <div class="decision-summary">
+                                <p id="decisionSummaryText">
+                                    Usted a selecionado <strong
+                                        id="selectedDecision">-</strong>, con
+                                    una
+                                    devolución autorizada de
+                                    <strong id="selectedAmount">-</strong>.
+                                    Favor deje sus comentarios respecto de la
+                                    desición para la autorización por parte de
+                                    sus
+                                    jefaturas:
+                                </p>
+                            </div>
+
+                            <!-- Sección de comentarios -->
+                            <section class="comments-section popup-comments">
+                                <h4>Comentarios de la desición</h4>
+                                <p class="comments-description">Detallar
+                                    claramente
+                                    las causales por las cuales se rechaza
+                                    el monto solicitado o una parte de él.</p>
+                                <div class="editor-toolbar">
+                                    <button type="button" class="toolbar-button"
+                                        onclick="formatDecisionText('bold')"
+                                        title="Negrita">
+                                        <strong>B</strong>
+                                    </button>
+                                    <button type="button" class="toolbar-button"
+                                        onclick="formatDecisionText('italic')"
+                                        title="Cursiva">
+                                        <em>I</em>
+                                    </button>
+                                    <button type="button" class="toolbar-button"
+                                        onclick="formatDecisionText('underline')"
+                                        title="Subrayado">
+                                        <u>U</u>
+                                    </button>
+                                    <button type="button" class="toolbar-button"
+                                        onclick="insertDecisionList('unordered')"
+                                        title="Lista con viñetas">
+                                        •
+                                    </button>
+                                    <button type="button" class="toolbar-button"
+                                        onclick="insertDecisionList('ordered')"
+                                        title="Lista numerada">
+                                        1.
+                                    </button>
+                                </div>
+                                <div class="editor-container">
+                                    <div id="decisionComentarios"
+                                        class="rich-text-editor"
+                                        contenteditable="true"
+                                        data-max-length="10000"></div>
+                                    <div class="character-count">
+                                        <span
+                                            id="decisionCharCount">0</span>/10000
+                                        caracteres
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <!-- Footer con botones de acción -->
+                        <div class="modal-footer">
+                            <button class="action-button secondary"
+                                onclick="cerrarPopupIngresarDecision()">Cerrar</button>
+                            <button class="action-button primary"
+                                onclick="guardarDecisionComentarios()">Guardar</button>
+                            <button class="action-button primary"
+                                onclick="enviarDecisionComentarios()">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </body>
+
+        </html>
