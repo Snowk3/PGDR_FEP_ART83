@@ -173,6 +173,30 @@ function obtenerValorNumerico(inputId) {
     return valor ? parseInt(valor) : 0;
 }
 
+/**
+ * Obtiene el valor de un campo del formulario de manera segura
+ * @param {string} fieldName - Nombre del campo a obtener
+ * @returns {string} Valor del campo o string vacío si no existe
+ */
+function obtenerValorCampo(fieldName) {
+    // Mapeo de nombres de campos a IDs de elementos
+    const fieldMapping = {
+        'razonSocial': 'razonSocial',
+        'rut': 'rut',
+        'folioSolicitud': 'folioSolicitud',
+        'fechaSolicitud': 'fechaSolicitud'
+    };
+    
+    const elementId = fieldMapping[fieldName];
+    if (!elementId) return '';
+    
+    const element = document.getElementById(elementId);
+    if (!element) return '';
+    
+    // Si es un input, usar value; si es span/div, usar textContent
+    return element.value || element.textContent || '';
+}
+
 /******************************************************************************
  * 2. FUNCIONES BASE Y UTILIDADES GENERALES
  * - Generación de IDs, formatos de fecha, conversiones UTM y utilidades comunes
@@ -967,6 +991,9 @@ function generarResolucionFep() {
 
     // Button state management removed - all buttons remain enabled throughout workflow
     
+    // Mostrar popup con la resolución FEP
+    mostrarPopupResolucionFep();
+    
     mostrarAlerta('Resolución FEP generada correctamente', 'success');
 }
 
@@ -1687,6 +1714,65 @@ function calcularFechaLimiteFep() {
     }
 }
 
+
+/**
+ * Abre el popup con la resolución FEP
+ */
+function mostrarPopupResolucionFep() {
+    const popup = document.getElementById('resolucionPopup');
+    const iframe = document.getElementById('resolucionFrame');
+    
+    // Cargar el contenido de la plantilla FEP en el iframe
+    iframe.src = 'RES_TYPE_INICIOFEP.HTML';
+    
+    // Mostrar el popup
+    popup.style.display = 'block';
+    
+    // Cuando el iframe termine de cargar, llenamos los datos
+    iframe.onload = function() {
+        try {
+            const frameDoc = iframe.contentDocument || iframe.contentWindow.document;
+            
+            // Completar campos básicos de la plantilla con datos del sistema
+            const campos = {
+                'DR': 'DR METROPOLITANA SANTIAGO ORIENTE',
+                'DEPTO': 'DEPARTAMENTO DE FISCALIZACIÓN',
+                'GRUPO': 'GRUPO DE GRANDES CONTRIBUYENTES',
+                'R_Social': obtenerValorCampo('razonSocial') || '[Razón Social]',
+                'RUT_CONTR': obtenerValorCampo('rut') || '[RUT]',
+                'INICIO_FEP': 'INICIO FEP',
+                'Numero_RES_FEP': document.getElementById('numeroResolucionFep')?.textContent || generarNumeroResolucion(),
+                'FECHA_FEP': document.getElementById('fechaGeneracionFep')?.textContent || formatoFecha(new Date()),
+                'NOMBRE_FIRMANTE_PRINCIPAL': 'PEDRO GONZÁLEZ MARTÍNEZ',
+                'CARGO_PRINCIPAL': 'JEFE DEPARTAMENTO DE FISCALIZACIÓN',
+                'UNIDAD_PRINCIPAL': 'DR METROPOLITANA SANTIAGO ORIENTE',
+                'NOMBRE_1': 'MARÍA RODRÍGUEZ SILVA',
+                'CARGO_1': 'ANALISTA TRIBUTARIO',
+                'NOMBRE_2': 'CARLOS MENDOZA TORRES',
+                'CARGO_2': 'REVISOR SENIOR',
+                'NOMBRE_3': 'ANA LÓPEZ VARGAS',
+                'CARGO_3': 'COORDINADORA FEP'
+            };
+            
+            // Llenar todos los campos de la plantilla
+            Object.entries(campos).forEach(([placeholder, valor]) => {
+                const elementos = frameDoc.querySelectorAll(`[data-placeholder="${placeholder}"]`);
+                elementos.forEach(elemento => {
+                    elemento.textContent = valor;
+                });
+            });
+            
+            // Activar el modo de edición en la plantilla
+            const editButton = frameDoc.querySelector('.edit-button');
+            if (editButton) {
+                // Simulamos un clic en el botón de edición
+                editButton.click();
+            }
+        } catch (e) {
+            console.error('Error al cargar datos en la plantilla FEP:', e);
+        }
+    };
+}
 
 /******************************************************************************
  * 10. MÓDULO DE DOCUMENTOS Y RESOLUCIONES

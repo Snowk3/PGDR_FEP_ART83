@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Plantilla de Resolución Inicio FEP - Editor Avanzado</title>
+    <link rel="stylesheet" href="RES_TYPE_DES.CSS">
+    <script src="RES_TYPE_DES.JS"></script>    <style>
+        /* Template-specific adjustments */
+        .document-container {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="edit-button" onclick="toggleEdit()">Activar Edición</button>
+    <button class="print-button" onclick="window.print()">Imprimir</button>
+    
+    <!-- Hidden file inputs for media upload functionality -->
+    <div id="file-inputs" style="display: none;">
+        <input type="file" id="excel-input" accept=".xlsx,.xls,.csv">
+        <input type="file" id="image-input" accept="image/*">
+    </div>
+    
+    <div class="document-container">
+        
+        <div class="header" style="text-align: left;">
+            <img src="https://www.sii.cl/sobre_el_sii/logoSII250x108.jpg" alt="SII Logo" style="height: 60px; margin-bottom: 15px;">
+            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+                <div><span class="field" contenteditable="false" data-placeholder="DR">[DR]</span></div>
+                <div><span class="field" contenteditable="false" data-placeholder="DEPTO">[DEPTO]</span></div>
+                <div><span class="field" contenteditable="false" data-placeholder="GRUPO">[GRUPO]</span></div>
+            </div>
+        </div>
+        
+        <div style="text-align: right; margin: 10px 0;">
+            <span class="field" contenteditable="false" data-placeholder="R_Social">[R_Social]</span>
+        </div>
+
+        <div style="text-align: right; margin: 10px 0;">
+            RUT <span class="field" contenteditable="false" data-placeholder="RUT_CONTR">[RUT_CONTR]</span>
+        </div>
+        
+        <div style="text-align: right; margin: 10px 0;">
+            <span class="field" contenteditable="false" data-placeholder="INICIO_FEP">INICIO FEP</span>
+        </div>
+        
+        <div style="text-align: right; margin: 10px 0;">
+            RES.EX N° <span class="field" contenteditable="false" data-placeholder="Numero_RES_FEP">[Numero_RES_FEP]</span>
+        </div>
+        
+        <div class="date">
+            <span class="field" contenteditable="false" data-placeholder="FECHA_FEP">[FECHA_FEP]</span>
+        </div>
+
+        <div class="section">
+            <div style="text-align: center; margin: 10px 0;">
+                <div class="section-title">VISTOS:</div>
+                <div class="editor-toolbar">
+                    <button onclick="insertExcelTable(this)" title="Insertar tabla (⊞)">⊞</button>
+                    <button onclick="document.getElementById('excel-input').click()" title="Importar desde Excel (📊)">📊</button>
+                    <button onclick="document.getElementById('image-input').click()" title="Insertar imagen (🖼️)">🖼️</button>
+                    <button onclick="showPasteInstructions()" title="Pegar desde Excel (📋)">📋</button>
+                    <button onclick="formatText('bold', this)" title="Negrita"><b>B</b></button>
+                    <button onclick="formatText('italic', this)" title="Cursiva"><i>I</i></button>
+                    <button onclick="formatText('underline', this)" title="Subrayado"><u>U</u></button>
+                    <button onclick="insertList('ul', this)" title="Lista con viñetas">•</button>
+                    <button onclick="insertList('ol', this)" title="Lista numerada">1.</button>
+                    <button onclick="formatText('removeFormat', this)" title="Limpiar formato">🧹</button>
+                    <button onclick="undoAction(this)" title="Deshacer">↶</button>
+                    <button onclick="redoAction(this)" title="Rehacer">↷</button>
+                </div>
+                <div class="section-content with-toolbar" contenteditable="false">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div style="text-align: center; margin: 10px 0;">
+                <div class="section-title">CONSIDERANDO:</div>
+                <div class="editor-toolbar">
+                    <button onclick="insertExcelTable(this)" title="Insertar tabla (⊞)">⊞</button>
+                    <button onclick="document.getElementById('excel-input').click()" title="Importar desde Excel (📊)">📊</button>
+                    <button onclick="document.getElementById('image-input').click()" title="Insertar imagen (🖼️)">🖼️</button>
+                    <button onclick="showPasteInstructions()" title="Pegar desde Excel (📋)">📋</button>
+                    <button onclick="formatText('bold', this)" title="Negrita"><b>B</b></button>
+                    <button onclick="formatText('italic', this)" title="Cursiva"><i>I</i></button>
+                    <button onclick="formatText('underline', this)" title="Subrayado"><u>U</u></button>
+                    <button onclick="insertList('ul', this)" title="Lista con viñetas">•</button>
+                    <button onclick="insertList('ol', this)" title="Lista numerada">1.</button>
+                    <button onclick="formatText('removeFormat', this)" title="Limpiar formato">🧹</button>
+                    <button onclick="undoAction(this)" title="Deshacer">↶</button>
+                    <button onclick="redoAction(this)" title="Rehacer">↷</button>
+                </div>
+                <div class="section-content with-toolbar" contenteditable="false">
+                    <p>1.- Que conforme a lo dispuesto en el artículo 83° de la Ley sobre Impuesto a la Venta y Servicios (LIVS), este Servicio puede ....</p>
+                    <p></p>
+                    <p></p>
+                    <p><em>Haga clic aquí para agregar consideraciones adicionales...</em></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div style="text-align: center; margin: 10px 0;">
+                <div class="section-title">RESUELVO:</div>
+                <div class="editor-toolbar">
+                    <button onclick="insertExcelTable(this)" title="Insertar tabla (⊞)">⊞</button>
+                    <button onclick="document.getElementById('excel-input').click()" title="Importar desde Excel (📊)">📊</button>
+                    <button onclick="document.getElementById('image-input').click()" title="Insertar imagen (🖼️)">🖼️</button>
+                    <button onclick="showPasteInstructions()" title="Pegar desde Excel (📋)">📋</button>
+                    <button onclick="formatText('bold', this)" title="Negrita"><b>B</b></button>
+                    <button onclick="formatText('italic', this)" title="Cursiva"><i>I</i></button>
+                    <button onclick="formatText('underline', this)" title="Subrayado"><u>U</u></button>
+                    <button onclick="insertList('ul', this)" title="Lista con viñetas">•</button>
+                    <button onclick="insertList('ol', this)" title="Lista numerada">1.</button>
+                    <button onclick="formatText('removeFormat', this)" title="Limpiar formato">🧹</button>
+                    <button onclick="undoAction(this)" title="Deshacer">↶</button>
+                    <button onclick="redoAction(this)" title="Rehacer">↷</button>
+                </div>
+                <div class="section-content with-toolbar" contenteditable="false">
+                    <p>1.- INICIAR el procedimiento de Fiscalización Especial Previa (FEP) para determinar  <strong><span class="field" contenteditable="false" data-placeholder="R_Social_Res">[R_Social]</span></strong>, RUT <strong><span class="field" contenteditable="false" data-placeholder="RUT_CONTR_Res">[RUT_CONTR]</span></strong>.</p>
+                    
+                    <p><em>Haga clic aquí para agregar puntos resolutivos adicionales...</em></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <div style="text-align: center; margin: 10px 0;">
+                <strong>ANÓTESE, COMUNÍQUESE Y NOTIFÍQUESE</strong>
+            </div>
+            
+            <!-- Sección de Firmas Electrónicas -->
+            <div class="signature-section">
+                <div class="signature-header">
+                    <h3>FIRMAS ELECTRÓNICAS</h3>
+                </div>
+                
+                <!-- Firma Principal -->
+                <div class="main-signature">
+                    <div class="signature-area main">
+                        <div class="signature-placeholder">
+                            <span class="signature-icon">✍️</span>
+                            <span class="signature-text">Firma Electrónica Principal</span>
+                        </div>
+                    </div>
+                    <div class="signature-info">
+                        <div class="signature-name">
+                            <span class="field" contenteditable="false" data-placeholder="NOMBRE_FIRMANTE_PRINCIPAL">[NOMBRE_FIRMANTE_PRINCIPAL]</span>
+                        </div>
+                        <div class="signature-title">
+                            <span class="field" contenteditable="false" data-placeholder="CARGO_PRINCIPAL">[CARGO_PRINCIPAL]</span>
+                        </div>
+                        <div class="signature-unit">
+                            <span class="field" contenteditable="false" data-placeholder="UNIDAD_PRINCIPAL">[UNIDAD_PRINCIPAL]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Firmas Secundarias -->
+                <div class="secondary-signatures">
+                    <div class="signatures-inline">
+                        <span class="inline-signature">
+                            <span class="signature-icon small">✍️</span>
+                            <span class="field" contenteditable="false" data-placeholder="NOMBRE_1">[NOMBRE_1]</span>
+                            <br>
+                            <span class="field" contenteditable="false" data-placeholder="CARGO_1">[CARGO_1]</span>
+                        </span>
+                        <span class="signature-separator"> ; </span>
+                        <span class="inline-signature">
+                            <span class="signature-icon small">✍️</span>
+                            <span class="field" contenteditable="false" data-placeholder="NOMBRE_2">[NOMBRE_2]</span>
+                            <br>
+                            <span class="field" contenteditable="false" data-placeholder="CARGO_2">[CARGO_2]</span>
+                        </span>
+                        <span class="signature-separator"> ; </span>
+                        <span class="inline-signature">
+                            <span class="signature-icon small">✍️</span>
+                            <span class="field" contenteditable="false" data-placeholder="NOMBRE_3">[NOMBRE_3]</span>
+                            <br>
+                            <span class="field" contenteditable="false" data-placeholder="CARGO_3">[CARGO_3]</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instructions overlay for first-time users -->
+    <div id="welcome-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; color: white; padding: 50px; box-sizing: border-box;">
+        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <h2>🎉 Editor Avanzado de Resolución Inicio FEP</h2>
+            <h3>Nuevas funcionalidades disponibles:</h3>
+            <ul style="text-align: left; list-style: none; padding: 0;">
+                <li style="margin: 10px 0;">📋 <strong>Pegado directo de Excel:</strong> Copie tablas desde Excel y pegue con Ctrl+V</li>
+                <li style="margin: 10px 0;">🖼️ <strong>Inserción de imágenes:</strong> Pegue imágenes directamente o cargue desde archivo</li>
+                <li style="margin: 10px 0;">📊 <strong>Formato preservado:</strong> Las tablas mantienen su formato original</li>
+                <li style="margin: 10px 0;">⚙️ <strong>Controles avanzados:</strong> Redimensione imágenes y gestione contenido</li>
+            </ul>
+            <button onclick="document.getElementById('welcome-overlay').style.display='none'" style="background: #1976d2; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-top: 20px;">¡Entendido!</button>        </div>
+    </div>
+</body>
+</html>
