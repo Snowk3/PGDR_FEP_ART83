@@ -1,42 +1,42 @@
-
-  body {
+body {
             font-family: 'Times New Roman', serif;
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px 15px;
-            line-height: 1.4;
+            padding: 40px 20px;
+            line-height: 1.6;
             background-color: #f8f9fa;
         }
         
         .document-container {
             background: white;
-            padding: 25px;
+            padding: 40px;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            border-radius: 6px;
+            border-radius: 8px;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 15px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
         }
-          .field {
+        
+        .field {
             background-color: #e3f2fd;
-            border: 1px dashed #1976d2;
-            padding: 4px 8px;
-            margin: 5px 0;
-            border-radius: 3px;
+            border: 2px dashed #1976d2;
+            padding: 8px 12px;
+            margin: 10px 0;
+            border-radius: 4px;
             display: inline-block;
             font-weight: bold;
             color: #1976d2;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
         
         .field:hover {
             background-color: #bbdefb;
-            transform: scale(1.01);
+            transform: scale(1.02);
         }
         
         .field[contenteditable="true"]:focus {
@@ -45,34 +45,35 @@
             border-color: #f57c00;
             color: #f57c00;
         }
-          .resolution-number {
-            font-size: 16px;
+        
+        .resolution-number {
+            font-size: 18px;
             font-weight: bold;
             text-align: center;
-            margin: 15px 0;
+            margin: 20px 0;
         }
         
         .date {
             text-align: right;
-            margin: 15px 0;
+            margin: 20px 0;
         }
         
         .section {
-            margin: 20px 0;
+            margin: 30px 0;
         }
         
         .section-title {
             font-weight: bold;
-            font-size: 15px;
-            margin-bottom: 10px;
+            font-size: 16px;
+            margin-bottom: 15px;
             text-decoration: underline;
         }
         
         .section-content {
-            min-height: 80px;
+            min-height: 100px;
             border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 3px;
+            padding: 15px;
+            border-radius: 4px;
             background-color: #fafafa;
         }
         
@@ -89,10 +90,10 @@
         
         .footer {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 50px;
             font-weight: bold;
             border-top: 1px solid #333;
-            padding-top: 15px;
+            padding-top: 20px;
         }
         
         .edit-button {
@@ -136,7 +137,8 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-          @media print {
+        
+        @media print {
             body {
                 background-color: white;
                 margin: 0;
@@ -146,10 +148,10 @@
             .document-container {
                 box-shadow: none;
                 border-radius: 0;
-                padding: 15px;
+                padding: 20px;
             }
             
-            .edit-button, .print-button, .editor-toolbar {
+            .edit-button, .print-button {
                 display: none;
             }
             
@@ -170,51 +172,882 @@
         .instructions {
             background: #fff3cd;
             border: 1px solid #ffeaa7;
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            font-size: 13px;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
         }
         
         .instructions h4 {
             margin-top: 0;
             color: #856404;
         }
-          /* Editor toolbar styles */
+        
+        /* ====================================================================
+   ENHANCED COPY/PASTE AND MEDIA FUNCTIONALITY STYLES
+   Advanced styles for Excel table import and image handling
+==================================================================== */
+        
+        /* Enhanced Toolbar Styles */
         .editor-toolbar {
-            display: flex;
-            background-color: #f0f0f0;
-            border: 1px solid #ddd;
-            border-bottom: none;
-            padding: 4px;
-            border-radius: 3px 3px 0 0;
-            z-index: 10; /* Ensure toolbar appears above content */
+            display: none;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px 4px 0 0;
+            padding: 8px;
+            margin: 0;
+            flex-wrap: wrap;
+            gap: 4px;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .editor-toolbar button {
             background-color: #fff;
             border: 1px solid #ccc;
             border-radius: 3px;
-            margin-right: 4px;
-            padding: 4px 8px;
+            padding: 6px 10px;
             cursor: pointer;
             font-size: 12px;
+            transition: all 0.2s ease;
+            margin: 2px;
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .editor-toolbar button:hover {
-            background-color: #e6e6e6;
+            background-color: #e3f2fd;
+            border-color: #1976d2;
+            transform: translateY(-1px);
         }
         
         .editor-toolbar button:active {
-            background-color: #d4d4d4;
+            background-color: #bbdefb;
+            transform: translateY(0);
         }
         
-        .section-container {
-            position: relative;
+        /* Special buttons styling */
+        .editor-toolbar button[title*="Excel"],
+        .editor-toolbar button[title*="tabla"],
+        .editor-toolbar button[title*="imagen"] {
+            background-color: #e8f5e8;
+            border-color: #4caf50;
+            font-weight: bold;
         }
         
+        .editor-toolbar button[title*="Pegar"] {
+            background-color: #fff3e0;
+            border-color: #ff9800;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        /* Section content with toolbar */
         .section-content.with-toolbar {
             border-top: none;
             border-top-left-radius: 0;
             border-top-right-radius: 0;
+            min-height: 150px;
+            position: relative;
         }
+        
+        .section-content.with-toolbar:focus {
+            background-color: white;
+        }
+        
+        .section-content.with-toolbar em {
+            color: #999;
+            font-style: italic;
+        }
+        
+        /* Toolbar visibility control */
+        .editor-toolbar {
+            display: none; /* Hidden by default */
+        }
+        
+        /* When editing is active, show toolbars */
+        body.edit-mode .editor-toolbar {
+            display: flex !important;
+        }
+        
+        /* Excel Table Styles */
+        .excel-imported-table,
+        .plain-text-table,
+        .imported-table,
+        .inserted-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+            font-size: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: white;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .excel-imported-table th,
+        .plain-text-table th,
+        .imported-table th,
+        .inserted-table th {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            font-weight: bold;
+            text-align: left;
+            border: 1px solid #ccc;
+            padding: 10px 8px;
+            color: #333;
+            position: relative;
+        }
+        
+        .excel-imported-table td,
+        .plain-text-table td,
+        .imported-table td,
+        .inserted-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            vertical-align: top;
+            transition: background-color 0.2s ease;
+        }
+        
+        .excel-imported-table tr:nth-child(even) td,
+        .plain-text-table tr:nth-child(even) td,
+        .imported-table tr:nth-child(even) td,
+        .inserted-table tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+        
+        .excel-imported-table tr:hover td,
+        .plain-text-table tr:hover td,
+        .imported-table tr:hover td,
+        .inserted-table tr:hover td {
+            background-color: #e3f2fd;
+        }
+        
+        /* Table wrapper for responsiveness */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .table-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .table-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        
+        .table-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        /* Image Container Styles */
+        .image-container {
+            margin: 15px 0;
+            text-align: center;
+            padding: 10px;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+            transition: all 0.3s ease;
+        }
+        
+        .image-container:hover {
+            border-color: #1976d2;
+            background-color: #f3f8ff;
+        }
+        
+        .pasted-image,
+        .inserted-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .pasted-image:hover,
+        .inserted-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        /* Image Controls */
+        .image-controls {
+            margin-top: 8px;
+            font-size: 11px;
+            color: #666;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .img-btn {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 3px;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 10px;
+            transition: all 0.2s ease;
+        }
+        
+        .img-btn:hover {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+        }
+        
+        .delete-btn {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .delete-btn:hover {
+            background-color: #f1b0b7;
+        }
+        
+        /* Paste Instructions Popup */
+        .paste-instructions {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            z-index: 1000;
+            max-width: 400px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+        
+        .instruction-content h4 {
+            margin: 0 0 15px 0;
+            color: #1976d2;
+            text-align: center;
+        }
+        
+        .instruction-content ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .instruction-content li {
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+        
+        .close-instructions {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            float: right;
+            margin-top: 10px;
+        }
+        
+        .close-instructions:hover {
+            background-color: #1565c0;
+        }
+        
+        /* Enhanced notifications */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            font-size: 14px;
+            max-width: 350px;
+            animation: slideInNotification 0.3s ease;
+        }
+        
+        @keyframes slideInNotification {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Enhanced section styling */
+        .section {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .section-content {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            min-height: 100px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .section-content:focus {
+            outline: none;
+            border-color: #1976d2;
+            box-shadow: 0 0 8px rgba(25, 118, 210, 0.3);
+        }
+        
+        .section-content[contenteditable="true"] {
+            background-color: #fafafa;
+        }
+        
+        /* Enhanced section content with toolbar */
+        .section-content.with-toolbar {
+            border-top: none;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            min-height: 150px;
+            position: relative;
+        }
+        
+        .section-content.with-toolbar:focus {
+            background-color: white;
+        }
+        
+        .section-content.with-toolbar em {
+            color: #999;
+            font-style: italic;
+        }
+        
+        /* Toolbar visibility control */
+        .editor-toolbar {
+            display: none; /* Hidden by default */
+        }
+        
+        /* When editing is active, show toolbars */
+        body.edit-mode .editor-toolbar {
+            display: flex !important;
+        }
+        
+        /* Excel Table Styles */
+        .excel-imported-table,
+        .plain-text-table,
+        .imported-table,
+        .inserted-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+            font-size: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: white;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .excel-imported-table th,
+        .plain-text-table th,
+        .imported-table th,
+        .inserted-table th {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            font-weight: bold;
+            text-align: left;
+            border: 1px solid #ccc;
+            padding: 10px 8px;
+            color: #333;
+            position: relative;
+        }
+        
+        .excel-imported-table td,
+        .plain-text-table td,
+        .imported-table td,
+        .inserted-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            vertical-align: top;
+            transition: background-color 0.2s ease;
+        }
+        
+        .excel-imported-table tr:nth-child(even) td,
+        .plain-text-table tr:nth-child(even) td,
+        .imported-table tr:nth-child(even) td,
+        .inserted-table tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+        
+        .excel-imported-table tr:hover td,
+        .plain-text-table tr:hover td,
+        .imported-table tr:hover td,
+        .inserted-table tr:hover td {
+            background-color: #e3f2fd;
+        }
+        
+        /* Table wrapper for responsiveness */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .table-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .table-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        
+        .table-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        /* Image Container Styles */
+        .image-container {
+            margin: 15px 0;
+            text-align: center;
+            padding: 10px;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+            transition: all 0.3s ease;
+        }
+        
+        .image-container:hover {
+            border-color: #1976d2;
+            background-color: #f3f8ff;
+        }
+        
+        .pasted-image,
+        .inserted-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .pasted-image:hover,
+        .inserted-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        /* Image Controls */
+        .image-controls {
+            margin-top: 8px;
+            font-size: 11px;
+            color: #666;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .img-btn {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 3px;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 10px;
+            transition: all 0.2s ease;
+        }
+        
+        .img-btn:hover {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+        }
+        
+        .delete-btn {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .delete-btn:hover {
+            background-color: #f1b0b7;
+        }
+        
+        /* Paste Instructions Popup */
+        .paste-instructions {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            z-index: 1000;
+            max-width: 400px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+        
+        .instruction-content h4 {
+            margin: 0 0 15px 0;
+            color: #1976d2;
+            text-align: center;
+        }
+        
+        .instruction-content ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .instruction-content li {
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+        
+        .close-instructions {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            float: right;
+            margin-top: 10px;
+        }
+        
+        .close-instructions:hover {
+            background-color: #1565c0;
+        }
+        
+        /* Enhanced notifications */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            font-size: 14px;
+            max-width: 350px;
+            animation: slideInNotification 0.3s ease;
+        }
+        
+        @keyframes slideInNotification {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Enhanced section styling */
+        .section {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .section-content {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            min-height: 100px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .section-content:focus {
+            outline: none;
+            border-color: #1976d2;
+            box-shadow: 0 0 8px rgba(25, 118, 210, 0.3);
+        }
+        
+        .section-content[contenteditable="true"] {
+            background-color: #fafafa;
+        }
+        
+        /* Enhanced section content with toolbar */
+        .section-content.with-toolbar {
+            border-top: none;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            min-height: 150px;
+            position: relative;
+        }
+        
+        .section-content.with-toolbar:focus {
+            background-color: white;
+        }
+        
+        .section-content.with-toolbar em {
+            color: #999;
+            font-style: italic;
+        }
+        
+        /* Toolbar visibility control */
+        .editor-toolbar {
+            display: none; /* Hidden by default */
+        }
+        
+        /* When editing is active, show toolbars */
+        body.edit-mode .editor-toolbar {
+            display: flex !important;
+        }
+        
+        /* ==========================================
+           SECCIÓN DE FIRMAS ELECTRÓNICAS
+           ========================================== */
+        
+        .signature-section {
+            margin-top: 40px;
+            padding: 30px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .signature-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .signature-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        /* Firma Principal */
+        .main-signature {
+            margin-bottom: 30px;
+            padding: 25px;
+            border: 1px solid #d0d0d0;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        
+        .signature-area.main {
+            height: 120px;
+            border: 2px dashed #bbb;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fafafa;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .signature-area.main:hover {
+            border-color: #1976d2;
+            background: #f3f8ff;
+        }
+        
+        .signature-placeholder {
+            text-align: center;
+            color: #666;
+        }
+        
+        .signature-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        .signature-text {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .signature-info {
+            text-align: center;
+        }
+        
+        .signature-name,
+        .signature-title,
+        .signature-unit {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        
+        .signature-name {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .signature-title {
+            font-style: italic;
+            color: #555;
+        }
+        
+        .signature-unit {
+            color: #777;
+            font-size: 13px;
+        }          /* Firmas Secundarias */
+        .secondary-signatures {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #d0d0d0;
+            border-radius: 6px;
+            background: white;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+        }
+          .signatures-inline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            text-align: center;
+        }
+          .inline-signature {
+            display: inline-block;
+            text-align: center;
+            padding: 8px 12px;
+            border: 1px dashed #ccc;
+            border-radius: 4px;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            min-width: 140px;
+            flex: 1;
+            max-width: 200px;
+        }
+        
+        .inline-signature:hover {
+            border-color: #1976d2;
+            background: #f3f8ff;
+        }
+        
+        .signature-separator {
+            font-size: 18px;
+            font-weight: bold;
+            color: #666;
+            margin: 0 10px;        }
+        
+        /* Campos de firmas editables */
+        .signature-section .field {
+            background-color: #fff3e0;
+            border: 1.5px dashed #ff9800;
+            color: #e65100;
+            font-size: 12px;
+            padding: 4px 8px;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .signature-section .field:hover {
+            background-color: #ffe0b2;
+            border-color: #f57c00;
+        }
+        
+        .signature-section .field[contenteditable="true"]:focus {
+            background-color: #ffffff;
+            border-color: #ff5722;
+            color: #d84315;
+            outline: none;
+        }
+          /* Responsive para firmas */
+        @media (max-width: 768px) {
+            .signature-section {
+                padding: 20px;
+                margin-top: 30px;
+            }
+            
+            .signatures-inline {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .inline-signature {
+                min-width: auto;
+                width: 100%;
+            }
+            
+            .signature-separator {
+                display: none;
+            }
+            
+            .signature-area.main {
+                height: 100px;
+            }
+        }
+        
+        @media print {
+            .signature-section {
+                border: 1px solid #ccc;
+                box-shadow: none;
+                background: white;
+                page-break-inside: avoid;
+            }
+            
+            .signature-area.main {
+                border-style: solid;
+                background: white;
+            }
+            
+            .inline-signature {
+                border-style: solid;
+                background: white;
+            }
+        }
+
+

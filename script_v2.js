@@ -1220,21 +1220,22 @@ function toggleBotonesContacto() {
     const checkInfoRecibida = document.querySelector('label.checkbox-label');
     const btnGenerarActa = document.getElementById('btnGenerarActa');
 
-    // Ocultar todos los botones primero
+    // Ocultar botones específicos primero (excepto btnDisponeFep que siempre está visible)
     btnGuardar.style.display = 'none';
     btnAnotacion42.style.display = 'none';
-    btnDisponeFep.style.display = 'none';
     checkInfoRecibida.style.display = 'none';
     btnGenerarActa.style.display = 'none';
-
-    // Mostrar los botones correspondientes
+    
+    // btnDisponeFep siempre visible
+    btnDisponeFep.style.display = 'inline-block';
+    
+    // Mostrar los botones correspondientes según la selección
     if (valor === 'contactado') {
         btnGuardar.style.display = 'inline-block';
         checkInfoRecibida.style.display = 'block';
         btnGenerarActa.style.display = 'inline-block';
     } else if (valor === 'noContactado') {
         btnAnotacion42.style.display = 'inline-block';
-        btnDisponeFep.style.display = 'inline-block';
     }
 }
 
