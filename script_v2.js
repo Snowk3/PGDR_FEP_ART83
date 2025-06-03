@@ -1500,11 +1500,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mainIdExpediente || fepIdExpediente) {
         // Usar el ID existente que encontremos primero
         actualizarIdExpediente(mainIdExpediente || fepIdExpediente);
-    }
-      // Manejar cambios en los checkboxes para información recibida
+    }    // Manejar cambios en los checkboxes para información recibida
     document.getElementById('checkInfoRecibida')?.addEventListener('change', toggleActaRecepcion);
     document.getElementById('checkInfoRecibidaFep')?.addEventListener('change', toggleActaRecepcionFep);
     document.getElementById('checkInfoRecibidaSegunda')?.addEventListener('change', toggleDecisionSegunda);
+    
+    // Inicializar estado del botón FEP (deshabilitado por defecto)
+    toggleActaRecepcionFep();
     
     // Inicializar el tema
     initTheme();
@@ -1595,17 +1597,18 @@ function updateCharCount() {
  * Controla la habilitación del botón de generar acta para la sección FEP
  */
 function toggleActaRecepcionFep() {
-    const checkbox = document.getElementById('checkInfoRecibidaFep');
+    const select = document.getElementById('checkInfoRecibidaFep');
     const btnGenerar = document.getElementById('btnGenerarActaFep');
-    btnGenerar.disabled = !checkbox.checked;
+    // Habilitar el botón solo cuando se selecciona "Si, Ha enviado todos los antecedentes" (value="true")
+    btnGenerar.disabled = select.value !== "true";
 }
 
 /**
  * Genera el acta de recepción F3309 para la sección FEP
  */
 function generarActaRecepcionFep() {
-    const checkbox = document.getElementById('checkInfoRecibidaFep');
-    if (!checkbox.checked) {
+    const select = document.getElementById('checkInfoRecibidaFep');
+    if (select.value !== "true") {
         mostrarAlerta('Debe confirmar que el contribuyente ha enviado la información requerida', 'error');
         return;
     }
